@@ -19,11 +19,10 @@ import myapp.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', myapp.views.homelogin, name = 'homelogin'),
-    path('mypage', myapp.views.mypage, name = 'mypage'),
+    path('homelogin', myapp.views.homelogin, name = 'homelogin'),
+    path('', myapp.views.mypage, name = 'mypage'),
     path('myportfolio', myapp.views.myportfolio, name = 'myportfolio'),
-    path('like', myapp.views.like, name = 'like'),
-    path('purchase', myapp.views.purchase, name = 'purchase'),
-    path('contact', myapp.views.contact, name = 'contact'),
-    path('create', myapp.views.create, name = 'create')
+    path('create', myapp.views.create, name = 'create'),
+    path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
+   
 ]
