@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 import sys
+import os,glob
 import argparse
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
+from .models import itemsaved
+from matplotlib import pyplot as plt
+import cv2
 
 # Create your views here.
 def homelogin(request):
@@ -21,6 +25,11 @@ def myportfolio(request):
 def create(request):
     return render(request, 'myapp/create.html')
 
+
+def item_save(image_url):
+    blank_model = itemsaved()
+    blank_model.image =image_url
+    blank_model.save()
 
 
 def detect_product(image_url):
@@ -56,6 +65,15 @@ def show_products(image_url, detection_result):
         draw.text((x1+5,y1+5), obj['class'], (255,0,0))
     del draw
 
+
+
+    print(image.format)
+    image.thumbnail((600,600))
+    image_path = 'myapp/media/images/'
+    image_name = str(itemsaved.objects.all().count())+'.jpeg'
+    image_path = image_path + image_name
+    image.save(image_path)
+    item_save(image_path)
     return image
 
 def kakaoproduct(request):
@@ -69,6 +87,7 @@ def kakaoproduct(request):
 
     detection_result = detect_product("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg")
     image = show_products("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg", detection_result)
-    print(image)
+    print(type(image))
     image.show()
-    return render(request, 'myapp/kakaoproduct.html',{'image_a':image})
+    item_all = itemsaved.objects.all()
+    return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all})

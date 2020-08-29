@@ -29,8 +29,12 @@ plt.show() -->
 <br>
 <br>
 <h1>zzz</h1>
+{% for x in item_all %}
+{% if x.image %}
+<img src="{{x.image.url}}">
+{% endif %}
+{% endfor %}
 
-<img src="{{image_a}}">
 
 
 
