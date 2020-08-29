@@ -32,10 +32,18 @@ plt.show() -->
 
 {% for x in item_all %}
 {% if x.image %}
+<p>당신의 옷 스타일</p>
 <img src="{{x.image.url}}">
 {% endif %}
 {% endfor %}
 
+<p>당신이 궁금한 옷들</p>
+
+{% for y in item_list %}
+{% if y.shopping_want_wear %}
+<img src="{{y.shopping_want_wear.url}}">
+{% endif %}
+{% endfor %}
 
 
 {% endblock %}

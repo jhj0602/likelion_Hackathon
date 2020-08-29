@@ -5,7 +5,7 @@ import argparse
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-from .models import itemsaved
+from .models import itemsaved,wear_mywear
 from matplotlib import pyplot as plt
 
 # Create your views here.
@@ -27,10 +27,15 @@ def create(request):
 
 def item_save(image_url,name):
     blank_model = itemsaved()
-    print(image_url)
     image_url = 'images/'+name
     blank_model.image = image_url
     blank_model.save()
+
+def item_list_save(image_url,name):
+    blank_search_model = wear_mywear()
+    image_url = 'images/shoplist/'+name
+    blank_search_model.shopping_want_wear = image_url
+    blank_search_model.save()
 
 
 def detect_product(image_url):
@@ -55,7 +60,7 @@ def show_products(image_url, detection_result):
         print(str(e))
         sys.exit(0)
 
-
+    image_list = []
     draw = ImageDraw.Draw(image)
     for obj in detection_result['result']['objects']:
         x1 = int(obj['x1']*image.width)
@@ -64,12 +69,23 @@ def show_products(image_url, detection_result):
         y2 = int(obj['y2']*image.height)
         draw.rectangle([(x1,y1), (x2, y2)], fill=None, outline=(255,0,0,255))
         draw.text((x1+5,y1+5), obj['class'], (255,0,0))
+        area = (x1,y1,x2,y2)
+        croped_image = image.crop(area)
+        image_list.append(croped_image)
+        croped_image.show()
+        
     del draw
 
 
 
-    print(image.format)
-    # image.thumbnail((600,600))
+    
+    for x in image_list:
+        image_path = 'media/images/shoplist/'
+        image_name = str(wear_mywear.objects.all().count())+'.jpeg'
+        image_path = image_path + image_name
+        x.save(image_path)
+        item_list_save(image_path,image_name)
+
     image_path = 'media/images/'
     image_name = str(itemsaved.objects.all().count())+'.jpeg'
     image_path = image_path + image_name
@@ -88,7 +104,7 @@ def kakaoproduct(request):
 
     detection_result = detect_product("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg")
     image = show_products("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg", detection_result)
-    print(type(image))
     image.show()
     item_all = itemsaved.objects.all()
-    return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all})
+    search_list_all = wear_mywear.objects.all()
+    return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
