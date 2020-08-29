@@ -7,7 +7,6 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from .models import itemsaved
 from matplotlib import pyplot as plt
-import cv2
 
 # Create your views here.
 def homelogin(request):
@@ -26,9 +25,11 @@ def create(request):
     return render(request, 'myapp/create.html')
 
 
-def item_save(image_url):
+def item_save(image_url,name):
     blank_model = itemsaved()
-    blank_model.image =image_url
+    print(image_url)
+    image_url = 'images/'+name
+    blank_model.image = image_url
     blank_model.save()
 
 
@@ -68,12 +69,12 @@ def show_products(image_url, detection_result):
 
 
     print(image.format)
-    image.thumbnail((600,600))
-    image_path = 'myapp/media/images/'
+    # image.thumbnail((600,600))
+    image_path = 'media/images/'
     image_name = str(itemsaved.objects.all().count())+'.jpeg'
     image_path = image_path + image_name
     image.save(image_path)
-    item_save(image_path)
+    item_save(image_path,image_name)
     return image
 
 def kakaoproduct(request):
