@@ -72,7 +72,7 @@ def show_products(image_url, detection_result):
         area = (x1,y1,x2,y2)
         croped_image = image.crop(area)
         image_list.append(croped_image)
-        croped_image.show()
+        # croped_image.show()
         
     del draw
 
@@ -104,7 +104,7 @@ def kakaoproduct(request):
 
     detection_result = detect_product("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg")
     image = show_products("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg", detection_result)
-    image.show()
+    # image.show()
     item_all = itemsaved.objects.all()
     search_list_all = wear_mywear.objects.all()
     return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
