@@ -26,5 +26,7 @@ urlpatterns = [
     path('myportfolio', myapp.views.myportfolio, name = 'myportfolio'),
     path('create', myapp.views.create, name = 'create'),
     path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
+    path('camera', myapp.views.camera, name='camera'),
+    path('captureimage', myapp.views.captureimage, name='captureimage'),
    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

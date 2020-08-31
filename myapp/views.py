@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from .models import itemsaved,wear_mywear
 from matplotlib import pyplot as plt
+import cv2
 
 # Create your views here.
 def homelogin(request):
@@ -52,9 +53,10 @@ def detect_product(image_url):
 
 def show_products(image_url, detection_result):
     try:
-        image_resp = requests.get('https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg')
+        image_resp = requests.get(image_url)
         image_resp.raise_for_status()
         file_jpgdata = BytesIO(image_resp.content)
+        print(file_jpgdata)
         image = Image.open(file_jpgdata)
     except Exception as e:
         print(str(e))
@@ -95,16 +97,44 @@ def show_products(image_url, detection_result):
 
 def kakaoproduct(request):
     parser = argparse.ArgumentParser(description='Detect Products.')
-    parser.add_argument('https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg', type=str, nargs='?',
+    image_url_home = 'https://th.bing.com/th/id/OIP.NbJQhkLhgAHlnqDIAbqDwQHaHa?w=196&h=196&c=7&o=5&dpr=1.25&pid=1.7'
+    parser.add_argument(image_url_home, type=str, nargs='?',
         default="http://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/06.jpg",
         help='image url to show product\'s rect')
 
     args = parser.parse_args()
     print(args)
 
-    detection_result = detect_product("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg")
-    image = show_products("https://newsimg.sedaily.com/2018/07/22/1S26NWYDVG_1.jpg", detection_result)
+    detection_result = detect_product(image_url_home)
+    image = show_products(image_url_home, detection_result)
     image.show()
     item_all = itemsaved.objects.all()
     search_list_all = wear_mywear.objects.all()
     return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
+
+def camera(request):
+    cam = cv2.VideoCapture(0)
+    cv2.namedWindow("test")
+    img_counter = 0
+    while True:
+        ret, frame = cam.read()
+        cv2.imshow("test", frame)
+        if not ret:
+            break
+        k = cv2.waitKey(1)
+        if k%256 == 27:
+            # ESC pressed
+            print("Escape hit, closing...")
+            break
+        elif k%256 == 32:
+            # SPACE pressed
+            img_name = 'media/images/temp/'+"opencv_frame_0.png"
+            cv2.imwrite(img_name, frame)
+            print("{} written!".format(img_name))
+            img_counter += 1
+    cam.release()
+    cv2.destroyAllWindows()
+    return render(request,'myapp/camera.html',{'image_name':img_name})
+
+def captureimage(request):
+    return render(request, 'myapp/camera.html')
