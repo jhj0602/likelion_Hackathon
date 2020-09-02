@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import path
 import myapp.views
+
+from django.conf.urls.static import static
+from django.urls import path,include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('homelogin', myapp.views.homelogin, name = 'homelogin'),
-    path('', myapp.views.mypage, name = 'mypage'),
+    path('signin', myapp.views.signin, name = 'signin'),
+    path('signup', myapp.views.signup, name = 'signup'),
+    path('', myapp.views.main, name = 'main'),
     path('myportfolio', myapp.views.myportfolio, name = 'myportfolio'),
     path('create', myapp.views.create, name = 'create'),
     path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
-   
+    path('', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

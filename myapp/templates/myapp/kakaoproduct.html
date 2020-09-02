@@ -30,7 +30,7 @@ plt.show() -->
 <br>
 <h1>zzz</h1>
 <input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput">
-<!-- {% for x in item_all %}
+{% for x in item_all %}
 {% if x.image %}
 <p>당신의 옷 스타일</p>
 <img src="{{x.image.url}}" width="100">
@@ -43,20 +43,7 @@ plt.show() -->
 {% if y.shopping_want_wear %}
 <img src="{{y.shopping_want_wear.url}}"width="50">
 {% endif %}
-{% endfor %} -->
+{% endfor %}
 
-<script>
-    function readFile(file) {
-        var reader = new FileReader();
-        reader.onload = readSuccess;
-        function readSuccess(evt) {
-            document.getElementById("your_img_id").src = evt.target.result
-        };
-        reader.readAsDataURL(file);
-    }
 
-    document.getElementById('cameraInput').onchange = function (e) {
-        readFile(e.srcElement.files[0]);
-    };
-</script>
 {% endblock %}
