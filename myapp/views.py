@@ -3,6 +3,7 @@ import sys
 import os,glob
 import argparse
 import requests
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from .models import itemsaved,wear_mywear
@@ -138,3 +139,16 @@ def camera(request):
 
 def captureimage(request):
     return render(request, 'myapp/camera.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
