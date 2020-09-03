@@ -19,7 +19,35 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">MYPAGE</h2>
-            <h3 class="section-subheading text-muted">모하지</h3>
+            <h3 class="section-heading text-uppercase">{{ user.username }}님 </h3>
+            <h3 class="section-heading text-uppercase">{{ user.address }} </h3>
+            <section class="section">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-offset-4 is-4">
+                            <div class="box">
+                                <article class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-50x50">
+                                            <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <span class="title">{{ weather.city }}</span>
+                                                <br>
+                                                <span class="subtitle">{{ weather.temperature }}° C</span>
+                                                <br> {{ weather.description }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
 

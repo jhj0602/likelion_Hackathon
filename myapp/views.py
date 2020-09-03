@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 import sys
 import os,glob
 import argparse
@@ -8,19 +8,78 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from .models import itemsaved,wear_mywear
 from matplotlib import pyplot as plt
+<<<<<<< HEAD
 import cv2
+=======
+from .models import CustomUser
+from django.contrib.auth import login, authenticate
+>>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
 
+from .forms import  UserForm
+from django.http import HttpResponse
+
+
+#날씨 
+import pandas
 # Create your views here.
-def homelogin(request):
-    return render(request, 'myapp/homelogin.html')
 
-def mypage(request):
-    return render(request, 'myapp/mypage.html')
+def base(request):
+    users = CustomUser.objects.all()
+    return render(request, 'myapp/base.html') 
+
+def main(request):
+    if not request.user.is_active:
+        return redirect('signin')
+    else:
+        users = CustomUser.objects.all()
+        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=1acc16a96aa8764e33997f3c2ac1a09c'
+        city = 'busan'
+        city_weather = requests.get(url.format(city)).json() #request the API data and convert the JSON to Python data types
+        weather = {
+            'city' : city,
+            'temperature' : round((city_weather['main']['temp'] - 32)/1.8,1),
+            'description' : city_weather['weather'][0]['description'],
+            'icon' : city_weather['weather'][0]['icon']
+        }
+        context = {'weather' : weather,
+        'users': users}
+        
+        return render(request, 'myapp/main.html',context)
+    
+    
 
 def myportfolio(request):
     return render(request, 'myapp/myportfolio.html')
 
+def signin(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
 
+        if user is not None:
+            login(request, user)
+            return redirect('main')
+        else:
+            return render(request, 'myapp/signin.html')
+    else:
+        return render(request, 'myapp/signin.html')
+
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = CustomUser.objects.create_user(username=form.cleaned_data['username'],
+            password = form.cleaned_data['password'],
+            name = form.cleaned_data['name'],
+            address = form.cleaned_data['address'],
+            phone_number = form.cleaned_data['phone_number'],
+            gender = form.cleaned_data['gender'])
+            login(request, new_user)
+            return redirect('main')
+    else:
+        form = UserForm()
+        return render(request, 'myapp/signup.html', {'form': form})
 
 
 def create(request):
@@ -54,7 +113,11 @@ def detect_product(image_url):
 
 def show_products(image_url, detection_result):
     try:
+<<<<<<< HEAD
         image_resp = requests.get(image_url)
+=======
+        image_resp = requests.get('https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg')
+>>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
         image_resp.raise_for_status()
         file_jpgdata = BytesIO(image_resp.content)
         print(file_jpgdata)
@@ -75,7 +138,7 @@ def show_products(image_url, detection_result):
         area = (x1,y1,x2,y2)
         croped_image = image.crop(area)
         image_list.append(croped_image)
-        croped_image.show()
+        # croped_image.show() 내컴퓨터에서 사진파일 실행
         
     del draw
 
@@ -98,21 +161,32 @@ def show_products(image_url, detection_result):
 
 def kakaoproduct(request):
     parser = argparse.ArgumentParser(description='Detect Products.')
+<<<<<<< HEAD
     image_url_home = 'https://th.bing.com/th/id/OIP.NbJQhkLhgAHlnqDIAbqDwQHaHa?w=196&h=196&c=7&o=5&dpr=1.25&pid=1.7'
     parser.add_argument(image_url_home, type=str, nargs='?',
+=======
+    parser.add_argument('https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg', type=str, nargs='?',
+>>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
         default="http://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/06.jpg",
         help='image url to show product\'s rect')
 
     args = parser.parse_args()
     print(args)
 
+<<<<<<< HEAD
     detection_result = detect_product(image_url_home)
     image = show_products(image_url_home, detection_result)
     image.show()
+=======
+    detection_result = detect_product("https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg")
+    image = show_products("https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg", detection_result)
+    # image.show()
+>>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
     item_all = itemsaved.objects.all()
     search_list_all = wear_mywear.objects.all()
     return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
 
+<<<<<<< HEAD
 def camera(request):
     cam = cv2.VideoCapture(0)
     cv2.namedWindow("test")
@@ -151,4 +225,6 @@ def captureimage(request):
 
 
 
+=======
+>>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
 

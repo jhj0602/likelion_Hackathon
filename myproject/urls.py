@@ -15,18 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import path
 import myapp.views
+
+from django.conf.urls.static import static
+from django.urls import path,include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('homelogin', myapp.views.homelogin, name = 'homelogin'),
-    path('', myapp.views.mypage, name = 'mypage'),
+    path('signin', myapp.views.signin, name = 'signin'),
+    path('signup', myapp.views.signup, name = 'signup'),
+    path('', myapp.views.main, name = 'main'),
     path('myportfolio', myapp.views.myportfolio, name = 'myportfolio'),
     path('create', myapp.views.create, name = 'create'),
     path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
+<<<<<<< HEAD
     path('camera', myapp.views.camera, name='camera'),
     path('captureimage', myapp.views.captureimage, name='captureimage'),
    
+=======
+    path('', include('django.contrib.auth.urls')),
+>>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
