@@ -8,19 +8,14 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from .models import itemsaved,wear_mywear
 from matplotlib import pyplot as plt
-<<<<<<< HEAD
-import cv2
-=======
 from .models import CustomUser
 from django.contrib.auth import login, authenticate
->>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
 
 from .forms import  UserForm
 from django.http import HttpResponse
 
 
-#날씨 
-import pandas
+#날씨
 # Create your views here.
 
 def base(request):
@@ -44,7 +39,7 @@ def main(request):
         context = {'weather' : weather,
         'users': users}
         
-        return render(request, 'myapp/main.html',context)
+        return render(request, 'myapp/main2.html',context)
     
     
 
@@ -113,11 +108,7 @@ def detect_product(image_url):
 
 def show_products(image_url, detection_result):
     try:
-<<<<<<< HEAD
         image_resp = requests.get(image_url)
-=======
-        image_resp = requests.get('https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg')
->>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
         image_resp.raise_for_status()
         file_jpgdata = BytesIO(image_resp.content)
         print(file_jpgdata)
@@ -161,32 +152,21 @@ def show_products(image_url, detection_result):
 
 def kakaoproduct(request):
     parser = argparse.ArgumentParser(description='Detect Products.')
-<<<<<<< HEAD
     image_url_home = 'https://th.bing.com/th/id/OIP.NbJQhkLhgAHlnqDIAbqDwQHaHa?w=196&h=196&c=7&o=5&dpr=1.25&pid=1.7'
     parser.add_argument(image_url_home, type=str, nargs='?',
-=======
-    parser.add_argument('https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg', type=str, nargs='?',
->>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
         default="http://t1.daumcdn.net/alvolo/_vision/openapi/r2/images/06.jpg",
         help='image url to show product\'s rect')
 
     args = parser.parse_args()
     print(args)
 
-<<<<<<< HEAD
     detection_result = detect_product(image_url_home)
     image = show_products(image_url_home, detection_result)
     image.show()
-=======
-    detection_result = detect_product("https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg")
-    image = show_products("https://newsimg.sedaily.com/2020/07/02/1Z55BUHC9F_1.jpg", detection_result)
-    # image.show()
->>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
     item_all = itemsaved.objects.all()
     search_list_all = wear_mywear.objects.all()
     return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
 
-<<<<<<< HEAD
 def camera(request):
     cam = cv2.VideoCapture(0)
     cv2.namedWindow("test")
@@ -225,6 +205,4 @@ def captureimage(request):
 
 
 
-=======
->>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
 

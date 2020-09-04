@@ -29,11 +29,7 @@ urlpatterns = [
     path('myportfolio', myapp.views.myportfolio, name = 'myportfolio'),
     path('create', myapp.views.create, name = 'create'),
     path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
-<<<<<<< HEAD
     path('camera', myapp.views.camera, name='camera'),
     path('captureimage', myapp.views.captureimage, name='captureimage'),
-   
-=======
     path('', include('django.contrib.auth.urls')),
->>>>>>> 0249d6756393299cb90aa76b8dadeaafe069d016
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
