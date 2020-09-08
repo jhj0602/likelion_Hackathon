@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
     'api_test',
+    'deeplearning',
 ]
 
 MIDDLEWARE = [
