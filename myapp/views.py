@@ -10,7 +10,7 @@ from .models import itemsaved,wear_mywear
 from matplotlib import pyplot as plt
 from .models import CustomUser
 from django.contrib.auth import login, authenticate
-
+import cv2
 from .forms import  UserForm
 from django.http import HttpResponse
 
@@ -111,7 +111,6 @@ def show_products(image_url, detection_result):
         image_resp = requests.get(image_url)
         image_resp.raise_for_status()
         file_jpgdata = BytesIO(image_resp.content)
-        print(file_jpgdata)
         image = Image.open(file_jpgdata)
     except Exception as e:
         print(str(e))
@@ -158,7 +157,6 @@ def kakaoproduct(request):
         help='image url to show product\'s rect')
 
     args = parser.parse_args()
-    print(args)
 
     detection_result = detect_product(image_url_home)
     image = show_products(image_url_home, detection_result)
