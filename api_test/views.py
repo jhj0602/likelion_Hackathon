@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404,reverse
 import sys
 import os,glob
 import argparse
@@ -73,7 +73,17 @@ def show_products(image_url, detection_result):
     item_save(image_path,image_name)
     return image
 
-def kakaoproduct(request):
+def camera_kakaoproduct(request):
+    image_name = camera()
+    detection_result = detect_product(image_name)
+    image_name = Image.open(image_name)
+    image = show_products(image_name, detection_result)
+    image.show()
+    item_all = itemsaved.objects.all()
+    search_list_all = wear_mywear.objects.all()
+    return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
+
+def media_kakaoproduct(request):
     image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
     detection_result = detect_product(image_name)
     image_name = Image.open(image_name)
@@ -85,7 +95,7 @@ def kakaoproduct(request):
 
 def camera():
     cam = cv2.VideoCapture(0)
-    cv2.namedWindow("사진을 찍어주세요.")
+    cv2.namedWindow("please see front of camera")
     img_counter = 0
     while True:
         ret, frame = cam.read()
@@ -106,7 +116,10 @@ def camera():
             break
     cam.release()
     cv2.destroyAllWindows()
-    return redirect('kakaoproduct',img_name)
+    return img_name
 
 def captureimage(request):
     return render(request, 'myapp/camera.html')
+
+def choose_search(request):
+    return render(request, 'api_test/search.html')

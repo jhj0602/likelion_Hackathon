@@ -34,7 +34,7 @@ urlpatterns = [
     path('camera', myapp.views.camera, name='camera'),
     path('captureimage', myapp.views.captureimage, name='captureimage'),
     path('', include('django.contrib.auth.urls')),
-    path('cameratest/', include('api_test.urls')),
+    path('apitest/', include('api_test.urls')),
     path('deep/', include('deeplearning.urls')),
     path('imageprocess/', include('imageprocess.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
