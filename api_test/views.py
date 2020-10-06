@@ -74,7 +74,7 @@ def show_products(image_url, detection_result):
     return image
 
 def kakaoproduct(request):
-    image_name = "media/images/temp/opencv_frame_0.png"
+    image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
     detection_result = detect_product(image_name)
     image_name = Image.open(image_name)
     image = show_products(image_name, detection_result)
@@ -85,7 +85,7 @@ def kakaoproduct(request):
 
 def camera():
     cam = cv2.VideoCapture(0)
-    cv2.namedWindow("test")
+    cv2.namedWindow("사진을 찍어주세요.")
     img_counter = 0
     while True:
         ret, frame = cam.read()
@@ -99,14 +99,14 @@ def camera():
             break
         elif k%256 == 32:
             # SPACE pressed
-            img_name = 'media/images/temp/'+"opencv_frame_0.png"
+            img_name = 'media/images/temp/'+"opencv_frame_0.png" # user이름을 이름에 넣자
             cv2.imwrite(img_name, frame)
             print("{} written!".format(img_name))
             img_counter += 1
             break
     cam.release()
     cv2.destroyAllWindows()
-    return img_name
+    return redirect('kakaoproduct',img_name)
 
 def captureimage(request):
     return render(request, 'myapp/camera.html')

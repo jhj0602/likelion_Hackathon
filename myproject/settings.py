@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',
     'api_test',
     'deeplearning',
+    'imageprocess',
 ]
 
 MIDDLEWARE = [
