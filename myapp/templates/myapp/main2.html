@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SUNNY BOOGIE</title>
+    <link rel="stylesheet" href="{% static 'myapp/css/mainstyle.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+    <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+    <div class="topnav">
+      <input type="text" placeholder="Search..">
+      <a href="">카메라</a>
+      <a href="">내사진올리기</a>
+      <a href="">마이페이지</a>
+      <a href="{% url 'my_cart' %}">장바구니</a>
+    </div>
+    <hr class=hr1>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">{{ weather.city }}</span>
+                                        <br>
+                                        <span class="subtitle">{{ weather.temperature }}° C</span>
+                                        <br> {{ weather.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+      <div class="howwhether">
+        <br>
+        <p class="whethercardtext">오늘의 날씨는?</p>
+        <input class="form-control" id="disabledInput" type="text">
+        <br>
+        <button class="whethercardbtn">Search</button>
+      </div>
+    </div>
+
+    <div class="closet">
+        <img src="{% static 'myapp/img/main/1.jpg' %}"/>
+        <img src="{% static 'myapp/img/main/2.jpg' %}"/>
+        <img src="{% static 'myapp/img/main/로고.jpg' %}"/>
+        <img src="{% static 'myapp/img/main/closet.jpg' %}"/>
+        <img src="{% static 'myapp/img/main/2.jpg' %}"/>
+        <img src="{% static 'myapp/img/main/3.jpg' %}"/>
+    </div>
+
+    <div class="morecloset">
+      <img src="{% static 'myapp/img/main/closet.jpg' %}" alt="Avatar" class="closetimage">
+      <div class="overlay">
+        <a href="{% url 'camera' %}" class="icon" title="User Profile">
+          <i class="fa fa-user"></i>
+        </a>
+      </div>
+    </div>
+
+  </body>
+</html>

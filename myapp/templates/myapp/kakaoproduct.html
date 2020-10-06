@@ -1,0 +1,47 @@
+<!-- url = "https://kapi.kakao.com/v1/vision/product/detect"
+headers = {'Authorization': 'KakaoAK {}'.format(MYAPP_KEY)}
+
+filename = './face_detection_test_PW.jpg'
+files = { 'file' : open(filename, 'rb')}
+
+response = requests.post(url, headers=headers, files=files)
+
+result = response.json()
+fig_w, fig_h = result['result']['width'], result['result']['height']
+
+img = mpimg.imread('./face_detection_test_PW.jpg')
+fig,ax = plt.subplots(figsize=(10,10))
+
+for each in result['result']['objects']:
+    x, y = each['x1']*fig_w, each['y1']*fig_h
+    w, h = each['x2']*fig_w - x, each['y2']*fig_h - y
+    rect = patches.Rectangle((x, y), w, h, lw=5, edgecolor='c', facecolor='none')
+    ax.add_patch(rect)
+    plt.text(x,y-10, each['class'], size=18, color='red')
+    
+ax.imshow(img)
+plt.show() -->
+{% extends 'myapp/base.html' %}
+
+
+{% block content%}
+{% load static%}
+<br>
+<br>
+<h1>zzz</h1>
+<input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput">
+{% for x in item_all %}
+{% if x.image %}
+<p>당신의 옷 스타일</p>
+<img src="{{x.image.url}}" width="100">
+{% endif %}
+{% endfor %}
+
+<p>당신이 궁금한 옷들</p>
+
+{% for y in item_list %}
+{% if y.shopping_want_wear %}
+<img src="{{y.shopping_want_wear.url}}"width="50">
+{% endif %}
+{% endfor %}
+{% endblock %}

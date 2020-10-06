@@ -1,0 +1,48 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block content%}
+{% load static%}
+<br>
+<br>
+<br>
+<br>
+<h1>글작성</h1>
+<div class="container">
+	<form action="{% url 'create' %}" enctype="multipart/form-data" method="POST"><!--file을 받기 우해서 POST 형식으로 바꿔줌 views.py도 post형식으로 바꿔줘야한다.--> 
+	  {% csrf_token %}
+	  <h4>#옷 이름: </h4>
+	  <input type="text" name="title">
+	  <br>
+	  <br>
+	  <h4>#상의 하의: </h4>
+	  <select name="top_bottom ">
+        <option value='top_bottom'>상의</option>
+        <option value='top_bottom'>하의</option>
+      </select>
+	  <br>
+      <br>
+      <h4>#분류: </h4>
+      <select name="content">
+        <option value='content '>아우터</option>
+        <option value='content '>긴팔티</option>
+        <option value='content '>반팔티</option>
+        <option value='content '>긴바지</option>
+        <option value='content '>반바지</option>
+        
+      </select>
+      <br>
+      <br>
+	  <h4>#사진:</h4>
+	  <input type="file" name="images" accept="image/*">
+	  
+      <br>
+      <br>
+      <h4>#스타일:</h4>
+      <input type="text" name="hashtag_field">
+      <br>
+      <br>
+	  <input class="btn btn-dark" type="submit" value="글쓰기">
+    </form>
+</div>
+{% endblock %}
