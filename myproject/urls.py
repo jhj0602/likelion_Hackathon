@@ -28,8 +28,7 @@ urlpatterns = [
     path('signin', myapp.views.signin, name = 'signin'),
     path('signup', myapp.views.signup, name = 'signup'),
     path('', myapp.views.main, name = 'main'),
-    path('myportfolio', myapp.views.myportfolio, name = 'myportfolio'),
-    path('create', myapp.views.create, name = 'create'),
+  
     path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
     path('camera', myapp.views.camera, name='camera'),
     path('captureimage', myapp.views.captureimage, name='captureimage'),
@@ -37,4 +36,13 @@ urlpatterns = [
     path('apitest/', include('api_test.urls')),
     path('deep/', include('deeplearning.urls')),
     path('imageprocess/', include('imageprocess.urls')),
+    
+    #크롤링 부분
+    path('crowling', myapp.views.crowling, name='crowling'),
+    #장바구니 부분
+    path('my_cart', myapp.views.my_cart, name = 'my_cart'),
+    path('add_cart/<int:product_pk>', myapp.views.add_cart, name='add_cart'),
+    path('delete_cart_item/<int:product_pk>', myapp.views.delete_cart_item, name='delete_cart_item'),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

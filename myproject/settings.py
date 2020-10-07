@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api_test',
     'deeplearning',
     'imageprocess',
+    
 ]
 
 MIDDLEWARE = [

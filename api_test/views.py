@@ -28,6 +28,8 @@ def item_list_save(image_url,name):
     blank_search_model.save()
 
 
+
+
 def detect_product(image):
     headers = {'Authorization': 'KakaoAK {}'.format("1b93fbec9c5f4fdefb40d20a47f2e888")}
     print(type(image))
@@ -50,6 +52,7 @@ def show_products(image_url, detection_result):
 
     image_list = []
     draw = ImageDraw.Draw(image)
+    classname_list = []
     for obj in detection_result['result']['objects']:
         x1 = int(obj['x1']*image.width)
         y1 = int(obj['y1']*image.height)
@@ -57,14 +60,13 @@ def show_products(image_url, detection_result):
         y2 = int(obj['y2']*image.height)
         draw.rectangle([(x1,y1), (x2, y2)], fill=None, outline=(255,0,0,255))
         draw.text((x1+5,y1+5), obj['class'], (255,0,0))
+        classname_list.append(obj['class'])
         area = (x1,y1,x2,y2)
         croped_image = image.crop(area)
         image_list.append(croped_image)
         croped_image.show() #내컴퓨터에서 사진파일 실행
-        
     del draw
 
-    
 
     image_path = 'media/images/'
     image_name = str(itemsaved.objects.all().count())+'.jpeg'

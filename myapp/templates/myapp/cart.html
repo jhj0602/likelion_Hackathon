@@ -1,0 +1,39 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SUNNY BOOGIE</title>
+    <link rel="stylesheet" href="{% static 'myapp/css/mainstyle.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+<br>
+<br>
+<h1>여기는 장바구니에용</h1>
+{% for c in cart_item %}
+     <br>
+    
+    <!-- <p>{{c.quantity}}</p> -->
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="/media/{{c.product.musinsaImage}}" alt="...">
+            <div class="caption">
+              <h5>상품 이름 : {{c.product.musinName}}</h5>
+              <p>가격 : {{c.product.musinPrice}}</p>
+              
+              <p><a href="{% url 'delete_cart_item' c.product.id %}" class="btn btn-primary" role="button">장바구니 아이템 삭제</a>  </p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    {% endfor %}
+  </body>
+  </html>
+  
