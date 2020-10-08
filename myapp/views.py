@@ -332,7 +332,8 @@ def captureimage(request):
 
 
 
-
+def mypage(request):
+    return render(request, 'myapp/mypage.html')
 
 
 

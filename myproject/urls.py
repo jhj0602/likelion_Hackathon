@@ -43,6 +43,8 @@ urlpatterns = [
     path('my_cart', myapp.views.my_cart, name = 'my_cart'),
     path('add_cart/<int:product_pk>', myapp.views.add_cart, name='add_cart'),
     path('delete_cart_item/<int:product_pk>', myapp.views.delete_cart_item, name='delete_cart_item'),
-
+    
+    #마이페이지
+    path('mypage', myapp.views.mypage, name='mypage'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
