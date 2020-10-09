@@ -3,21 +3,31 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
-class itemsaved(models.Model):  ## 스타일 저장 모델
-    image = models.ImageField(upload_to='images/', blank=True)
+
 
 class wear_mywear(models.Model):
     shopping_want_wear = models.ImageField(upload_to='images/shoplist',blank=True)
 
 
+def name_func(instance, filename):
+       blocks = filename.split('.')
+       filename = "%s.jpg" % (instance.id)
+       return filename
+
+
 class CustomUser(AbstractUser):
     def __str__(self):
-        return self.username
+        return self.name
         
     name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     gender = models.CharField(max_length=50)
+
+class itemsaved(models.Model):  ## 이미지 검색할 때 임시저장 이미지 모델
+    image = models.ImageField(upload_to=name_func, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+
 
 class musinsaData(models.Model):
     search_musinsa = models.TextField()#검색어 필드

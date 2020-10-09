@@ -12,20 +12,11 @@ from myapp.models import CustomUser
 from django.contrib.auth import login, authenticate
 import cv2
 from myapp.forms import  UserForm
+from .forms import MediaForm
 from django.http import HttpResponse
 # Create your views here.
 
-def item_save(image_url,name):
-    blank_model = itemsaved()
-    image_url = 'images/'+name
-    blank_model.image = image_url
-    blank_model.save()
 
-def item_list_save(image_url,name):
-    blank_search_model = wear_mywear()
-    image_url = 'images/shoplist/'+name
-    blank_search_model.shopping_want_wear = image_url
-    blank_search_model.save()
 
 
 
@@ -44,13 +35,9 @@ def detect_product(image):
         sys.exit(0)
 
 def show_products(image_url, detection_result):
-    try:
-        image = Image.open("media/images/temp/opencv_frame_0.png")
-    except Exception as e:
-        print(str(e))
-        sys.exit(0)
-
+    image = image_url
     image_list = []
+    image_path_list=[]
     draw = ImageDraw.Draw(image)
     classname_list = []
     for obj in detection_result['result']['objects']:
@@ -64,36 +51,33 @@ def show_products(image_url, detection_result):
         area = (x1,y1,x2,y2)
         croped_image = image.crop(area)
         image_list.append(croped_image)
+        image_path = 'media/images/temp/' + str(obj['class']) + '.jpeg'
+        image_path_list.append(image_path)
+        croped_image.save(image_path)
         croped_image.show() #내컴퓨터에서 사진파일 실행
     del draw
 
 
-    image_path = 'media/images/'
-    image_name = str(itemsaved.objects.all().count())+'.jpeg'
-    image_path = image_path + image_name
-    image.save(image_path)
-    item_save(image_path,image_name)
-    return image
+    return image_path_list # 지금 경로리턴하게 바꿈 원래는 image그 자체를 반환함.
 
 def camera_kakaoproduct(request):
     image_name = camera()
     detection_result = detect_product(image_name)
     image_name = Image.open(image_name)
     image = show_products(image_name, detection_result)
-    image.show()
-    item_all = itemsaved.objects.all()
-    search_list_all = wear_mywear.objects.all()
-    return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
+    # image.show()
+    return redirect('imagecut',image)
 
-def media_kakaoproduct(request):
-    image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
+def media_kakaoproduct(request, pk):
+    a = itemsaved.objects.filter(pk=pk).last()
+    # image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
+    image_name = a.image.url
+    print(image_name)
     detection_result = detect_product(image_name)
-    image_name = Image.open(image_name)
+    image_name = Image.open(image_list)
     image = show_products(image_name, detection_result)
     image.show()
-    item_all = itemsaved.objects.all()
-    search_list_all = wear_mywear.objects.all()
-    return render(request, 'myapp/kakaoproduct.html',{'item_all':item_all, 'item_list':search_list_all})
+    return redirect('imagecut')
 
 def camera():
     cam = cv2.VideoCapture(0)
@@ -111,7 +95,7 @@ def camera():
             break
         elif k%256 == 32:
             # SPACE pressed
-            img_name = 'media/images/temp/'+"opencv_frame_0.png" # user이름을 이름에 넣자
+            img_name = 'media/images/temp/'+"opencv_frame_0.jpeg" # user이름을 이름에 넣자
             cv2.imwrite(img_name, frame)
             print("{} written!".format(img_name))
             img_counter += 1
@@ -120,8 +104,19 @@ def camera():
     cv2.destroyAllWindows()
     return img_name
 
-def captureimage(request):
-    return render(request, 'myapp/camera.html')
 
 def choose_search(request):
-    return render(request, 'api_test/search.html')
+    if request.method == "POST":
+        temp_image = MediaForm(request.POST,request.FILES)
+        if temp_image.is_valid():
+            temp_image= temp_image.save(commit=False)
+            temp_image.username = request.user
+            # temp_image.image =str(request.user)+".jpg"
+            temp_image= temp_image.save()
+            return redirect('mediatest',request.user.pk)
+    blank_media = MediaForm()    
+    return render(request, 'api_test/search.html',{'mediaform':blank_media})
+
+# def content_file_name(instance, filename):
+#     filename = "%s.jpg" % (instance.user.pk)
+#     return os.path.join('uploads', filename)

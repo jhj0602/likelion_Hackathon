@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import os, re
 import numpy as np
 import cv2
 from PIL import Image
 import matplotlib.pyplot as plt
 
-def imagecutter(request): #모든 크롤링 데이터에 대해 적용해야함. 이미지 전처리 함수를 만들엇음
+def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해야함. 이미지 전처리 함수를 만들엇음
     step = 0
+    global mouse_is_pressing
     mouse_is_pressing = False
-
 
     def distanceBetweenTwoPoints(point1, point2):
         
@@ -20,7 +20,7 @@ def imagecutter(request): #모든 크롤링 데이터에 대해 적용해야함.
 
     def mouse_callback(event,x,y,flags,param):
         
-        global mouse_is_pressing,points
+        # global mouse_is_pressing,points
 
         if step != 1:
             return
@@ -231,8 +231,9 @@ def imagecutter(request): #모든 크롤링 데이터에 대해 적용해야함.
             image[:,:,2] = b
         return image 
 
-
-    image = plt.imread('imageprocess\image2.jpg') #os.walk로 이제 모든 애들 끌고오면 될듯
+    image=image.split('/avhash')
+    image = image[0]
+    image = plt.imread(image) #os.walk로 이제 모든 애들 끌고오면 될듯
     pixels = np.array(image) # numpy 배열로 변환하기
     cut = channel_cut(pixels)
     # img = Image.open('sss.jpg')# 이미지 데이터 열기
@@ -247,6 +248,7 @@ def imagecutter(request): #모든 크롤링 데이터에 대해 적용해야함.
     size = len(points)
 
     if size > 0:
+        print("여기임")
         cv2.namedWindow('input')
         cv2.setMouseCallback("input", mouse_callback, 0);  
 
@@ -261,24 +263,28 @@ def imagecutter(request): #모든 크롤링 데이터에 대해 적용해야함.
             cv2.imshow('input', img_result)
 
             key = cv2.waitKey(1)
-            if key == 32:
+            if key % 256 == 32:
+                cv2.relese()
+                cv2.destroyAllWindows()
                 break
 
 
         img_final = transform(img_input, points )
 
-
-        cv2.imshow('input', img_result)
-        cv2.imshow('result', img_final )
+        im = Image.fromarray(img_final)
+        userimage_name="media/images/temp/myphoto.jpg"
+        im.save(userimage_name)
+        return redirect('avhash', userimage_name)
 
     else:
+        print("여긴가?")
         cv2.imshow('input', img_input)
 
         cv2.waitKey(0)
 
         cv2.destroyAllWindows()
 
-def avhash(request):
+def avhash(request,image):
     search_dir = "media/images/shoes"
     cache_dir = "imageprocess/imagecache/shoes"
 
@@ -326,22 +332,21 @@ def avhash(request):
             if diff_r < rate:
                 yield (diff_r, fname)
     # 찾기
-    srcfile = search_dir + "/신발(50).jpg" #지금은 search_dir에서 해당파일 찾고잇음 고쳐야됨
+
+
+    srcfile = image
+    srcfile = srcfile.split('/')
+    
+    # srcfile = search_dir + "/신발(50).jpg" #지금은 search_dir에서 해당파일 찾고잇음 고쳐야됨
     print(srcfile)
-    html =""
     sim = list(find_image(srcfile, 0.25))
     sim = sorted(sim, key=lambda x:x[0])
+    distance = []
+    namelist = []
+    address = []
     for r, f in sim:
         print(r,">",f)
-        s = '<div style="float:left;"><h3>[ 차이 : ' + str(r) + '-' + \
-            os.path.basename(f) + ']</h3>'+\
-            '<p><a href="'+f+'"><img src="' + f + '" width=400>'+\
-            '</a></p></div>'
-        html+= s
-    html = """<html><head><meta charset="utf8"></head>
-    <body><h3>원래 이미지 </h3><p>
-    <img src = '{0}' width=400></p>{1}
-    </body></html>""".format(srcfile, html)
-    with open("./avhash-search-output.html","w", encoding="utf-8") as f:
-        f.write(html)
-    print("ok")
+        address.append(f)
+        namelist.append(os.path.basename(f))
+        distance.append(r)
+    return render(request, 'imageprocess/search_result.html', {'sim': sim, 'srcfile':srcfile,'namelist':namelist, 'distance':distance, 'address':address })

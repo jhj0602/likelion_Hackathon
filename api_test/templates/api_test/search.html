@@ -1,2 +1,7 @@
 <a href ="{% url 'cameratest' %}">카메라로 찍기</a>
-<a href ="{% url 'mediatest' %}">내 사진으로 찾기</a>
+
+<form action="{% url 'search' %}" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{mediaform}}
+    <input type="submit" value="내 사진 올리기"></input>
+</form>

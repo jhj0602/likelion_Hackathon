@@ -13,7 +13,7 @@
     <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
     <div class="topnav">
       <input type="text" placeholder="Search..">
-      <a href="">카메라</a>
+      <a href="{% url 'search' %}">이미지 서치</a>
       <a href="">내사진올리기</a>
       <a href="">마이페이지</a>
       <a href="{% url 'my_cart' %}">장바구니</a>
@@ -58,7 +58,7 @@
     <div class="morecloset">
       <img src="{% static 'myapp/img/main/closet.jpg' %}" alt="Avatar" class="closetimage">
       <div class="overlay">
-        <a href="{% url 'camera' %}" class="icon" title="User Profile">
+     
           <i class="fa fa-user"></i>
         </a>
       </div>
