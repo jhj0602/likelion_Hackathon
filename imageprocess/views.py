@@ -231,9 +231,17 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
             image[:,:,2] = b
         return image 
 
-    image=image.split('/avhash')
-    image = image[0]
-    image = plt.imread(image) #os.walk로 이제 모든 애들 끌고오면 될듯
+    # image=image.split('/avhash')
+    # print(image)
+    # image = image[0]
+    # result_i = ""
+    # for x in image:
+    #     if x == '[' or x=="'" or x =="]":
+    #         pass
+    #     else:
+    #         result_i += x        
+    # print(result_i)
+    image = plt.imread(result_i) #os.walk로 이제 모든 애들 끌고오면 될듯
     pixels = np.array(image) # numpy 배열로 변환하기
     cut = channel_cut(pixels)
     # img = Image.open('sss.jpg')# 이미지 데이터 열기
