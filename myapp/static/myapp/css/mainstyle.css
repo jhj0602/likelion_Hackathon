@@ -88,7 +88,7 @@ body {
   float: left;
   width: 250px;
   height: 480px;
-  margin-left: 20px;
+  margin-left: 100px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 5px;
@@ -194,7 +194,7 @@ closet end */
   height: 170px;
   top: 20px;
   bottom: 10px;
-  left: 20px;
+  margin-left: 85px;
 }
 
 .closetimage {
@@ -267,7 +267,7 @@ closet end */
   display: block;
   width: 400px;
   height: 130px;
-  margin-left: 50px;
+  margin-left: 170px;
   margin-top: 40px;
   margin-bottom: 300px; /* 밑부분 추가할 때 지울 것!!! */
 }
@@ -276,7 +276,7 @@ closet end */
   position: absolute;
   top: 920px;
   bottom: 0;
-  left: 50px;
+  left: 170px;
   right: 0;
   height: 132px;
   width: 400px;
@@ -289,7 +289,7 @@ closet end */
   position: absolute;
   top: 920px;
   bottom: 0;
-  left: 500px;
+  left: 740px;
   right: 0;
   height: 132px;
   width: 400px;
@@ -302,7 +302,7 @@ closet end */
   position: absolute;
   top: 920px;
   bottom: 0;
-  left: 950px;
+  left: 1310px;
   right: 0;
   height: 132px;
   width: 400px;
