@@ -332,11 +332,11 @@ def captureimage(request):
 
 
 
+def mypage(request):
+    return render(request, 'myapp/mypage.html')
 
-
-
-
-
+def mypage_drag(request):
+    return render(request, 'myapp/mypage_drag.html')
 
 
 
