@@ -333,11 +333,15 @@ def captureimage(request):
 
 
 def mypage(request):
+    
     return render(request, 'myapp/mypage.html')
 
 def mypage_drag(request):
-    return render(request, 'myapp/mypage_drag.html')
+    cart_item = CartItem.objects.all().order_by('-id')
+    return render(request, 'myapp/mypage_drag.html',{'cart_item': cart_item})
 
-
+def draganddrop(request):
+    cart_item = CartItem.objects.all().order_by('-id')
+    return render(request, 'myapp/draganddrop.html',{'cart_item': cart_item})
 
 
