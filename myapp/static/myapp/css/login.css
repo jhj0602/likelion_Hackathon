@@ -1,0 +1,156 @@
+
+@font-face {
+  font-family: '123RF';
+}
+
+.logo {
+  width: 400px;
+  height: 110px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+}
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+  float: right;
+  font-family: '123RF';
+  padding: 4px;
+  border-radius: 5px 5px 5px 5px;
+  border-color: inherit;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+  background-color: #DAD9FF;
+}
+
+.inbutton {
+  font-family: '123RF';
+  margin-left: 20px;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.loginbtn{
+  background-color: white;
+  color: #6B66FF;
+  border: 2px solid #B5B2FF;
+}
+
+.loginbtn:hover {
+  background-color: #B5B2FF;
+  color: white;
+}
+
+.signinbtn {
+  background-color: white;
+  color: #6B66FF;
+  border: 2px solid #B5B2FF;
+}
+
+.signinbtn:hover {
+  background-color: #B5B2FF;
+  color: white;
+}
+
+.hr1 {
+  border: 2px solid #B5B2FF;
+}
+
+body {
+    padding-bottom:4.2rem;
+    background:rgba(0, 0, 0, 0.76);
+    font-family: '123RF';
+    src:url('123RF.ttf')
+}
+
+.logintext {
+  font-family: '123RF';
+  src:url('123RF.ttf')
+}
+
+.logintextt {
+  color: white;
+}
+
+a {
+    text-decoration:none !important;
+}
+
+.myform {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #B5B2FF;
+  border-radius: 1.1rem;
+  outline: 0;
+  max-width: 500px;
+  background-color: #B5B2FF;
+}
+
+.tx-tfm{
+  text-transform:uppercase;
+}
+.mybtn{
+  border-radius:50px;
+}
+
+.login-or {
+  position: relative;
+  color: #aaa;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+ }
+
+.span-or {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  margin-left: -25px;
+  width: 50px;
+  text-align: center;
+  background-color: #B5B2FF;
+  color: white;
+ }
+
+ .hr-or {
+  height: 1px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+ }
+
+.google {
+  color:#666;
+  width:100%;
+  height:40px;
+  text-align:center;
+  outline:none;
+  border: 1px solid lightgrey;
+ }
+
+ form .error {
+   color: #ff0000;
+ }
+
+ #second{display:none;}

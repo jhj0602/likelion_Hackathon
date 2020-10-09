@@ -1,0 +1,62 @@
+
+
+@font-face {
+  font-family: '123RF';
+}
+
+.logo {
+  width: 400px;
+  height: 110px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.hr1 {
+  border: 2px solid #B5B2FF;
+}
+
+body {font-family: '123RF';}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  font-family: '123RF';
+  border-radius: 5px;
+  background-color: #E8D9FF;
+  padding: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.gender1 {
+  margin-top: 20px;
+}
+
+.gender2 {
+  margin-bottom: 20px;
+}
