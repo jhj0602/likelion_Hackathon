@@ -29,11 +29,8 @@ urlpatterns = [
     path('signup', myapp.views.signup, name = 'signup'),
     path('', myapp.views.main, name = 'main'),
   
-    path('kakaoproduct', myapp.views.kakaoproduct, name = 'kakaoproduct'),
-    path('camera', myapp.views.camera, name='camera'),
-    path('captureimage', myapp.views.captureimage, name='captureimage'),
     path('', include('django.contrib.auth.urls')),
-    path('apitest/', include('api_test.urls')),
+    path('imagesearch/', include('api_test.urls')),
     path('deep/', include('deeplearning.urls')),
     path('imageprocess/', include('imageprocess.urls')),
     

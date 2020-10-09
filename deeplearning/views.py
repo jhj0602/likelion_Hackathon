@@ -9,6 +9,6 @@ from django.shortcuts import render
 # from tensorflow.keras.callbacks import ModelCheckpoint,EarlyStopping
 # import os
 # from PIL import Image
-# Create your views here.
+# # Create your views here.
 def learning(request):
     return

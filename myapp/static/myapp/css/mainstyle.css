@@ -1,163 +1,338 @@
 
-  body {
-    font-family: '123RF';
-    src:url('123RF.ttf')
-  }
-  
-  .logo {
+@font-face {
+  font-family: '123RF';
+}
+
+body {
+  font-family: '123RF';
+  src:url('123RF.ttf')
+}
+
+.logo {
+  width: 400px;
+  height: 110px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+}
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+  float: left;
+  font-family: '123RF';
+  padding: 4px;
+  border-radius: 10px;
+  border-color: inherit;
+  margin-top: 8px;
+  margin-left: 100px;
+  font-size: 17px;
+  background-color: #DAD9FF;
+  width: 70%;
+}
+
+.inbutton {
+  font-family: '123RF';
+  margin-left: 20px;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.loginbtn{
+  background-color: white;
+  color: #6B66FF;
+  border: 2px solid #B5B2FF;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.searchbtn {
+  background-color: #B5B2FF;
+  color: white;
+  border: 2px solid #B5B2FF;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 20px;
+}
+
+.carticon {
+  margin-left: 20px;
+  width: 50px;
+  height: 50px;
+  color: #B5B2FF;
+}
+
+
+/* navigation bar end */
+
+
+.hr1 {
+  border: 2px solid #B5B2FF;
+}
+
+
+/* whethercard start */
+.whethercard {
+  float: left;
+  width: 250px;
+  height: 480px;
+  margin-left: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.whethercard img {
+  width: 250px;
+  border-radius: 5px 5px 0 0;
+}
+
+.howwhether {
+  padding: 2px 16px;
+}
+
+.whethercardtext {
+  color: #6B66FF;
+  font-family: '123RF';
+}
+
+.whethercardbtn {
+  border-color: #e7e7e7;
+  background-color: inherit;
+  color: black;
+  border-radius: 5px;
+}
+
+.whethercardbtn:hover {
+  background: #e7e7e7;
+}
+/* whethercard end */
+
+
+/* closet start */
+.closet{
+  width: 60%;
+  height: 480px;
+  float: left;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin-left: 30px;
+}
+
+.closet img{
     width: 400px;
-    height: 110px;
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  }
-  
-  .topnav {
-    overflow: hidden;
-  }
-  
-  /* Style the search box inside the navigation bar */
-  .topnav input[type=text] {
-    float: right;
-    padding: 4px;
-    border-radius: 5px 5px 5px 5px;
-    border-color: inherit;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-    background-color: #DAD9FF;
-  }
-  /* navigation bar end */
-  
-  
-  .hr1 {
-    border: 2px solid #B5B2FF;
-  }
-  
-  
-  /* whethercard start */
-  .whethercard {
-    float: left;
-    width: 250px;
-    height: 430px;
-    margin-left: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .whethercard img {
-    width: 250px;
-    border-radius: 5px 5px 0 0;
-  }
-  
-  .howwhether {
-    padding: 2px 16px;
-  }
-  
-  .whethercardtext {
-    color: #C98AFF;
-    font-family: '123RF';
-  }
-  
-  .whethercardbtn {
-    border-color: #e7e7e7;
-    background-color: inherit;
-    color: black;
-    border-radius: 5px;
-  }
-  
-  .whethercardbtn:hover {
-    background: #e7e7e7;
-  }
-  /* whethercard end */
-  
-  
-  /* closet start */
-  .closet{
-    width: 60%;
-    height: 300px;
-    float: left;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    margin-left: 30px;
-  }
-  
-  .closet img{
-      width:300px;
-      height:100%;
-  }
-  
-  /* scroll */
-  ::-webkit-scrollbar { width: 20px; }
-  /* 스크롤바의 width */
-  ::-webkit-scrollbar-track { background-color: #f0f0f0; }
-  /* 스크롤바의 전체 배경색 */
-  ::-webkit-scrollbar-thumb {
-      background: linear-gradient(to bottom, #CB6CFF, #D1B2FF);
-  }
-  /* 스크롤바 색 */
-  ::-webkit-scrollbar-button { display: none; }
-  /* 위 아래 버튼 (버튼 없애기를 함)
-  closet end */
-  
-  
-  /* upload closet start */
-  .morecloset {
-    float: left;
-    position: relative;
-    width: 1000px;
-    top: 10px;
-    left: 15px;
-  }
-  
-  .closetimage {
-    float: left;
-    display: block;
-    width: 1000px;
-    height: 120px;
-    max-width: 100%;
-  }
-  
-  .overlay {
-    float: left;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0px;
-    right: 0;
-    height: 120px;
-    width: 1000px;
-    max-width: 100%;
-    opacity: 0;
-    transition: .3s ease;
-    background-color: #6B66FF;
-  }
-  
-  .morecloset:hover .overlay {
-    opacity: 1;
-  }
-  
-  .icon {
-    float: left;
-    color: white;
-    font-size: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  
-  .fa-user:hover {
-    color: #eee;
-  }
-  /* upload closet end */
-  
+    height: 100%;
+}
+
+/* scroll */
+::-webkit-scrollbar { width: 20px; }
+/* 스크롤바의 width */
+::-webkit-scrollbar-track { background-color: #f0f0f0; }
+/* 스크롤바의 전체 배경색 */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #6B66FF, #D1B2FF);
+}
+/* 스크롤바 색 */
+::-webkit-scrollbar-button { display: none; }
+/* 위 아래 버튼 (버튼 없애기를 함)
+closet end */
+
+
+/* to mypage start */
+.tomypage {
+  float: left;
+  position: relative;
+  width: 200px;
+  height: 430px;
+  left: 10px;
+  top: 10px;
+  bottom: 10px;
+}
+
+.overlay1 {
+  float: left;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 0;
+  height: 430px;
+  width: 200px;
+  max-width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: #6B66FF;
+}
+
+.tomypage:hover .overlay1 {
+  opacity: 1;
+}
+/* to mypage end */
+
+/* upload image start */
+.morecloset {
+  float: left;
+  position: relative;
+  width: 800px;
+  height: 170px;
+  top: 20px;
+  bottom: 10px;
+  left: 20px;
+}
+
+.closetimage {
+  float: left;
+  display: block;
+  width: 800px;
+  height: 170px;
+  max-width: 100%;
+}
+
+.overlay2 {
+  float: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0px;
+  right: 0;
+  height: 170px;
+  width: 800px;
+  max-width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: #6B66FF;
+}
+
+.morecloset:hover .overlay2 {
+  opacity: 1;
+}
+
+.icon {
+  float: left;
+  color: white;
+  font-size: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.fa-user:hover {
+  color: #eee;
+}
+/* upload closet end */
+
+
+/* advertising banner start */
+
+.adontainer1 {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+
+.adontainer2 {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+
+.adontainer3 {
+  float: left;
+  position: relative;
+  width: 50%;
+}
+
+.adimage1 {
+  float: left;
+  display: block;
+  width: 400px;
+  height: 130px;
+  margin-left: 50px;
+  margin-top: 40px;
+  margin-bottom: 300px; /* 밑부분 추가할 때 지울 것!!! */
+}
+
+.adoverlay1 {
+  position: absolute;
+  top: 920px;
+  bottom: 0;
+  left: 50px;
+  right: 0;
+  height: 132px;
+  width: 400px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #6799FF;
+}
+
+.adoverlay2 {
+  position: absolute;
+  top: 920px;
+  bottom: 0;
+  left: 500px;
+  right: 0;
+  height: 132px;
+  width: 400px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #6799FF;
+}
+
+.adoverlay3 {
+  position: absolute;
+  top: 920px;
+  bottom: 0;
+  left: 950px;
+  right: 0;
+  height: 132px;
+  width: 400px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #6799FF;
+}
+
+.adcontainer1:hover .adoverlay1 {
+  opacity: 1;
+}
+
+.adcontainer2:hover .adoverlay2 {
+  opacity: 1;
+}
+
+.adcontainer3:hover .adoverlay3 {
+  opacity: 1;
+}
+
+.adtext1 {
+  font-family: '123RF';
+  color: #ffffff;
+  font-size: 25px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+/* advertising banner end */
