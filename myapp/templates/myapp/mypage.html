@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.item1 { grid-area: header; }
+.item2 { grid-area: menu;}
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'main main menu menu menu menu'
+    'footer footer menu menu menu menu';
+  grid-gap: 10px;
+  /* background-color: #2196F3; */
+  padding: 10px;
+  height: 700px;
+}
+
+.grid-container > div {
+  background-color: darkgray;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+
+<div class="grid-container">
+  <div class="item2">
+      <p>정보 1</p>
+      <p>정보 1</p>
+      <p>정보 1</p>
+      <p>정보 1</p>
+  </div>
+  <div class="item3" onclick="location.href='/mypage'">inform</div>
+  <div class="item5" onclick="location.href='/mypage_drag'">mypage</div>
+
+ 
+</div>
+
+</body>
+</html>
