@@ -4,11 +4,11 @@ import numpy as np
 import cv2
 from PIL import Image
 import matplotlib.pyplot as plt
-
+mouse_is_pressing = False
+points = []
 def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해야함. 이미지 전처리 함수를 만들엇음
     step = 0
-    global mouse_is_pressing
-    mouse_is_pressing = False
+    global points
 
     def distanceBetweenTwoPoints(point1, point2):
         
@@ -20,7 +20,11 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
 
     def mouse_callback(event,x,y,flags,param):
         
-        # global mouse_is_pressing,points
+        global mouse_is_pressing
+        global points
+        # print(mouse_is_pressing)
+        # print(points)
+        
 
         if step != 1:
             return
@@ -231,80 +235,102 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
             image[:,:,2] = b
         return image 
 
-    # image=image.split('/avhash')
-    # print(image)
-    # image = image[0]
-    # result_i = ""
-    # for x in image:
-    #     if x == '[' or x=="'" or x =="]":
-    #         pass
-    #     else:
-    #         result_i += x        
-    # print(result_i)
-    image = plt.imread(result_i) #os.walk로 이제 모든 애들 끌고오면 될듯
-    pixels = np.array(image) # numpy 배열로 변환하기
-    cut = channel_cut(pixels)
-    # img = Image.open('sss.jpg')# 이미지 데이터 열기
-    # img = img.convert('RGB')
-    # pixel_data = swapped.getdata() #픽셀데이터 가져오기
-    pixels = np.array(cut) # numpy 배열로 변환하기
-    img_input = cv2.cvtColor(pixels, cv2.COLOR_RGB2BGR)
-    height, width = img_input.shape[:2]
+    
+    print(image)
+    image=image.split("'")
+    path_list =[]
+    image_count = 0 #저장된 이미지 개수
+    image_class_count=0 # 이미지 클래스 매칭할때 변수
+    is_empty = True
+    class_list = []
+    class_str = ""
+    p = re.compile('[a-zA-Z]')
+    for x in image:
+        if "media" in x:
+            path_list.append(x)
+            is_empty=False
+            print(is_empty)
+        else:
+            if p.match(x) is not None:
+                class_list.append(x)
+                class_str+=x +','
+                print(is_empty)
+    print(is_empty)
+    if is_empty:
+        return render(request,'imageprocess/none.html')
 
-    points = process(img_input, debug=False)
+    for i in range(len(path_list)):
+        image = plt.imread(path_list[i]) #os.walk로 이제 모든 애들 끌고오면 될듯
+        pixels = np.array(image) # numpy 배열로 변환하기
+        cut = channel_cut(pixels)
+        # img = Image.open('sss.jpg')# 이미지 데이터 열기
+        # img = img.convert('RGB')
+        # pixel_data = swapped.getdata() #픽셀데이터 가져오기
+        pixels = np.array(cut) # numpy 배열로 변환하기
+        img_input = cv2.cvtColor(pixels, cv2.COLOR_RGB2BGR)
+        height, width = img_input.shape[:2]
 
-    size = len(points)
+        points = process(img_input, debug=False)
 
-    if size > 0:
-        print("여기임")
-        cv2.namedWindow('input')
-        cv2.setMouseCallback("input", mouse_callback, 0);  
+        size = len(points)
 
-        step = 1
+        if size > 0:
+            print("아니씹ㅋㅋ 왜 글로벌 변수가 아니냐고 ㄹㅇㅋㅋ")
+            cv2.namedWindow('input')
+            cv2.setMouseCallback("input", mouse_callback, 0);  
 
-
-        while True:
-
-            img_result = img_input.copy()
-            for point in points:
-                cv2.circle(img_result, tuple(point), 10, (255,0,0), 3 )    
-            cv2.imshow('input', img_result)
-
-            key = cv2.waitKey(1)
-            if key % 256 == 32:
-                cv2.relese()
-                cv2.destroyAllWindows()
-                break
+            step = 1
 
 
-        img_final = transform(img_input, points )
+            while True:
 
-        im = Image.fromarray(img_final)
-        userimage_name="media/images/temp/myphoto.jpg"
-        im.save(userimage_name)
-        return redirect('avhash', userimage_name)
+                img_result = img_input.copy()
+                for point in points:
+                    cv2.circle(img_result, tuple(point), 10, (255,0,0), 3 )    
+                cv2.imshow('input', img_result)
 
-    else:
-        print("여긴가?")
-        cv2.imshow('input', img_input)
+                key = cv2.waitKey(1)
+                if key % 256 == 32:
+                    break
+            cv2.destroyAllWindows()
 
-        cv2.waitKey(0)
 
-        cv2.destroyAllWindows()
+            img_final = transform(img_input, points )
 
-def avhash(request,image):
-    search_dir = "media/images/shoes"
-    cache_dir = "imageprocess/imagecache/shoes"
+            im = Image.fromarray(img_final)
+            userimage_name="media/images/temp/{}/{}.jpg".format(class_list[i],image_count)
+            im.save(userimage_name)
+            image_count+=1
 
-    if not os.path.exists(cache_dir):
-        os.mkdir(cache_dir)
+        else:
+            print("여긴가?")
+            cv2.imshow('input', img_input)
+
+            cv2.waitKey(0)
+
+            cv2.destroyAllWindows()
+    return redirect('avhash',int(image_count),class_str)
+
+def avhash(request,image_count,class_list):
+    print(class_list)
+    class_list=class_list.split(',')
+    print(class_list)
+    search_dir = "media/images/{}".format(class_list[0])
+    print(search_dir)
+    cache_dir = "imageprocess/imagecache/{}".format(class_list[0])
+    print(cache_dir)
+    
 
     def average_hash(fname, size=16):
-        fname2 = fname[len(search_dir):]
+        fname2 = os.path.basename(fname)
         #이미지 캐시하기
         print(fname2)
-        cache_file = cache_dir + fname2.replace('\\', "_")+".csv"
+        print("여기란 말인가?")
+        # cache_file = cache_dir + fname2.replace('\\', "_")+".csv"
+        cache_file = cache_dir +fname2+".csv"
+
         print(cache_file)
+        print("저기란 말인가?")
         if not os.path.exists(cache_file):
             img = Image.open(fname)
             img = img.convert('L').resize((size,size), Image.ANTIALIAS)
@@ -333,28 +359,36 @@ def avhash(request,image):
     # 이미지 찾기                
     def find_image(fname, rate):
         src = average_hash(fname)
+        c = 0
         for fname in enum_all_files(search_dir):
             dst = average_hash(fname)
             diff_r = hamming_dist(src, dst) / 256
             print("[check] ",fname)
+            c+=1
             if diff_r < rate:
                 yield (diff_r, fname)
+        if c==0:
+            return "데이터를 찾을 수 없습니다."
     # 찾기
-
-
-    srcfile = image
-    srcfile = srcfile.split('/')
     
-    # srcfile = search_dir + "/신발(50).jpg" #지금은 search_dir에서 해당파일 찾고잇음 고쳐야됨
-    print(srcfile)
-    sim = list(find_image(srcfile, 0.25))
-    sim = sorted(sim, key=lambda x:x[0])
-    distance = []
-    namelist = []
-    address = []
-    for r, f in sim:
-        print(r,">",f)
-        address.append(f)
-        namelist.append(os.path.basename(f))
-        distance.append(r)
+
+    for x in range(image_count):
+        print(class_list[x])
+        srcfile = 'media/images/temp/{}/{}.jpg'.format(class_list[x],x)
+        search_dir = "media/images/{}".format(class_list[x])
+        cache_dir = "imageprocess/imagecache/{}".format(class_list[x])
+        if not os.path.exists(cache_dir):
+            os.mkdir(cache_dir) 
+
+        print(srcfile)
+        sim = list(find_image(srcfile, 0.45))
+        sim = sorted(sim, key=lambda x:x[0])
+        distance = []
+        namelist = []
+        address = []
+        for r, f in sim:
+            print(r,">",f)
+            address.append(f)
+            namelist.append(os.path.basename(f))
+            distance.append(r)
     return render(request, 'imageprocess/search_result.html', {'sim': sim, 'srcfile':srcfile,'namelist':namelist, 'distance':distance, 'address':address })
