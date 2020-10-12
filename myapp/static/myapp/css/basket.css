@@ -1,0 +1,104 @@
+
+@font-face {
+  font-family: '123RF';
+}
+
+body {
+  font-family: '123RF';
+  src:url('123RF.ttf');
+}
+
+.logo {
+  width: 400px;
+  height: 110px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+#cardheader {
+  background-color: #918EDB;
+}
+
+#gotomain {
+  color: #fff;
+}
+
+.quantity {
+    font-family: '123RF';
+    src:url('123RF.ttf')
+    float: left;
+    margin-right: 15px;
+    position: relative;
+    width: 80px;
+    overflow: hidden
+}
+
+.quantity input {
+    font-family: '123RF';
+    src:url('123RF.ttf')
+    margin: 0;
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    float: right;
+    color: #000;
+    font-size: 20px;
+    border: 0;
+    outline: 0;
+}
+
+.quantity input.qty {
+    font-family: '123RF';
+    src:url('123RF.ttf')
+    position: relative;
+    border: 0;
+    width: 100%;
+    height: 40px;
+    padding: 10px 25px 10px 10px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 0;
+    background-clip: padding-box;
+}
+
+.quantity .minus, .quantity .plus {
+    font-family: '123RF';
+    src:url('123RF.ttf')
+    line-height: 0;
+    background-clip: padding-box;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-background-size: 6px 30px;
+    -moz-background-size: 6px 30px;
+    color: #bbb;
+    font-size: 20px;
+    position: absolute;
+    height: 50%;
+    border: 0;
+    right: 0;
+    padding: 0;
+    width: 25px;
+    z-index: 3
+}
+
+.quantity .minus:hover, .quantity .plus:hover {
+    font-family: '123RF';
+    src:url('123RF.ttf');
+}
+
+.quantity .minus {
+    font-family: '123RF';
+    src:url('123RF.ttf');
+    bottom: 0;
+}
+
+.shopping-cart {
+    font-family: '123RF';
+    src:url('123RF.ttf');
+    margin-top: 20px;
+}
