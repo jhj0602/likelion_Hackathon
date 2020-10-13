@@ -275,7 +275,6 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
         size = len(points)
 
         if size > 0:
-            print("아니씹ㅋㅋ 왜 글로벌 변수가 아니냐고 ㄹㅇㅋㅋ")
             cv2.namedWindow('input')
             cv2.setMouseCallback("input", mouse_callback, 0);  
 
@@ -299,6 +298,7 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
 
             im = Image.fromarray(img_final)
             userimage_name="media/images/temp/{}/{}.jpg".format(class_list[i],image_count)
+            print(userimage_name + "저장되었습니다.")
             im.save(userimage_name)
             image_count+=1
 
@@ -315,6 +315,8 @@ def avhash(request,image_count,class_list):
     print(class_list)
     class_list=class_list.split(',')
     print(class_list)
+    class_list.pop()
+    print(class_list)
     search_dir = "media/images/{}".format(class_list[0])
     print(search_dir)
     cache_dir = "imageprocess/imagecache/{}".format(class_list[0])
@@ -325,12 +327,10 @@ def avhash(request,image_count,class_list):
         fname2 = os.path.basename(fname)
         #이미지 캐시하기
         print(fname2)
-        print("여기란 말인가?")
-        # cache_file = cache_dir + fname2.replace('\\', "_")+".csv"
-        cache_file = cache_dir +fname2+".csv"
-
+        cache_file = cache_dir + fname2.replace('\\', "_")+".csv"
+        # cache_file = cache_dir +fname2+".csv"
         print(cache_file)
-        print("저기란 말인가?")
+        
         if not os.path.exists(cache_file):
             img = Image.open(fname)
             img = img.convert('L').resize((size,size), Image.ANTIALIAS)
@@ -370,25 +370,30 @@ def avhash(request,image_count,class_list):
         if c==0:
             return "데이터를 찾을 수 없습니다."
     # 찾기
-    
+    sim_list =[]
+    srcfile_list =[] 
+    distance = []
+    namelist = []
+    address = []
 
     for x in range(image_count):
         print(class_list[x])
         srcfile = 'media/images/temp/{}/{}.jpg'.format(class_list[x],x)
+        srcfile_list.append(srcfile)
         search_dir = "media/images/{}".format(class_list[x])
         cache_dir = "imageprocess/imagecache/{}".format(class_list[x])
         if not os.path.exists(cache_dir):
             os.mkdir(cache_dir) 
 
         print(srcfile)
-        sim = list(find_image(srcfile, 0.45))
+        sim = list(find_image(srcfile, 0.25))
         sim = sorted(sim, key=lambda x:x[0])
-        distance = []
-        namelist = []
-        address = []
+        
+        sim_list.append(sim)
         for r, f in sim:
+
             print(r,">",f)
             address.append(f)
             namelist.append(os.path.basename(f))
             distance.append(r)
-    return render(request, 'imageprocess/search_result.html', {'sim': sim, 'srcfile':srcfile,'namelist':namelist, 'distance':distance, 'address':address })
+    return render(request, 'imageprocess/search_result.html', {'sim': sim_list, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })

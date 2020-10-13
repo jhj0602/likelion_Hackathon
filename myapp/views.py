@@ -61,9 +61,9 @@ def signin(request):
             login(request, user)
             return redirect('main')
         else:
-            return render(request, 'myapp/signin.html')
+            return render(request, 'myapp/login.html')
     else:
-        return render(request, 'myapp/signin.html')
+        return render(request, 'myapp/login.html')
 
 def signup(request):
     if request.method == "POST":

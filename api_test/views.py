@@ -82,7 +82,7 @@ def media_kakaoproduct(request, pk):
 
 def camera():
     cam = cv2.VideoCapture(0)
-    cv2.namedWindow("please see front of camera")
+    # cv2.namedWindow("please see front of camera")
     img_counter = 0
     while True:
         ret, frame = cam.read()
