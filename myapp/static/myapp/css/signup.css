@@ -1,7 +1,7 @@
-
-
 @font-face {
   font-family: '123RF';
+  src: local('123RF'),
+    url('../fonts/123RF_123RF_TTF.ttf')
 }
 
 .logo {
@@ -17,7 +17,9 @@
   border: 2px solid #B5B2FF;
 }
 
-body {font-family: '123RF';}
+body {font-family: '123RF';
+  src:url('../fonts/123RF_123RF_TTF.ttf');
+}
 * {box-sizing: border-box;}
 
 input[type=text], select, textarea {
@@ -46,6 +48,7 @@ input[type=submit]:hover {
 
 .container {
   font-family: '123RF';
+  src:url('../fonts/123RF_123RF_TTF.ttf');
   border-radius: 5px;
   background-color: #E8D9FF;
   padding: 20px;

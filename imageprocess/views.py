@@ -327,7 +327,7 @@ def avhash(request,image_count,class_list):
         fname2 = os.path.basename(fname)
         #이미지 캐시하기
         print(fname2)
-        cache_file = cache_dir + fname2.replace('\\', "_")+".csv"
+        cache_file = cache_dir + fname2.replace('\\', "/")+".csv"
         # cache_file = cache_dir +fname2+".csv"
         print(cache_file)
         
@@ -386,14 +386,16 @@ def avhash(request,image_count,class_list):
             os.mkdir(cache_dir) 
 
         print(srcfile)
-        sim = list(find_image(srcfile, 0.25))
+        sim = list(find_image(srcfile, 1))
         sim = sorted(sim, key=lambda x:x[0])
-        
         sim_list.append(sim)
         for r, f in sim:
-
             print(r,">",f)
+
+            f=f.replace("\\",'/')
+            print(f)
+            print('요요')
             address.append(f)
             namelist.append(os.path.basename(f))
             distance.append(r)
-    return render(request, 'imageprocess/search_result.html', {'sim': sim_list, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })
+    return render(request, 'imageprocess/search_result.html', {'sim': sim, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })
