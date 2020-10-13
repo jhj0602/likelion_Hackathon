@@ -24,15 +24,15 @@ body {
 /* Style the search box inside the navigation bar */
 .topnav input[type=text] {
   float: left;
+  padding: 10px;
+  width: 50%;
+  margin-left: 15%;
   font-family: '123RF';
-  padding: 4px;
   border-radius: 10px;
   border-color: inherit;
   margin-top: 8px;
-  margin-left: 100px;
   font-size: 17px;
   background-color: #DAD9FF;
-  width: 70%;
 }
 
 .inbutton {
@@ -48,15 +48,6 @@ body {
   cursor: pointer;
 }
 
-.loginbtn{
-  background-color: white;
-  color: #6B66FF;
-  border: 2px solid #B5B2FF;
-  width: 100px;
-  height: 50px;
-  font-size: 20px;
-}
-
 .searchbtn {
   background-color: #B5B2FF;
   color: white;
@@ -65,10 +56,15 @@ body {
   height: 50px;
   font-size: 20px;
   border-radius: 20px;
+  float: left;
+  padding: 10px;
+  width: 10%;
 }
 
 .carticon {
-  margin-left: 20px;
+  float: left;
+  padding: 10px;
+  width: 30%;
   width: 50px;
   height: 50px;
   color: #B5B2FF;
@@ -86,7 +82,7 @@ body {
 /* whethercard start */
 .whethercard {
   float: left;
-  width: 250px;
+  width: 10%;
   height: 480px;
   margin-left: 100px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -99,7 +95,7 @@ body {
 }
 
 .whethercard img {
-  width: 250px;
+  width: 100%;
   border-radius: 5px 5px 0 0;
 }
 
@@ -157,28 +153,27 @@ closet end */
 
 /* to mypage start */
 .tomypage {
-  float: left;
+  width: 230px;
   position: relative;
-  width: 200px;
+  float: left;
   height: 430px;
-  left: 10px;
-  top: 10px;
-  bottom: 10px;
+  margin: 10px;
 }
 
 .overlay1 {
   float: left;
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
+  top: 0;
+  bottom: 0;
+  left: 0px;
   right: 0;
   height: 430px;
-  width: 200px;
+  width: 230px;
   max-width: 100%;
   opacity: 0;
   transition: .3s ease;
   background-color: #6B66FF;
+  margin: 10px;
 }
 
 .tomypage:hover .overlay1 {
@@ -190,11 +185,12 @@ closet end */
 .morecloset {
   float: left;
   position: relative;
-  width: 800px;
+  width: 40%;
   height: 170px;
   top: 20px;
   bottom: 10px;
-  margin-left: 85px;
+  left: 10%;
+  margin-bottom: 20px;
 }
 
 .closetimage {
@@ -203,6 +199,7 @@ closet end */
   width: 800px;
   height: 170px;
   max-width: 100%;
+  margin-bottom: 100px;
 }
 
 .overlay2 {
@@ -213,7 +210,7 @@ closet end */
   left: 0px;
   right: 0;
   height: 170px;
-  width: 800px;
+  width:  100%;
   max-width: 100%;
   opacity: 0;
   transition: .3s ease;
@@ -241,98 +238,5 @@ closet end */
 }
 /* upload closet end */
 
-
 /* advertising banner start */
-
-.adontainer1 {
-  float: left;
-  position: relative;
-  width: 50%;
-}
-
-.adontainer2 {
-  float: left;
-  position: relative;
-  width: 50%;
-}
-
-.adontainer3 {
-  float: left;
-  position: relative;
-  width: 50%;
-}
-
-.adimage1 {
-  float: left;
-  display: block;
-  width: 400px;
-  height: 130px;
-  margin-left: 170px;
-  margin-top: 40px;
-  margin-bottom: 300px; /* 밑부분 추가할 때 지울 것!!! */
-}
-
-.adoverlay1 {
-  position: absolute;
-  top: 920px;
-  bottom: 0;
-  left: 170px;
-  right: 0;
-  height: 132px;
-  width: 400px;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #6799FF;
-}
-
-.adoverlay2 {
-  position: absolute;
-  top: 920px;
-  bottom: 0;
-  left: 740px;
-  right: 0;
-  height: 132px;
-  width: 400px;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #6799FF;
-}
-
-.adoverlay3 {
-  position: absolute;
-  top: 920px;
-  bottom: 0;
-  left: 1310px;
-  right: 0;
-  height: 132px;
-  width: 400px;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #6799FF;
-}
-
-.adcontainer1:hover .adoverlay1 {
-  opacity: 1;
-}
-
-.adcontainer2:hover .adoverlay2 {
-  opacity: 1;
-}
-
-.adcontainer3:hover .adoverlay3 {
-  opacity: 1;
-}
-
-.adtext1 {
-  font-family: '123RF';
-  color: #ffffff;
-  font-size: 25px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
 /* advertising banner end */
