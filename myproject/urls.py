@@ -45,4 +45,5 @@ urlpatterns = [
     path('draganddrop', myapp.views.draganddrop, name='draganddrop'),
     path('mypage', myapp.views.mypage, name='mypage'),
     path('mypage_drag', myapp.views.mypage_drag, name='mypage_drag'),
+    path('inform/', myapp.views.inform, name="inform"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

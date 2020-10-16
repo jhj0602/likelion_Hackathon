@@ -106,7 +106,7 @@
 </style>
 </head>
 <body>
-<a href="main.html"><img class="logo" src="{% static 'myapp/img/로고.jpg' %}" alt=""></a>
+<a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
 <hr style="border: 2px solid #B5B2FF;">
  
 <div class="grid-container"> 
@@ -117,7 +117,7 @@
       <p></p>
       <p>정보 1</p>
   </div> -->
-  <button class="snip1535" onclick="location.href='/inform'">My info</button>
+  <button class="snip1535" href="{% url 'inform' %}">My info</button>
   <button class="snip1535" onclick="location.href='/draganddrop'">My closet</button>
 
   <!-- <div class="item3" onclick="location.href='/inform'">inform</div>
