@@ -29,7 +29,7 @@ def base(request):
     users = CustomUser.objects.all()
     return render(request, 'myapp/base.html') 
 
-def main(request):
+def main2(request):
     if not request.user.is_active:
         return redirect('signin')
     else:
@@ -214,24 +214,22 @@ def my_cart(request):
     return redirect('my_cart')
 
 
+def warningone(request):
+    return render(request, 'myapp/warningone.html')
 
-
-
-
-
-
-
+def warningtwo(request):
+    return render(request, 'myapp/warningtwo.html')
 
 def mypage(request):
-    
     return render(request, 'myapp/mypage.html')
 
-def mypage_drag(request):
-    cart_item = CartItem.objects.all().order_by('-id')
-    return render(request, 'myapp/mypage_drag.html',{'cart_item': cart_item})
-
 def draganddrop(request):
-    cart_item = CartItem.objects.all().order_by('-id')
-    return render(request, 'myapp/draganddrop.html',{'cart_item': cart_item})
+    return render(request, 'myapp/draganddrop.html')
+
+def inform(request):
+    return render(request, 'myapp/inform.html')
+
+
+
 
 

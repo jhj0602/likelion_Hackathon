@@ -91,13 +91,13 @@
   }
 }
 </style>
-<a href="main.html"><img class="logo" src="{% static 'myapp/img/로고.jpg' %}" alt=""></a>
+<a href="{%url 'main2' %}"><img class="logo" src="{% static 'myapp/img/로고.jpg' %}" alt=""></a>
 
 <hr style="border: 2px solid #B5B2FF;">
 
 <div tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content" height=>
+      <div class="modal-content">
         <div class="modal-header" style="background-color: #B5B2FF;">
           <h5 class="modal-title">경고 ! </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -110,7 +110,7 @@
         <div class="modal-footer" style="background-color: #B5B2FF;">
           <div class="page">
 
-            <button class="fun-btn"a href="main.html" id="main">back</button>
+            <button class="fun-btn"a href="{%url 'main2.html' %}" id="main2">back</button>
           
           </div>
           
