@@ -349,6 +349,48 @@ def avhash(request,image_count,class_list):
         ab = b.reshape(1,-1)
         dist = (aa != ab).sum()
         return dist
+
+
+    def hsv_dist(a,b):
+        aa = a.reshape(1,-1)
+        ab = b.reshape(1,-1)
+        dist = (aa != ab).sum()
+        return dist
+
+
+
+    def hsv_many(fname, size):
+        
+        return "빈도가 제일 높은 hsv 칼라 특히 h"
+
+
+
+    def hsv_hash(fname, size):
+        fname2 = os.path.basename(fname)
+        #이미지 캐시하기
+        print(fname2)
+        cache_file = cache_dir + fname2.replace('\\', "/")+"hsv"+".csv"
+        # cache_file = cache_dir +fname2+".csv"
+        print(cache_file)
+        hsv_list = {}
+        if not os.path.exists(cache_file):
+            img = cv2.imread(fname, cv2.IMREAD_COLOR)
+            hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+            h,s,v = cv2.split(hsv)
+            for hsv_temp in (h,s,v):
+                hsv_list[hsv_temp] = hsv_list.get(hsv_temp,0)+1
+                keys = sorted(hsv_list.keys())
+            for hsv_temp in keys:
+                print(hsv_temp + ':' + str(hsv_list[hsv_temp]))
+            
+
+            # pixels = np.array(img.getdata()).reshape((size,size))
+            # avg = pixels.mean()
+            # px = 1 * (pixels > avg)
+            np.savetxt(cache_file, px , fmt ="%.0f", delimiter=",")
+        else:
+            px = np.loadtxt(cache_file, delimiter=",")
+        return px
     # 모든 폴더에 처리 적용하기
     def enum_all_files(path):
         for root, dirs, files in os.walk(path):
@@ -386,16 +428,16 @@ def avhash(request,image_count,class_list):
             os.mkdir(cache_dir) 
 
         print(srcfile)
-        sim = list(find_image(srcfile, 1))
+        sim = list(find_image(srcfile, 0.4))
         sim = sorted(sim, key=lambda x:x[0])
         sim_list.append(sim)
         for r, f in sim:
             print(r,">",f)
 
             f=f.replace("\\",'/')
+            f = '/'+f
             print(f)
-            print('요요')
             address.append(f)
             namelist.append(os.path.basename(f))
             distance.append(r)
-    return render(request, 'imageprocess/search_result.html', {'sim': sim, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })
+    return render(request, 'imageprocess/result.html', {'sim': sim, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <a href="main.html"><img class="logo" src="로고.jpg" alt=""></a>
+    <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
     <div class="topnav">
       <input type="text" placeholder="Search"><a href="#"><button class="inbutton searchbtn" type="button" name="search">Search</button></a>
       <a href="basket.html">
@@ -18,7 +19,7 @@
       </a>
     </div>
 
-    <hr class=hr1>
+    <hr class="hr1">
 
     <div class="container">
       <div class="row">
@@ -123,13 +124,13 @@
         <li><a href="#">Price (low)</a></li>
         <li><a href="#">Price (high)</a></li>
       </ul>
-
+      {% for x in address %}
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <div class="shop__thumb">
             <a href="#">
               <div class="shop-thumb__img">
-                <img src="https://via.placeholder.com/400x400/87CEFA/000000" class="img-responsive" alt="...">
+                <img src="{{ x }}" class="img-responsive" alt="...">
               </div>
               <h5 class="shop-thumb__title">
                 Product Title
@@ -141,24 +142,10 @@
             </a>
           </div>
         </div>
+      </div>
+      {% endfor %}
 
-        <div class="col-sm-6 col-md-4">
-          <div class="shop__thumb">
-            <a href="#">
-              <div class="shop-thumb__img">
-                <img src="https://via.placeholder.com/400x400/20B2AA/000000" class="img-responsive" alt="...">
-              </div>
-              <h5 class="shop-thumb__title">
-                Product Title
-              </h5>
-              <div class="shop-thumb__price">
-                $59.99
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
+        <!-- <div class="col-sm-6 col-md-4">
           <div class="shop__thumb">
             <a href="#">
               <div class="shop-thumb__img">
@@ -221,7 +208,7 @@
             </a>
           </div>
         </div>
-      </div> <!-- / .row -->
+      </div> / .row -->
 
       <!-- Pagination -->
       <div class="row">

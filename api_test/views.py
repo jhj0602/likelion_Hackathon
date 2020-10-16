@@ -106,6 +106,7 @@ def camera():
     return img_name
 
 
+
 # def choose_search(request):
 #     if request.method == "POST":
 #         temp_image = MediaForm(request.POST,request.FILES)
