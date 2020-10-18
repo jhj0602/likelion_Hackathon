@@ -1,0 +1,571 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@font-face {
+  font-family: '123RF';
+  src: local('123RF'),
+    url('../fonts/123RF_123RF_TTF.ttf')
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.logo {
+  width: 400px;
+  height: 110px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+body {
+  background-color: #E8D9FF;
+  font-family: '123RF';
+  src:url('123RF.ttf')
+}
+
+.gotomainbutton {
+  cursor: pointer;
+  font-family: '123RF';
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  background-color: #E3C4FF;
+  color: #8041D9;
+  border-radius: 15px;
+  line-height: 60px;
+  border-color: inherit;
+  box-shadow: 5px 5px 5px #A566FF;
+}
+
+.gotomainbutton:hover {
+    background-color: white;
+    cursor: hand;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+.horizen {
+  border: 2px solid #B5B2FF;
+  margin-bottom: 50px;
+}
+
+/* The circles on the timeline */
+.container::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: white;
+  border: 4px solid #B5B2FF;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -16px;
+}
+
+/* The actual content */
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+}
+
+.lastcontent {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+  margin-bottom: 50px;
+}
+
+.introducefirst  {
+  font-family: 123RF;
+  padding: 30px 50px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  background-color: #E3C4FF;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+  /* Place the timelime to the left */
+  .timeline::after {
+  left: 31px;
+  }
+
+  /* Full-width containers */
+  .container {
+  width: 100%;
+  padding-left: 70px;
+  padding-right: 25px;
+  }
+
+  /* Make sure that all arrows are pointing leftwards */
+  .container::before {
+  left: 60px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+  }
+
+  /* Make sure all circles are at the same spot */
+  .left::after, .right::after {
+  left: 15px;
+  }
+
+  /* Make all right containers behave like the left ones */
+  .right {
+  left: 0%;
+  }
+}
+
+
+</style>
+</head>
+<body>
+    <div class="navbar">
+      <a href="{% url 'main' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+    </div>
+
+    <div class="introducefirst">
+      <h2 style="color: #A566FF;">Let me introduce "Codiboogie"</h2>
+      <pre style="color: #8041D9; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 30px;">
+      저희 코디부기(codiboogie)에서는 자신이 마음에 드는 옷을 사진을 찍거나 캡쳐한 사진들을 인식한 후 옷의 정보를
+      파악하여 해당 옷을 구매할 수 있는 사이트에 연결해드립니다!
+      또한, 마음에 드는 옷들을 저장하시면, 자신이 선택한 옷들로 직접 코디를 해볼 수도 있습니다!
+      저희가 이 서비스를 만들게 된 동기는 자신이 보았던 옷들 중 마음에 드는 옷을 고른 후,
+      그 옷의 정보를 알아 자신이 직접 코디하여 입으면 좋을 것 같다는 생각을 하였고, 이 서비스를 만들게 되었습니다.
+      </pre>
+      <h2 style="color: #A566FF;">Division of roles</h2>
+      <pre style="color: #8041D9; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 30px;">
+      김수현 학생은 전체적인 백을 맡았으며, 저장한 옷들을 인식하고 실제 옷들과의 유사도를 판별하는 기능을 구현하였습니다.
+      박주영 학생은 전체적인 프론트를 맡았으며, 로고 제작 및 메인 홈페이지와 로그인, 회원가입 등의 홈페이지를 디자인했습니다.
+      한슬희 학생은 드래그앤드롭에 대해 공부함으로써 유저가 사진을 직접 드래그하여 코디하는 기능을 구현하였고,
+      이러한 기능이 구현되는 곳인 마이페이지의 디자인과 구성을 맡았습니다.
+      진형준 학생은 김수현 학생과 함께 백을 맡았으며, 유저가 저장한 옷들을 넘겨주는 기능을 구현하고,
+      이러한 기능이 구현되는 곳인 장바구니 페이지를 만들었습니다.
+      또한, 저희 프로젝트를 롯데 홈페이지에 크롤링하여 연결하였습니다.
+      정수호 학생은 로그인과 회원가입 페이지에 연결해주는 프로젝트 소개페이지를 만들었습니다.
+      </pre>
+    </div>
+  </div>
+
+
+<a link="main.html"><button type="button" class="btn btn-dark gotomainbutton">Go to Codiboogie!</button></a>
+
+<hr class="horizen">
+
+<div class="timeline">
+  <div class="container right">
+    <div class="content">
+      <h2>20.08.04 첫번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0804.jpg' %}" alt="" width=200px; height=300px;>
+  <pre style="color: black; font-family: '123RF';
+  src:url('123RF.ttf'); line-height: 20px;">
+  프론트와 백 역할 나누기
+  front : 주영,수호,슬희
+  back : 수현, 형준
+
+  초기설정, 페이지기능, crud: 형준
+  로그인, 회원가입: 수호
+  필요한 템플릿 디자인:  주영, 슬희
+  쪽지기능 구현 연습해보기: 수현
+  crispy forms 쓸건지 다음 회의때까지 연습해보기
+  </pre>
+    </div>
+  </div>
+  <div class="container left">
+    <div class="content">
+      <h2>20.08.07 두번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0807.jpg' %}" alt="" width=200px; height=300px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('../fonts/123RF_123RF_TTF.ttf'); line-height: 20px;">
+      forms에 대해서 연구하기
+      git 연습(다들 git 협력에 대해서 공부해오기)
+      login form 꾸미기(ModelChoiceField로 할 예정)
+      user 모델 필드 설정
+      (id,password,nickname,,birth..
+      추가로 필요한 거 있을지 생각)
+      pagiator 구현 및 front 팀 html 제작 시작
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.08.11 세번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0811.jpg' %}" alt="" width=300px; height=300px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  슬희: 브랜치로 수정한 내용 pull request 합쳐보기
+  각자 맡을 HTML 하나씩 부트스트랩 이용해 만들어보기
+  수호: 수업내용 복습 겸 수현과 회원가입,로그인 구현
+  형준: 기능 공부 및 프론트-백엔드 연결
+  주영, 슬희: HTML 기본 틀 만들어주기
+    </pre>
+    </div>
+  </div>
+  <div class="container left">
+    <div class="content">
+      <h2>20.08.14 네번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0814.jpg' %}" alt="" width=200px; height=300px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  전체모임 전에 간단하게 모였음.
+  수호 결석권 사용
+  모델에서 birthdayfield라는거 써보려다가 잘 안돼서
+  지우고 마이그레이트 했더니 깃에서 충돌났다해서
+  이 참에 브랜치에 대한 개념을 다시
+  설명해주는 시간을 가짐.
+  그런데 슬희 작업내용을 master에서 branch로
+  머지하는 과정에서 에러 남.
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.08.18 다섯번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0818.jpg' %}" alt="" width=300px; height=300px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  수현, 형준: pdf파일을 받고 결제 전에는
+  미리보기로 3페이지만 보이게 하고,
+  결제를 하면 모든 페이지를 열람할 수 있는 기능 구현중
+
+  슬희, 주영 : 프로젝트를 제작하는 과정에서 만든 테마가
+  아이디어톤 등 에서 접한 다른
+  프론트들보다 별로라고 판단해서 테마를 다시
+  선택하기로 함.(생각보다 고르는데 시간 오래 걸림ㅜㅜ)
+
+  수호: 저번에 결석으로 인해 부족한 css 공부할 겸
+  인스타그램 과제 css 보완
+    </pre>
+    </div>
+  </div>
+    <div class="container left">
+    <div class="content">
+      <h2>20.08.21 여섯번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0821.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  주영 결석권 사용
+
+  수호: 유튜브 프론트 강의 10강 듣기(기초부족)
+
+  슬희:
+  1. 프로젝트를 새로 파서 부트스트랩 테마 입히기
+  2. git collaborator 추가해주기
+  3. 수호가 디자인해 볼 페이지 새로 고르면
+  그 페이지 url연결 해주기
+
+  수현, 형준: pdf 띄우기 까진 되었는데
+  아직 3페이지 자르기가
+  잘 안되서 고민 중임.
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.08.25 일곱번째 모임</h2>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  아이디어 새로 구상
+
+  처음 구상한 포트폴리오 공유 서비스
+  포포리는 이미 여러 곳에서 다 쓰이는 기능과
+  메리트가 있는 아이디어도 아니어서
+  차라리 이미 비슷한 서비스가
+  있어도 차별점을 두는 만들 때 재미있는
+  서비스를 만들자 해서
+  아이디어를 변경!
+
+  sunnyboogie(날씨 + 옷)
+  옷장에 있는 옷들을 등록하고
+  날씨에 맞춰 오늘의 옷 추천 시스템
+  (랜덤방식, 트렌드방식 있음)
+
+  수호 : 플로우차트 짜기
+  슬희, 주영 : 프론트 디자인
+  수현 : 날씨 api 기능구현
+  (나중에 파라미터 바꿔서 위도,경도로 바꿀 예정)
+  형준 : 프론트, 옷장에 있는 옷 조합 구현 진행 중
+    </pre>
+    </div>
+  </div>  <div class="container left">
+    <div class="content">
+      <h2>20.08.28 여덟번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0828.jpg' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  수현 : 이미지 배경 자동 지우기 구현중.
+  지금은 open형식이라서 저장해야함.
+  슬희, 주영 : 필요한 부트스트랩 테마 고르기, 로고디자인
+  형준 : 로그인, 회원가입 구현
+  수호 : footer 디자인
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.09.01 아홉번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0901.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  수호: footer 디자인 고르기, trello 적기 인수인계
+  수현: 카메라로 찍은 사진 상품검출(애먹다가 결국 해결)
+  주영: main페이지 프론트 구현
+  형준: 회원가입 로그인 수정
+  슬희: mypage 구상
+    </pre>
+    </div>
+  </div>  <div class="container left">
+    <div class="content">
+      <h2>20.09.04 열번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0904.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  날씨를 메인으로 잡자니 메인기능으로
+  선정하기에 어려움이 있어 아이디어 회의
+
+  아이디어를 여러 개 내고
+  그 중 2개 아이디어를 선정
+
+  1.연예인, 가수, 셀럽 등 각 사람마다 입는 옷 검색
+  각 연예인, 가수, 셀럽 등 한 사람을 검색하여 그 사람이
+  입었던 옷들의 정보를 인공지능이 파악하여 보여주기
+
+  2.자기가 직접 디자인
+  자신의 체형(키, 몸무게 등)을 입력하여 체형과 닮은
+  마네킹이 나와 그 위에 자신이 원하는 옷들로 코디하기.
+  ex) 모자, 상의, 하의, 악세사리 등
+  클래스를 나눠서 마네킹에 입힘.
+
+  +)
+  셀럽이 입었던 옷을 아무거나 가져오는 것은
+  효율적이지 않다는 의견.
+  셀럽이 입은 옷등을 미디어로 올리면
+  그 사진과 유사한 이미지를 크롤링해 온
+  이미지들과 비교해 결과를 띄우기로 함.
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.09.08 열한번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0908.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  형준: 크롤링 찾아서 넘겨주기
+         클래스별로 상의, 하의 등 이미지들 받아오기
+  수현: 딥러닝 유사이미지 학습 시키기
+  주영: mainpage에 마네킹 들어갈 공간 넣어주기
+  슬희: mypage에 옷 드래그 기능 추가하기
+         옷 가져올 수 있는 공간과 마네킹 디자인 추가하기
+  수호: 마크다운 프로젝트 설계 연습 후 깃허브에 올리기
+    </pre>
+    </div>
+  </div>
+    <div class="container left">
+    <div class="content">
+      <h2>20.09.11 열두번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0911.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  형준, 수현: 옷 드래그하는거 크게 잡아서 만들어주기
+  슬희: 드래그 앤 드롭
+  주영: 마네킹 디자인과 밑에 넣을 광고배너 생각해보기
+  수호: 마크다운 작성하기
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.09.15 열세번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0915.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  모델 사이 관계 공부
+  ex) 1:1 -> 학생 김수현 - 학번 201914009
+  ex) 1:n -> 게시판의 글 - 여러 개의 댓글
+
+  크롤링 과정 결정
+  1. 우리가 직접 사진을 찍거나 캡쳐해서 올린 상품
+  2. 상품 검출 후 해당 상품 class에 넣어주고
+     옷 부분을 잘라
+     유사이미지에 삽입
+  3.무신사에서 크롤링하여 가져온 옷들 중에
+    유사도가 90% 이상인 옷들을 선정
+  4. 그 중 맘에 드는걸 찜하기 하면
+     그 옷이 옷장으로 넘어와 코디 가능
+    </pre>
+    </div>
+  </div>
+    <div class="container left">
+    <div class="content">
+      <h2>20.09.18 열네번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0918.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  전체적인 데이터베이스 점검
+
+  수현: 데이터 부풀리기란 과정으로
+        n:n으로 만듬(design_my_style)
+  수호: 마크다운 작성하기
+  슬희: 사진 잘라서 붙이기, 배경 색깔 바꾸기
+         드래그앤드롭 사진이 날아다니는거만 처리하기
+  주영: 사진자르기, 수현과 데이터베이스 복습하기
+  형준: 크롤링해서 찜 목록에 넘기기
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.09.22 열다섯번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/0922.jpg' %}" alt="" width=300px; height=300px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  수현: 데이터 부풀리기 과정 진행 중
+  수호: 다른 홈쇼핑 페이지와 비교 후 추가할 부분 찾기
+  주영: 가격 계산하는 기능 공부
+  형준: 가격 따로 자르는 기능 추가해보기
+  슬희: 드래그앤드롭 기능 공부
+    </pre>
+    </div>
+  </div>
+    <div class="container left">
+    <div class="content">
+      <h2>20.10.02 열여섯번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/1002.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+  수현: 픽셀상에 하얀색 배경이 아닌 다른 색의 배경이
+        들어오면 정확도가 많이 떨어질 수 있으므로
+        전처리 과정 공부 중임
+  수호: 검색 결과 나오는 방법 공부
+  주영: 로그인-로그아웃 페이지 만들기
+  형준: 수현과 전처리 과정 공부 후 시도 중임
+  슬희: 마이페이지 만들기
+    </pre>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>20.10.06 스무번째 모임</h2>
+      <img class="teampicture" src="{% static 'myapp/img/team/1006.png' %}" alt="" width=300px; height=200px;>
+      <pre style="color: black; font-family: '123RF';
+      src:url('123RF.ttf'); line-height: 20px;">
+    로그인-아웃과 회원가입 페이지 거의 완료.
+    구체적인 구성이 조금 바뀌어 플로우차트 다시 짜기.
+    가격 표시 기능도 추가하고 구매는 url을 주어서
+    직접 구매할 수 있도록 함.
+    </pre>
+    </div>
+  </div>
+  <div class="container left">
+  <div class="lastcontent">
+    <h2>20.10.16 스물세번째 모임</h2>
+    <pre style="color: black; font-family: '123RF';
+    src:url('123RF.ttf'); line-height: 20px;">
+수현: 이미지 정확도 높이기에 집중
+수호: 소개 페이지에 들어갈 글 작성
+주영: 검색결과, 소개 페이지 만들기
+형준: 전체적인 백 점검
+슬희: 마이페이지 거의 완성하여 마무리 작업
+  </pre>
+  </div>
+  </div>
+
+</body>
+</html>

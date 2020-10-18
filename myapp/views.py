@@ -230,7 +230,8 @@ def inform(request):
                 }
     return render(request, 'myapp/inform.html',my_inform)
 
-
+def introduce(request):
+    return render(request, 'myapp/introduce.html')
 
 
 def mypage(request):
