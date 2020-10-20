@@ -95,7 +95,7 @@
   }
 }
 </style>
-<a href="main.html"><img class="logo" src="{% static 'myapp/img/로고.jpg' %}" alt=""></a>
+<a href="{%url 'main2' %}"><img class="logo" src="{% static 'myapp/img/로고.jpg' %}" alt=""></a>
 <hr style="border: 2px solid #B5B2FF;" >
 
 <div tabindex="-1" >
@@ -113,7 +113,7 @@
         <div class="modal-footer" style="background-color:  #B5B2FF;">
           <div class="page">
 
-            <button class="fun-btn"a href="main.html" id="main">back</button>
+            <button class="fun-btn"a href="{% url 'main2.html' %}" id="main2">back</button>
           
           </div>
           <!-- <button type="button" class="btn btn-primary" a href="main.html" id="main">돌아가기</button> -->

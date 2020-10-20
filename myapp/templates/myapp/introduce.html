@@ -7,7 +7,7 @@
 @font-face {
   font-family: '123RF';
   src: local('123RF'),
-    url('../fonts/123RF_123RF_TTF.ttf')
+    url('../fonts/123RF_123RF_TTF.ttf');
 }
 
 * {
@@ -31,12 +31,13 @@
 body {
   background-color: #E8D9FF;
   font-family: '123RF';
-  src:url('123RF.ttf')
+  src:url('123RF.ttf');
 }
 
 .gotomainbutton {
   cursor: pointer;
   font-family: '123RF';
+  src:url('123RF.ttf');
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -50,7 +51,7 @@ body {
   border-radius: 15px;
   line-height: 60px;
   border-color: inherit;
-  box-shadow: 5px 5px 5px #A566FF;
+  box-shadow: 5px 5px 5px #3a373d;
 }
 
 .gotomainbutton:hover {
@@ -165,6 +166,8 @@ body {
 
 .introducefirst  {
   font-family: 123RF;
+
+  src:url('123RF.ttf');
   padding: 30px 50px;
   background-color: white;
   position: relative;
@@ -208,6 +211,7 @@ body {
   .right {
   left: 0%;
   }
+  
 }
 
 
@@ -215,7 +219,7 @@ body {
 </head>
 <body>
     <div class="navbar">
-      <a href="{% url 'main' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+      <a href="{% url 'introduce' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
     </div>
 
     <div class="introducefirst">
@@ -244,7 +248,7 @@ body {
   </div>
 
 
-<a link="main.html"><button type="button" class="btn btn-dark gotomainbutton">Go to Codiboogie!</button></a>
+<a href="{% url 'main2' %}" style="text-decoration:none;"><button type="button" class="btn btn-dark gotomainbutton">Go to Codiboogie!</button></a>
 
 <hr class="horizen">
 

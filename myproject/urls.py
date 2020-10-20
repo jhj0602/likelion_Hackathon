@@ -27,7 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signin', myapp.views.signin, name = 'signin'),
     path('signup', myapp.views.signup, name = 'signup'),
-    path('main/', myapp.views.main, name = 'main'),
+    path('main/', myapp.views.main2, name = 'main2'),
     path('', myapp.views.introduce, name='introduce'),
   
     path('', include('django.contrib.auth.urls')),
@@ -45,6 +45,9 @@ urlpatterns = [
     #마이페이지
     path('draganddrop', myapp.views.draganddrop, name='draganddrop'),
     path('mypage', myapp.views.mypage, name='mypage'),
-    path('mypage_drag', myapp.views.mypage_drag, name='mypage_drag'),
+
     path('inform/', myapp.views.inform, name="inform"),
+    # 경고페이지
+    path('one', myapp.views.warningone, name = 'warningone'),
+    path('two', myapp.views.warningtwo, name = 'warningtwo'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
