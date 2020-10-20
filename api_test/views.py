@@ -58,14 +58,15 @@ def show_products(image_url, detection_result):
     del draw
 
 
-    return image_path_list # 지금 경로리턴하게 바꿈 원래는 image그 자체를 반환함.
+    return image_path_list,classname_list # 지금 경로리턴하게 바꿈 원래는 image그 자체를 반환함.
 
 def camera_kakaoproduct(request):
     image_name = camera()
     detection_result = detect_product(image_name)
     image_name = Image.open(image_name)
     image = show_products(image_name, detection_result)
-    # image.show()
+    print("여기?")
+    print(image)
     return redirect('imagecut',image)
 
 def media_kakaoproduct(request, pk):
@@ -81,7 +82,7 @@ def media_kakaoproduct(request, pk):
 
 def camera():
     cam = cv2.VideoCapture(0)
-    cv2.namedWindow("please see front of camera")
+    # cv2.namedWindow("please see front of camera")
     img_counter = 0
     while True:
         ret, frame = cam.read()
@@ -105,17 +106,18 @@ def camera():
     return img_name
 
 
-def choose_search(request):
-    if request.method == "POST":
-        temp_image = MediaForm(request.POST,request.FILES)
-        if temp_image.is_valid():
-            temp_image= temp_image.save(commit=False)
-            temp_image.username = request.user
-            # temp_image.image =str(request.user)+".jpg"
-            temp_image= temp_image.save()
-            return redirect('mediatest',request.user.pk)
-    blank_media = MediaForm()    
-    return render(request, 'api_test/search.html',{'mediaform':blank_media})
+
+# def choose_search(request):
+#     if request.method == "POST":
+#         temp_image = MediaForm(request.POST,request.FILES)
+#         if temp_image.is_valid():
+#             temp_image= temp_image.save(commit=False)
+#             temp_image.username = request.user
+#             # temp_image.image =str(request.user)+".jpg"
+#             temp_image= temp_image.save()
+#             return redirect('mediatest',request.user.pk)
+#     blank_media = MediaForm()    
+#     return render(request, 'api_test/search.html',{'mediaform':blank_media})
 
 # def content_file_name(instance, filename):
 #     filename = "%s.jpg" % (instance.user.pk)

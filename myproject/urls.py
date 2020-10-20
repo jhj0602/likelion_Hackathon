@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signin', myapp.views.signin, name = 'signin'),
     path('signup', myapp.views.signup, name = 'signup'),
-    path('', myapp.views.main, name = 'main'),
+    path('main/', myapp.views.main, name = 'main'),
+    path('', myapp.views.introduce, name='introduce'),
   
     path('', include('django.contrib.auth.urls')),
     path('imagesearch/', include('api_test.urls')),
@@ -45,4 +46,5 @@ urlpatterns = [
     path('draganddrop', myapp.views.draganddrop, name='draganddrop'),
     path('mypage', myapp.views.mypage, name='mypage'),
     path('mypage_drag', myapp.views.mypage_drag, name='mypage_drag'),
+    path('inform/', myapp.views.inform, name="inform"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

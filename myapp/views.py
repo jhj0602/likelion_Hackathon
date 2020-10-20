@@ -61,9 +61,9 @@ def signin(request):
             login(request, user)
             return redirect('main')
         else:
-            return render(request, 'myapp/signin.html')
+            return render(request, 'myapp/login.html')
     else:
-        return render(request, 'myapp/signin.html')
+        return render(request, 'myapp/login.html')
 
 def signup(request):
     if request.method == "POST":
@@ -220,11 +220,23 @@ def my_cart(request):
 
 
 
+def inform(request):
+    username = request.user.name
+    password = request.user.password
+    phone_number = request.user.phone_number
+    gender = request.user.gender
+    address = request.user.address
+    my_inform = {
+                 'username':username,
+                 'password':password,
+                 'phone_number':phone_number,
+                 'gender':gender,
+                 'address':address,    
+                }
+    return render(request, 'myapp/inform.html',my_inform)
 
-
-
-
-
+def introduce(request):
+    return render(request, 'myapp/introduce.html')
 
 
 def mypage(request):

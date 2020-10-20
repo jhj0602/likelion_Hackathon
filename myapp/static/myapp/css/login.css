@@ -1,6 +1,7 @@
-
 @font-face {
   font-family: '123RF';
+  src: local('123RF'),
+    url('../fonts/123RF_123RF_TTF.ttf')
 }
 
 .logo {
@@ -72,12 +73,12 @@ body {
     padding-bottom:4.2rem;
     background:rgba(0, 0, 0, 0.76);
     font-family: '123RF';
-    src:url('123RF.ttf')
+    src:url('../fonts/123RF_123RF_TTF.ttf')
 }
 
 .logintext {
   font-family: '123RF';
-  src:url('123RF.ttf')
+  src:url('../fonts/123RF_123RF_TTF.ttf')
 }
 
 .logintextt {

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -5,6 +6,15 @@
 	<meta charset="UTF-8">
 	<title>My Codi</title>
 	<style>
+	.logo {
+    	width: 400px;
+    	height: 110px;
+    	display: table;
+    	margin-left: auto;
+    	margin-right: auto;
+    	margin-top: 10px;
+  		}
+
 		div {
 			width: 150px;
 			height: 180px;
@@ -35,19 +45,37 @@
 </head>
 
 <body>
-
-		{% for c in cart_item %}
-        <div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
-            <img id="top1" width="140" height="170" src="/media/{{c.product.musinsaImage}}" draggable="true" ondragstart="drag(event)">
-        </div>
-        {% endfor %}
-        
+	<a href="main.html"><img class="logo" src="{% static 'myapp/img/로고.jpg' %}" alt=""></a>
+	<hr style="border: 2px solid #B5B2FF;">
 	<div class="mycodi">
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">TOP</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BOTTOM</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
 	</div>
+	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="top1" width="140" height="170" src="{% static 'myapp/img/top1.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+	<div class="bottom" ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="bottom1" width="140" height="170" src="{% static 'myapp/img/bottom1.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+	<div ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="top2" width="140" height="170" src="{% static 'myapp/img/bottom2.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+	<div ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="top3" width="140" height="170" src="{% static 'myapp/img/top2.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+	<div ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="top4" width="140" height="170" src="{% static 'myapp/img/top3.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+	<div ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="top5" width="140" height="170" src="{% static 'myapp/img/shoes1.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+	<div ondrop="drop(event)" ondragover="dragEnter(event)">
+		<img id="top6" width="140" height="170" src="{% static 'myapp/img/shoes2.jpg' %}" draggable="true" ondragstart="drag(event)">
+	</div>
+
+
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
@@ -56,9 +84,9 @@
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+	
+	
+	
 
 
 	<script>
