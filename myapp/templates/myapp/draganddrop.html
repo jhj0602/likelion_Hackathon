@@ -105,16 +105,20 @@
 <body>
 	<a href="{%url 'main2' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
 	<hr style="border: 2px solid #B5B2FF;">
+	<form method="post">
 	<div class="mycodi">
+		{% csrf_token %}
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">TOP</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BOTTOM</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
+		
 	</div>
-
 	<div class="back">
-		<div class="button_base b01_simple_rollover" onclick="location.href='/main'">저장</div>
+		<input class="button_base b01_simple_rollover" type="submit" value="저장" ></input>
 	</div>
+	</form>
+	
 
 
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">

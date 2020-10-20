@@ -4,7 +4,7 @@ import os,glob
 import argparse
 import requests
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont ,ImageGrab
 from io import BytesIO
 from .models import itemsaved,wear_mywear
 from matplotlib import pyplot as plt
@@ -225,6 +225,10 @@ def mypage(request):
     return render(request, 'myapp/mypage.html')
 
 def draganddrop(request):
+    if request.method == "POST":
+        bbox=(20,300,562,905) #x1 y1 x2 y2
+        img = ImageGrab.grab(bbox)
+        img.save('./test.png')
     return render(request, 'myapp/draganddrop.html')
 
 def inform(request):
