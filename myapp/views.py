@@ -217,6 +217,7 @@ def my_cart(request):
 def warningone(request):
     return render(request, 'myapp/warningone.html')
 
+
 def warningtwo(request):
     return render(request, 'myapp/warningtwo.html')
 
@@ -227,8 +228,22 @@ def draganddrop(request):
     return render(request, 'myapp/draganddrop.html')
 
 def inform(request):
-    return render(request, 'myapp/inform.html')
+    username = request.user.name
+    password = request.user.password
+    phone_number = request.user.phone_number
+    gender = request.user.gender
+    address = request.user.address
+    my_inform = {
+                 'username':username,
+                 'password':password,
+                 'phone_number':phone_number,
+                 'gender':gender,
+                 'address':address,    
+                }
+    return render(request, 'myapp/inform.html',my_inform)
 
+def introduce(request):
+    return render(request, 'myapp/introduce.html')
 
 
 
