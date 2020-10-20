@@ -41,6 +41,64 @@
 			height: 200px;
 		}
 
+
+		@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+.preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+
+@media screen and (max-width: 1260px) {
+    .back {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .back {
+        width: 100%;
+    }
+}
+
+.button_base {
+    margin: 0;
+    border: 0;
+    font-size: 18px;
+    position: relative;
+    top: 310%;
+    right: 100%;
+    margin-top: -25px;
+    margin-left: -100px;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.button_base:hover {
+    cursor: pointer;
+}
+
+/* ### ### ### 01 */
+.b01_simple_rollover {
+    color: #000000;
+    border: #000000 solid 1px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.b01_simple_rollover:hover {
+    color: #ffffff;
+    background-color: #B5B2FF
+}
+
+
 	</style>
 </head>
 
@@ -53,6 +111,12 @@
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
 		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
 	</div>
+
+	<div class="back">
+		<div class="button_base b01_simple_rollover" onclick="location.href='/main'">저장</div>
+	</div>
+
+
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
 		<img id="top1" width="140" height="170" src="{% static 'myapp/img/top1.jpg' %}" draggable="true" ondragstart="drag(event)">
 	</div>
@@ -83,7 +147,7 @@
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
-	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+	
 	
 	
 	
