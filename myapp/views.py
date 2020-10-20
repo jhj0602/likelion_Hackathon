@@ -229,6 +229,7 @@ def draganddrop(request):
         bbox=(20,300,562,905) #x1 y1 x2 y2
         img = ImageGrab.grab(bbox)
         img.save('./test.png')
+        return redirect('main2')
     return render(request, 'myapp/draganddrop.html')
 
 def inform(request):
