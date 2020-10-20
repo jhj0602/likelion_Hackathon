@@ -27,10 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signin', myapp.views.signin, name = 'signin'),
     path('signup', myapp.views.signup, name = 'signup'),
-
-    path('', myapp.views.main2, name = 'main2'),
+    path('main/', myapp.views.main2, name = 'main2'),
     path('', myapp.views.introduce, name='introduce'),
-
   
     path('', include('django.contrib.auth.urls')),
     path('imagesearch/', include('api_test.urls')),
@@ -47,7 +45,8 @@ urlpatterns = [
     #마이페이지
     path('draganddrop', myapp.views.draganddrop, name='draganddrop'),
     path('mypage', myapp.views.mypage, name='mypage'),
-    path('inform', myapp.views.inform, name='inform'),
+
+    path('inform/', myapp.views.inform, name="inform"),
     # 경고페이지
     path('one', myapp.views.warningone, name = 'warningone'),
     path('two', myapp.views.warningtwo, name = 'warningtwo'),
