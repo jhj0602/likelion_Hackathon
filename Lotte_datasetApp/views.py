@@ -123,3 +123,15 @@ def lotteproduct(request):
    # for i in range(1,2):
 
 #     lotteproduct(i) #수현이가 말한 크롤링 함수 반복문
+
+
+def save_test():
+    # Celery로 비동기적으로 30초마다 모델이 저장되는 지 확인하기 위함
+    temp_lt_data = lotteData()
+    temp_lt_data.search_lotte = 'Test'
+    # lotteImage = 이미지는 없이 저장
+    temp_lt_data.lotteUrl = 'Test'
+    temp_lt_data.lotteName = 'Test'
+    temp_lt_data.lottePrice = 'Test'
+    temp_lt_data.category = 'Test'
+    temp_lt_data.save()

@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,8 +43,22 @@ INSTALLED_APPS = [
     'api_test',
     'deeplearning',
     'imageprocess',
-    
+
 ]
+
+# for CELERY
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Seoul'
+
+INSTALLED_APPS += (
+    'django_celery_beat',
+    'django_celery_results',
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,5 +145,5 @@ MEDIA_ROOT = Path(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGOUT_REDIRECT_URL = 'main'
- 
+
 AUTH_USER_MODEL = 'myapp.CustomUser'

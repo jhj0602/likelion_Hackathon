@@ -22,3 +22,13 @@ app.autodiscover_tasks()
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
+
+# 여기서 시간 조정하면 됨
+# 일단 100초 마다로 설정 해뒀음
+app.conf.beat_schedule = {
+    'add-every-100-seconds': {
+        'task': 'save_temp', # 여기서 이름 바꾸면 됨
+        # 'task': 'save_lottedata' 이거 주석 풀고 위에꺼 주석하면 lotteproduct 함수 호출
+        'schedule': 100.0,  # 100초마다
+    },
+}
