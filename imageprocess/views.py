@@ -6,6 +6,18 @@ from PIL import Image
 import matplotlib.pyplot as plt
 mouse_is_pressing = False
 points = []
+
+# register = template.Library()
+
+# @register.filter
+# def remainder(value, arg):
+#     try:
+#         return int(value) % int(arg)
+#     except (ValueError, ZeroDivisionError):
+#         return "나머지가 없습니다."
+
+
+
 def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해야함. 이미지 전처리 함수를 만들엇음
     step = 0
     global points
@@ -257,7 +269,7 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
                 print(is_empty)
     print(is_empty)
     if is_empty:
-        return render(request,'imageprocess/none.html')
+        return render(request,'imageprocess/warningtwo.html')
 
     for i in range(len(path_list)):
         image = plt.imread(path_list[i]) #os.walk로 이제 모든 애들 끌고오면 될듯
@@ -406,17 +418,18 @@ def avhash(request,image_count,class_list):
             dst = average_hash(fname)
             diff_r = hamming_dist(src, dst) / 256
             print("[check] ",fname)
-            c+=1
             if diff_r < rate:
+                c+=1
                 yield (diff_r, fname)
         if c==0:
-            return "데이터를 찾을 수 없습니다."
+            return render(request, 'imageprocess/warningone.html')
     # 찾기
     sim_list =[]
     srcfile_list =[] 
     distance = []
     namelist = []
     address = []
+    sim=[]
 
     for x in range(image_count):
         print(class_list[x])
@@ -428,7 +441,7 @@ def avhash(request,image_count,class_list):
             os.mkdir(cache_dir) 
 
         print(srcfile)
-        sim = list(find_image(srcfile, 0.4))
+        sim = list(find_image(srcfile, 0.5))
         sim = sorted(sim, key=lambda x:x[0])
         sim_list.append(sim)
         for r, f in sim:
@@ -440,4 +453,6 @@ def avhash(request,image_count,class_list):
             address.append(f)
             namelist.append(os.path.basename(f))
             distance.append(r)
+    if len(address)==0:
+        return render(request, 'imageprocess/warningone.html')
     return render(request, 'imageprocess/result.html', {'sim': sim, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })
