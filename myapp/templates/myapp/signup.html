@@ -15,37 +15,26 @@
   <hr class="hr1">
 
     <div class="container">
-      <form action="/action_page.php">
+      <form action="{% url 'signup' %}" method="post" >
+        {% csrf_token %}
+        <label for="name">Name</label>{{form.name}}
+        
 
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name..">
+        <label for="username">ID</label>{{form.username}}
+     
 
-        <label for="id">ID</label>
-        <input type="text" id="id" name="id" placeholder="Your ID..">
+        <label for="password">Password</label>{{form.password}}
+        
 
-        <label for="password">Password</label>
-        <input type="text" id="password" name="password" placeholder="Your Password..">
-
-        <label for="phonenumber">Phone number</label>
-        <input type="text" id="phonenumber" name="phonenumber" placeholder="전화번호를 '-'를 제외하고 입력하시오.">
+        <label for="phonenumber">Phone number</label>{{form.phone_number}}
+        
 
         <label for="country">지역</label>
-        <select id="country" name="country">
-          <option value="seoul">서울</option>
-          <option value="gyeonggi">경기</option>
-          <option value="chungnam">충남</option>
-          <option value="chungbuk">충북</option>
-          <option value="gyeongbuk">경북</option>
-          <option value="gyeongnam">경남</option>
-          <option value="jeonbuk">전북</option>
-          <option value="jeonman">전남</option>
-        </select>
+        {{form.address}}
+        
 
         <label for="gender" class="gender1">성별</label>
-        <select id="gender" class="gender2" name="gender">
-          <option value="female">여성</option>
-          <option value="male">남성</option>
-        </select>
+        {{form.gender}}
 
     <input type="submit" value="Submit">
 

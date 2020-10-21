@@ -9,9 +9,34 @@ from selenium import webdriver #selenium 크롤링 크롬드라이버
 
 import time
 
-def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product_dir):
+def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product_dir,category):
     print("씨발")
     lotte = lotteData()
+    if category == "아우터":
+        category = "outer"
+    elif category == "백팩":
+        category = "backpack"
+    elif category == "캐리어":
+        category = "baggage"
+    elif category == "모자":
+        category = "hat"
+    elif category == "원피스":
+        category = "one-piece"
+    elif category == "바지":
+        category = "pants"
+    elif category == "신발":
+        category = "shoes"
+    elif category == "샌달":
+        category = "sandals"
+    elif category == "셔츠":
+        category = "shirts"
+    elif category == "치마":
+        category = "skirt"
+    elif category == "티셔츠":
+        category = "t-shirts"
+    elif category == "토트백":
+        category = "tote bag"
+    lotte.category = category
     lotte.search_lotte =searchtitle#검색어
     lotte.lotteUrl = buyurl #구매 페이지
     image_url = 'images/'+product_dir+lotte_image_name
@@ -29,9 +54,11 @@ def lotteproduct(request):
         baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
         search_Image = "여성 아우터"
         plusUrl = "여성 아우터"
+        category = search_Image.split()
+        category = category[1]
         url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)
 
-        driver = webdriver.Chrome('C:\해커톤_프로젝트\likelion_Hackathon\chromedriver.exe')
+        driver = webdriver.Chrome('chromedriver.exe')
 
         driver.get(url)
 
@@ -78,7 +105,7 @@ def lotteproduct(request):
             
             urlretrieve(image2,'media/images/'+product_dir + lotte_image_name)
         
-            lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product_dir)
+            lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product_dir,category)
             print("씨발")
             n=n+1
             # except:

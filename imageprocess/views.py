@@ -3,6 +3,7 @@ import os, re
 import numpy as np
 import cv2
 from PIL import Image
+from Lotte_datasetApp.models import lotteData
 import matplotlib.pyplot as plt
 mouse_is_pressing = False
 points = []
@@ -326,10 +327,18 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
 def avhash(request,image_count,class_list):
     print(class_list)
     class_list=class_list.split(',')
+    gender = request.user.gender
+    
+    
     print(class_list)
     class_list.pop()
+    search_list = []
+    for x in class_list:
+        search_list.append(lotteData.objects.filter(category=x))
+        
+    print(search_list)    
     print(class_list)
-    search_dir = "media/images/{}".format(class_list[0])
+    search_dir = "media/images/{}/{}".format(gender,class_list[0])
     print(search_dir)
     cache_dir = "imageprocess/imagecache/{}".format(class_list[0])
     print(cache_dir)
@@ -440,7 +449,7 @@ def avhash(request,image_count,class_list):
         print(class_list[x])
         srcfile = 'media/images/temp/{}/{}.jpg'.format(class_list[x],x)
         srcfile_list.append(srcfile)
-        search_dir = "media/images/{}".format(class_list[x])
+        search_dir = "media/images/{}/{}".format(gender,class_list[x])
         cache_dir = "imageprocess/imagecache/{}".format(class_list[x])
         if not os.path.exists(cache_dir):
             os.mkdir(cache_dir) 

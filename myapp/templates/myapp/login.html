@@ -24,11 +24,11 @@
 							<h1>Login</h1>
 						 </div>
 					</div>
-                   <form action="" method="post" name="login">
+                   <form action="{% url 'signin' %}" method="post" name="login">
                       {% csrf_token %}
                            <div class="form-group">
                               <label for="exampleInputEmail1">ID</label>
-                              <input type="ID" name="ID"  class="form-control" id="ID" aria-describedby="IDHelp" placeholder="Enter ID">
+                              <input type="username" name="username"  class="form-control" id="ID" aria-describedby="IDHelp" placeholder="Enter ID">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">Password</label>

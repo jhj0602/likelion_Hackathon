@@ -59,7 +59,7 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            return redirect('main')
+            return redirect('main2')
         else:
             return render(request, 'myapp/login.html')
     else:
@@ -76,7 +76,7 @@ def signup(request):
             phone_number = form.cleaned_data['phone_number'],
             gender = form.cleaned_data['gender'])
             login(request, new_user)
-            return redirect('main')
+            return redirect('main2')
     else:
         form = UserForm()
         return render(request, 'myapp/signup.html', {'form': form})

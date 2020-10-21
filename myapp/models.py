@@ -18,11 +18,27 @@ def name_func(instance, filename):
 class CustomUser(AbstractUser):
     def __str__(self):
         return self.name
+    ADDRESS = (
+        ('seoul','서울'),
+        ('gyeonggi','경기'),
+        ('chungnam','충남'),
+        ('chungbuk','충북'),
+        ('gyeongbuk','경북'),
+        ('gyeongnam','경남'),
+        ('jeonbuk','전북'),
+        ('jeonnam','전남'),
         
+    )
+    GENDER = (
+        ('여성','여성'),
+        ('남성','남성'),
+    )
+    username = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=50)    
     name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=50)
-    address = models.CharField(max_length=50)
-    gender = models.CharField(max_length=50)
+    address = models.CharField(max_length=50,choices=ADDRESS)
+    gender = models.CharField(max_length=50,choices=GENDER)
 
 class itemsaved(models.Model):  ## 이미지 검색할 때 임시저장 이미지 모델
     image = models.ImageField(upload_to=name_func, blank=True)

@@ -45,3 +45,4 @@ urllib3==1.25.10
 Werkzeug==1.0.1
 wrapt==1.12.1
 zipp==3.1.0
+selenium==3.141.0
