@@ -363,46 +363,50 @@ def avhash(request,image_count,class_list):
         return dist
 
 
+# hsv 거리 구하기
     def hsv_dist(a,b):
         aa = a.reshape(1,-1)
         ab = b.reshape(1,-1)
         dist = (aa != ab).sum()
         return dist
-
-
-
-    def hsv_many(fname, size):
-        
-        return "빈도가 제일 높은 hsv 칼라 특히 h"
-
-
-
-    def hsv_hash(fname, size):
+    def hsv_color_dist(fname):
         fname2 = os.path.basename(fname)
         #이미지 캐시하기
         print(fname2)
         cache_file = cache_dir + fname2.replace('\\', "/")+"hsv"+".csv"
         # cache_file = cache_dir +fname2+".csv"
         print(cache_file)
-        hsv_list = {}
+        print("여기에 왓을까?")
         if not os.path.exists(cache_file):
             img = cv2.imread(fname, cv2.IMREAD_COLOR)
-            hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-            h,s,v = cv2.split(hsv)
-            for hsv_temp in (h,s,v):
-                hsv_list[hsv_temp] = hsv_list.get(hsv_temp,0)+1
-                keys = sorted(hsv_list.keys())
-            for hsv_temp in keys:
-                print(hsv_temp + ':' + str(hsv_list[hsv_temp]))
-            
-
-            # pixels = np.array(img.getdata()).reshape((size,size))
-            # avg = pixels.mean()
-            # px = 1 * (pixels > avg)
-            np.savetxt(cache_file, px , fmt ="%.0f", delimiter=",")
+            img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+            h,s,v = cv2.split(img_hsv)
+            hsv_dict = {}
+            color = []
+            h, cnts = np.unique(h,return_counts=True)
+            hsv_dict = dict(zip(h,cnts))
+            hsv_dict = sorted(hsv_dict.items(), key=(lambda x:x[1]), reverse=True)
+            for x in hsv_dict:
+                color.append(x)
+            print(color) # 여기에 파일 입출력으로 캐시파일 만들기
+            # np.savetxt(cache_file, px , fmt ="%.0f", delimiter=",")
         else:
-            px = np.loadtxt(cache_file, delimiter=",")
-        return px
+            img = cv2.imread(fname, cv2.IMREAD_COLOR)
+            img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+            h,s,v = cv2.split(img_hsv)
+            hsv_dict = {}
+            color = []
+            h, cnts = np.unique(h,return_counts=True)
+            hsv_dict = dict(zip(h,cnts))
+            hsv_dict = sorted(hsv_dict.items(), key=(lambda x:x[1]), reverse=True)
+            for x in range(5):
+                color.append(x)
+            print(color)
+            # px = np.loadtxt(cache_file, delimiter=",") # 캐시파일 불러오기
+            
+        # return px
+        
+        return "빈도가 제일 높은 hsv 칼라 특히 h"
     # 모든 폴더에 처리 적용하기
     def enum_all_files(path):
         for root, dirs, files in os.walk(path):
@@ -413,6 +417,7 @@ def avhash(request,image_count,class_list):
     # 이미지 찾기                
     def find_image(fname, rate):
         src = average_hash(fname)
+        color = hsv_color_dist(fname)
         c = 0
         for fname in enum_all_files(search_dir):
             dst = average_hash(fname)
