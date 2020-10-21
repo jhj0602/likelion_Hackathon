@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 import myapp.views
+import Lotte_datasetApp.views
 import api_test.urls
 import deeplearning.urls
 import imageprocess.urls
@@ -47,4 +48,5 @@ urlpatterns = [
     path('mypage', myapp.views.mypage, name='mypage'),
     path('mypage_drag', myapp.views.mypage_drag, name='mypage_drag'),
     path('inform/', myapp.views.inform, name="inform"),
+    path('lotteproduct', Lotte_datasetApp.views.lotteproduct, name="lotteproduct"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

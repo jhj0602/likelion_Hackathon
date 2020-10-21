@@ -1,0 +1,18 @@
+{% load static %}
+<DOCTYPE HTML5>
+    <html>
+      <head>
+        <link href="{% static 'myapp/css/styles2.css' %}" rel="stylesheet" />
+      </head>
+    
+      <body width="100%" height="100%">
+        
+       <h1>여기 롯데 상품 나타낼거야</h1>
+        
+    <form method="POST" enctype="multipart/form-data" action="{% url 'lotteproduct' %}">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="text" name="search" placeholder="검색어를 입력하세요">
+      <input type="submit" value="submit" class="btn btn-info" role="button">
+    </form>
+      </body>
+    </html>
