@@ -327,17 +327,20 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
 def avhash(request,image_count,class_list):
     print(class_list)
     class_list=class_list.split(',')
-    gender = request.user.gender
-    
-    
-    print(class_list)
-    class_list.pop()
+    gender = request.user.gender # 성별넣음
+    class_list.pop() # 마지막 새끼 제거
     search_list = []
+    address = []
     for x in class_list:
-        search_list.append(lotteData.objects.filter(category=x))
-        
-    print(search_list)    
-    print(class_list)
+        k = lotteData.objects.filter(category=x)
+        search_list.append(k)
+        img_list = k.values_list('lotteImage',flat = True)
+    
+    #img_list에는 지금 애들 정확히 lotteImage값 들감
+    #img_list[0] == images/남성/t-shirts/1.jpg
+    
+    print(search_list) 
+    print(class_list) #카테고리 프린트
     search_dir = "media/images/{}/{}".format(gender,class_list[0])
     print(search_dir)
     cache_dir = "imageprocess/imagecache/{}".format(class_list[0])
@@ -370,6 +373,10 @@ def avhash(request,image_count,class_list):
         ab = b.reshape(1,-1)
         dist = (aa != ab).sum()
         return dist
+
+
+    def addressfilter(fname):
+        return fname
 
 
 # hsv 거리 구하기
@@ -422,17 +429,22 @@ def avhash(request,image_count,class_list):
             for f in files:
                 fname = os.path.join(root,f)
                 if re.search(r'\.(jpg|jpeg|png)$', fname):
+                    fname =fname.replace('media/','')
+                    fname =fname.replace('\\','/')
                     yield fname
     # 이미지 찾기                
-    def find_image(fname, rate):
+    def find_image(fname, rate,categogo):
         src = average_hash(fname)
         color = hsv_color_dist(fname)
         c = 0
-        for fname in enum_all_files(search_dir):
+        for fname in enum_all_files(search_dir): # 여기에서 카테고리랑 이름이 같으면 걸러내자
             dst = average_hash(fname)
             diff_r = hamming_dist(src, dst) / 256
             print("[check] ",fname)
             if diff_r < rate:
+                for x in img_list:
+                    if fname == x:
+                        address.append(lotteData.objects.get(lotteImage=x))
                 c+=1
                 yield (diff_r, fname)
         if c==0:
@@ -455,7 +467,7 @@ def avhash(request,image_count,class_list):
             os.mkdir(cache_dir) 
 
         print(srcfile)
-        sim = list(find_image(srcfile, 0.5))
+        sim = list(find_image(srcfile, 0.5,class_list[x]))
         sim = sorted(sim, key=lambda x:x[0])
         sim_list.append(sim)
         for r, f in sim:
@@ -464,9 +476,11 @@ def avhash(request,image_count,class_list):
             f=f.replace("\\",'/')
             f = '/'+f
             print(f)
-            address.append(f)
-            namelist.append(os.path.basename(f))
-            distance.append(r)
+            # address.append(f)
+            # namelist.append(os.path.basename(f))
+            # distance.append(r)
+        # img_list = address.values_list('lotteImage',flat = True)
+        print(address)
     if len(address)==0:
         return render(request, 'imageprocess/warningone.html')
-    return render(request, 'imageprocess/result.html', {'sim': sim, 'srcfile':srcfile_list,'namelist':namelist, 'distance':distance, 'address':address })
+    return render(request, 'imageprocess/result.html', {'sim': sim,  'distance':distance, 'product':address })

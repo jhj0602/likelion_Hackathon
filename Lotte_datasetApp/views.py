@@ -49,11 +49,11 @@ def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product
 def lotteproduct(request):
     if request.method =='POST':
         gender = request.POST['search']
-        product_dir = str(gender+'/'+'outer'+'/')
+        product_dir = str(gender+'/'+'t-shirts'+'/')
         baseUrl1 = '&page='
         baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
-        search_Image = "여성 아우터"
-        plusUrl = "여성 아우터"
+        search_Image = "여성 티셔츠"
+        plusUrl = "여성 티셔츠"
         category = search_Image.split()
         category = category[1]
         url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)

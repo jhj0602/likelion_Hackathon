@@ -16,11 +16,6 @@ from .forms import MediaForm
 from django.http import HttpResponse
 # Create your views here.
 
-
-
-
-
-
 def detect_product(image):
     headers = {'Authorization': 'KakaoAK {}'.format("1b93fbec9c5f4fdefb40d20a47f2e888")}
     print(type(image))
@@ -69,16 +64,24 @@ def camera_kakaoproduct(request):
     print(image)
     return redirect('imagecut',image)
 
-def media_kakaoproduct(request, pk):
-    a = itemsaved.objects.filter(pk=pk).last()
-    # image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
-    image_name = a.image.url
-    print(image_name)
-    detection_result = detect_product(image_name)
-    image_name = Image.open(image_list)
-    image = show_products(image_name, detection_result)
-    image.show()
-    return redirect('imagecut')
+def media_kakaoproduct(request):
+    if request.method=="POST":
+        form = MediaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            image_name = form.image
+                        
+        # image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
+            print(image_name)
+            detection_result = detect_product(image_name)
+            print('여긴가?')
+            image_name = Image.open(image_list)
+            image = show_products(image_name, detection_result)
+            image.show()
+            return redirect('imagecut')
+    else:
+        form = MediaForm()
+        return render(request, 'api_test/media.html',{'form':form})
 
 def camera():
     cam = cv2.VideoCapture(0)

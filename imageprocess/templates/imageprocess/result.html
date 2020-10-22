@@ -124,27 +124,26 @@
         <li><a href="#">Price (low)</a></li>
         <li><a href="#">Price (high)</a></li>
       </ul>
-      {% for x in address %}
-      {% if forloop.counter|divisibleby:"3" %}
+      {% for x in product %}
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <div class="shop__thumb">
-            <a href="#">
+            <a href="{{ x.lotteUrl}}">
               <div class="shop-thumb__img">
-                <img src="{{ x }}" class="img-responsive" alt="...">
+                <img src="{{ x.lotteImage.url }}" class="img-responsive" alt="...">
               </div>
               <h5 class="shop-thumb__title">
-                Product Title
+                {{x.lotteName}}
               </h5>
               <div class="shop-thumb__price">
-                <span class="shop-thumb-price_old">$80.99</span>
+                <span class="shop-thumb-price_old">{{x.lottePrice}}</span>
                 <span class="shop-thumb-price_new">$59.99</span>
               </div>
             </a>
           </div>
         </div>
       </div>
-      {% endif %}
+      
       
       {% endfor %}
 
