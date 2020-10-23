@@ -106,14 +106,14 @@
 	<a href="{%url 'main2' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
 	<hr style="border: 2px solid #B5B2FF;">
 	<form method="post">
-	<div class="mycodi">
-		{% csrf_token %}
-		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">TOP</div>
-		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BOTTOM</div>
-		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
-		<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
+		<div class="mycodi">
+			{% csrf_token %}
+			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)" draggable="true" ondragstart="drag(event)">TOP</div>
+			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BOTTOM</div>
+			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
+			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
 		
-	</div>
+		</div>
 	<div class="back">
 		<input class="button_base b01_simple_rollover" type="submit" value="저장" onclick="alerttest()" ></input>
 	</div>
@@ -122,11 +122,11 @@
 
 	{% for d  in cart_item%}
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
-		<img id="top1" width="140" height="170" src="/media/{{d.product.lotteImage}}" draggable="true" ondragstart="drag(event)">
+		<img id="top{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" draggable="true" ondragstart="drag(event)">
 	</div>
 	
 
-	<div ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+	<!-- <div ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 	{% endfor %}
 	
 	

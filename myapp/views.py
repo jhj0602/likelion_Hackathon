@@ -109,7 +109,7 @@ def add_cart(request, product_pk):
 
     try:
     	# 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
-        cart = CartItem.objects.get(product__id=product.pk, user__id=request.user.pk)
+        cart = CartItem.objects.get(product=product, user=request.user)
         print("씨발")
         if cart:
             if cart.product.lotteName == product.lotteName:

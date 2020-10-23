@@ -461,7 +461,7 @@ def avhash(request,image_count,class_list):
         print(class_list[x])
         srcfile = 'media/images/temp/{}/{}.jpg'.format(class_list[x],x)
         srcfile_list.append(srcfile)
-        search_dir = "media/images/{}/{}".format(gender,class_list[x])
+        search_dir = "media/images/{}".format(class_list[x])
         cache_dir = "imageprocess/imagecache/{}".format(class_list[x])
         if not os.path.exists(cache_dir):
             os.mkdir(cache_dir) 
