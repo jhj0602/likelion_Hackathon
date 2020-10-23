@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen,urlretrieve
 from urllib.parse import quote_plus
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from Lotte_datasetApp.models import lotteData
 
 
 
@@ -102,12 +102,15 @@ def crowling(request):
         
 
 def add_cart(request, product_pk):
+    print("씨발")
 	# 상품을 담기 위해 해당 상품 객체를 product 변수에 할당
     product = lotteData.objects.get(pk=product_pk)
+    print(product.lotteImage)
 
     try:
     	# 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
         cart = CartItem.objects.get(product__id=product.pk, user__id=request.user.pk)
+        print("씨발")
         if cart:
             if cart.product.lotteName == product.lotteName:
                 cart.quantity += 1
@@ -166,7 +169,8 @@ def draganddrop(request):
         img = ImageGrab.grab(bbox)
         img.save('./test.png')
         return redirect('main2')
-    return render(request, 'myapp/draganddrop.html')
+    cart_item = CartItem.objects.all()
+    return render(request, 'myapp/draganddrop.html',{'cart_item':cart_item})
 
 def inform(request):
     username = request.user.name
