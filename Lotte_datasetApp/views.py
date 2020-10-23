@@ -5,7 +5,7 @@ from urllib.parse import quote_plus #아스키 코드로 변환해준다
 
 from bs4 import BeautifulSoup
 
-from selenium import webdriver #selenium 크롤링 크롬드라이버 
+from selenium import webdriver #selenium 크롤링 크롬드라이버
 
 import time
 from django.core.paginator import Paginator
@@ -65,14 +65,14 @@ def lotteproduct(request):
 
         time.sleep(3)  # 위에서 불러오고 1초 기다린후에 분석을 시작
 
- 
+
 
         pageString = driver.page_source
 
         soup = BeautifulSoup(pageString, features="html.parser")
-        
+
         LotteProductList = soup.find(name = 'ul', attrs ={'class':'srchProductList'}) #롯데 상품리스트
-    
+
         Lotteimageurl = LotteProductList.find_all("div", class_ = "srchThumbImageWrap") #이미지 URL
         Lottebuyurl = LotteProductList.find_all("a",class_="srchGridProductUnitLink srchNoProductOrderInfo")
         # print(Lottebuyurl)
@@ -81,21 +81,21 @@ def lotteproduct(request):
         Lotteprice = LotteProductList.find_all("div", class_="srchProductUnitPriceArea")
         n=1
         for i,b,t,p in zip(Lotteimageurl,Lottebuyurl,Lottetitle,Lotteprice):
-       
+
             # try:
             print(str(n)+"번째")
-            
+
             image = i.select_one("img")
             image2 = image.attrs['src']
             print("이미지"+str(image2))
-            
+
             lotte_image_name =str(n) +'.jpg'#이미지 이름
             buyurl = b.attrs['href']
             #print("구매링크"+str(buyurl))
-            
+
             Lottetitle = t.get_text()
             print("상품 이름"+str(Lottetitle))
-            
+
 
             Lotteprice = p.select_one("span.srchCurrentPrice").get_text()
             print("가격"+str(Lotteprice).replace(',','')[:-1])
@@ -103,8 +103,8 @@ def lotteproduct(request):
             Lotteprice3 = int(Lotteprice2)
             print()
             # lotte_path = 'media/images/'
-            searchtitle = search_Image+str(n)#검색어 
-            
+            searchtitle = search_Image+str(n)#검색어
+
             urlretrieve(image2,'media/images/'+product_dir + lotte_image_name)
         
             lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice3,product_dir,category)
@@ -142,6 +142,7 @@ def highprice(request):#높은 가격순
 
 #     lotteproduct(i) #수현이가 말한 크롤링 함수 반복문
 
+
 def search(request):
     q= request.GET['q']
     if q:
@@ -152,3 +153,16 @@ def search(request):
     page = request.GET.get('page')
     lotteposts = paginator.get_page(page)
     return render(request,'Lotte_datasetApp/search.html', {'lotteposts':lotteposts} )
+
+
+def save_test():
+    # Celery로 비동기적으로 30초마다 모델이 저장되는 지 확인하기 위함
+    temp_lt_data = lotteData()
+    temp_lt_data.search_lotte = 'Test'
+    # lotteImage = 이미지는 없이 저장
+    temp_lt_data.lotteUrl = 'Test'
+    temp_lt_data.lotteName = 'Test'
+    temp_lt_data.lottePrice = 'Test'
+    temp_lt_data.category = 'Test'
+    temp_lt_data.save()
+

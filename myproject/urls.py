@@ -46,6 +46,7 @@ urlpatterns = [
     #마이페이지
     path('draganddrop', myapp.views.draganddrop, name='draganddrop'),
     path('mypage', myapp.views.mypage, name='mypage'),
+    path('imagenaming/<str:data>/', myapp.views.imagenaming, name='imagenaming'),
 
     path('inform/', myapp.views.inform, name="inform"),
 

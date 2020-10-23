@@ -165,12 +165,20 @@ def mypage(request):
 
 def draganddrop(request):
     if request.method == "POST":
+        user = request.user
         bbox=(20,300,562,905) #x1 y1 x2 y2
         img = ImageGrab.grab(bbox)
-        img.save('./test.png')
-        return redirect('main2')
+        imagename = './{}.png'.format(user)
+        img.save(imagename)
+        imagename = './{}.png'.format(user)
+        return redirect('main2',{'imagename':imagename})
     cart_item = CartItem.objects.all()
     return render(request, 'myapp/draganddrop.html',{'cart_item':cart_item})
+
+def imagenaming(request,data):
+    print(data)
+    print("여기?")
+    return data
 
 def inform(request):
     username = request.user.name

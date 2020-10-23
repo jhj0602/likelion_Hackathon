@@ -87,6 +87,8 @@
 
 /* ### ### ### 01 */
 .b01_simple_rollover {
+	margin-top:10px;
+	margin-left: 10px;
     color: #000000;
     border: #000000 solid 1px;
     padding: 10px;
@@ -114,15 +116,15 @@
 			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
 		
 		</div>
-	<div class="back">
-		<input class="button_base b01_simple_rollover" type="submit" value="저장" onclick="alerttest()" ></input>
-	</div>
+	<!-- <div class="back"> -->
+		<input class="b01_simple_rollover" type="submit" value="저장" onclick="alerttest()" ></input>
+	<!-- </div> -->
 	</form>
 	
 
 	{% for d  in cart_item%}
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
-		<img id="top{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" draggable="true" ondragstart="drag(event)">
+		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" draggable="true" ondragstart="drag(event)">
 	</div>
 	
 
@@ -150,16 +152,20 @@
 
 		function drag(ev) {
 			ev.dataTransfer.setData("text", ev.target.id);
+			
 		}
 
 		function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var img = ev.currentTarget.querySelector("img");
+	var url = "{% url 'imagenaming' 123 %}";
+	// var id = $(this).attr('id');
     if(img) {
         document.getElementById(data).parentNode.appendChild(img);
     }
     ev.currentTarget.appendChild(document.getElementById(data));
+	// document.location.href = url.replace('123', data.id);
 		}
 		
 	</script>
