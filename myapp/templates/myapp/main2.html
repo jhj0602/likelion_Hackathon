@@ -23,6 +23,38 @@
 
     <hr class=hr1>
 
+    <div class="slideshow-container">
+
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="{% static 'myapp/img/main/slide1.jpg' %}" class="slideimage" style="width:60%;">
+        <div class="slidetext">Caption Text</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="{% static 'myapp/img/main/slide2.jpg' %}" class="slideimage"  style="width:60%;">
+        <div class="slidetext">Caption Two</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="{% static 'myapp/img/main/slide3.jpg' %}" class="slideimage"  style="width:60%;">
+        <div class="slidetext">Caption Three</div>
+      </div>
+      
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      
+      </div>
+      <br>
+      
+      <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span> 
+        <span class="dot" onclick="currentSlide(2)"></span> 
+        <span class="dot" onclick="currentSlide(3)"></span> 
+      </div>
+
     <br>
 
     <div class="closet">
@@ -59,6 +91,51 @@
         </a>
       </div>
     </div>
+
+    <div class="functioncard">
+      <img src="{% static 'myapp/img/main/function1.jpg' %}" class="functionimage">
+      <h3 style="line-height: 80px;">카메라를 이용한 상품 검출 서비스</h3>
+      <p class="function">내가 산 옷은 어디서 판매중인지, 친구의 옷은 어디서 판매중인지 궁금할 때 직접 카메라로 찍어 업로드하면 유사한 상품들을 검출해주는 서비스를 제공합니다.</p>
+    </div>
+    <div class="functioncard">
+      <img src="{% static 'myapp/img/main/function2.jpg' %}" class="functionimage">
+      <h3 style="line-height: 80px;">이미지를 이용한 상품 검출 서비스</h3>
+      <p class="function">드라마와 뉴스 등에서 본 샐럽들의 옷을 캡처하여 업로드하면 유사한 상품들을 검출해주는 서비스를 제공합니다.</p>
+    </div>
+    <div class="functioncard">
+      <img src="{% static 'myapp/img/main/function3.jpg' %}" class="functionimage">
+      <h3 style="line-height: 80px;">드래그앤드롭 코디</h3>
+      <p class="function">사용자가 마음에 드는 옷들과 옷장에 있는 옷들을 직접 드래그앤드롭으로 매치하여 코디하는 서비스를 제공합니다.</p>
+    </div>
+    
+    <script>
+      var slideIndex = 1;
+      showSlides(slideIndex);
+      
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+      
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+      
+      function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+      }
+      </script>
 
   </body>
 </html>
