@@ -49,7 +49,7 @@ body {
 }
 
 .searchbtn {
-  background-color: #B5B2FF;
+  background-color: rgb(49, 46, 46);
   color: white;
   border: 2px solid #B5B2FF;
   width: 100px;
@@ -67,7 +67,7 @@ body {
   width: 30%;
   width: 50px;
   height: 50px;
-  color: #B5B2FF;
+  color:rgb(49, 46, 46);
 }
 
 
@@ -75,7 +75,7 @@ body {
 
 
 .hr1 {
-  border: 2px solid #B5B2FF;
+  border: 2px solid rgb(49, 46, 46);
 }
 
 
@@ -101,7 +101,7 @@ body {
 ::-webkit-scrollbar-track { background-color: #f0f0f0; }
 /* 스크롤바의 전체 배경색 */
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #6B66FF, #D1B2FF);
+    background: linear-gradient(to bottom, rgb(49, 46, 46),rgb(241, 235, 235));
 }
 /* 스크롤바 색 */
 ::-webkit-scrollbar-button { display: none; }
@@ -130,7 +130,7 @@ closet end */
   max-width: 100%;
   opacity: 0;
   transition: .3s ease;
-  background-color: #6B66FF;
+  background-color:rgb(49, 46, 46);
   margin: 10px;
 }
 
@@ -172,7 +172,7 @@ closet end */
   max-width: 100%;
   opacity: 0;
   transition: .3s ease;
-  background-color: #6B66FF;
+  background-color: rgb(49, 46, 46);
 }
 
 .morecloset:hover .overlay2 {

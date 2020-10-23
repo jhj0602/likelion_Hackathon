@@ -84,7 +84,7 @@ def signup(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('main')
+    return redirect('signin')
 
 def lotte_Data(searchtitle,detail_url,lotte_path,lotte_image_name,M_title,M_price,product_dir):
     lotte = lotteData()
@@ -139,17 +139,17 @@ def my_cart(request):
     
     cart_item = CartItem.objects.filter(user__id=request.user.pk)
     # 장바구니에 담긴 상품의 총 합계 가격
-    # total_price = 0
+    total_price = 0
     # for loop 를 순회하여 각 상품 * 수량을 total_price 에 담는다
-    # for each_total in cart_item:
-    #     total_price += each_total.product.price * each_total.quantity
+    for each_total in cart_item:
+        total_price += each_total.product.lottePrice
     if cart_item is not None:
         context = {
         	# 없으면 없는대로 빈 conext 를 템플릿 변수에서 사용
             'cart_item': cart_item,
-            # 'total_price': total_price,
+            'total_price': total_price,
         }
-        return render(request, 'myapp/cart.html', {'cart_item': cart_item,})
+        return render(request, 'myapp/cart.html', {'cart_item': cart_item,'total_price': total_price})
     return redirect('my_cart')
 
 
