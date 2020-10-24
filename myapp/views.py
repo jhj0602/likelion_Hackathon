@@ -181,22 +181,24 @@ def imagenaming(request,data):
     return data
 
 def inform(request):
-    username = request.user.name
-    password = request.user.password
-    phone_number = request.user.phone_number
-    gender = request.user.gender
-    address = request.user.address
-    user = request.user
-    print(user.username)
-    form = UserForm(instance=user)
-    my_inform = {
-                 'username':username,
-                 'password':password,
-                 'phone_number':phone_number,
-                 'gender':gender,
-                 'address':address,    
-                }
-    return render(request, 'myapp/inform.html',my_inform)
+    if request.method =='POST':
+        user = request.user
+        phone_number = request.POST.get('phone_number')
+        username = request.POST.get('username')
+        new_user_pw = request.POST.get('password')
+        name = request.POST.get('name')
+        
+        user.phone_number = phone_number
+        user.username = username
+        user.name = name
+        user.set_password(new_user_pw)
+        user.save()
+
+
+        return redirect('main2')
+
+  
+    return render(request, 'myapp/inform.html')
 
 def introduce(request):
     return render(request, 'myapp/introduce.html')
