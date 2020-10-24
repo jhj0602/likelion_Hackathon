@@ -1,11 +1,11 @@
 
 @font-face {
-  font-family: '123RF';
+  font-family: 'NanumBarunGothic';
 }
 
 body {
-  font-family: '123RF';
-  src:url('123RF.ttf');
+  font-family: 'NanumBarunGothic';
+  src:url('../fonts/NanumBarunGothic.ttf')
 }
 
 .logo {
@@ -26,8 +26,7 @@ body {
 }
 
 .quantity {
-    font-family: '123RF';
-    src:url('123RF.ttf')
+    font-family: 'NanumBarunGothic';
     float: left;
     margin-right: 15px;
     position: relative;
@@ -36,8 +35,7 @@ body {
 }
 
 .quantity input {
-    font-family: '123RF';
-    src:url('123RF.ttf')
+    font-family: 'NanumBarunGothic';
     margin: 0;
     text-align: center;
     width: 15px;
@@ -51,8 +49,7 @@ body {
 }
 
 .quantity input.qty {
-    font-family: '123RF';
-    src:url('123RF.ttf')
+    font-family: 'NanumBarunGothic';
     position: relative;
     border: 0;
     width: 100%;
@@ -66,8 +63,7 @@ body {
 }
 
 .quantity .minus, .quantity .plus {
-    font-family: '123RF';
-    src:url('123RF.ttf')
+    font-family: 'NanumBarunGothic';
     line-height: 0;
     background-clip: padding-box;
     -webkit-border-radius: 0;
@@ -87,18 +83,56 @@ body {
 }
 
 .quantity .minus:hover, .quantity .plus:hover {
-    font-family: '123RF';
-    src:url('123RF.ttf');
+  font-family: 'NanumBarunGothic';
+
 }
 
 .quantity .minus {
-    font-family: '123RF';
-    src:url('123RF.ttf');
-    bottom: 0;
+  font-family: 'NanumBarunGothic';
+  bottom: 0;
 }
 
 .shopping-cart {
-    font-family: '123RF';
-    src:url('123RF.ttf');
-    margin-top: 20px;
+  font-family: 'NanumBarunGothic';
+  margin-top: 20px;
+}
+
+/* tomypage */
+
+.tomypage {
+  width: 230px;
+  position: relative;
+  float: right;
+  height: 500px;
+  
+}
+
+.overlay1 {
+  float: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0px;
+  right: 0;
+  height: 500px;
+  width: 230px;
+  max-width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: black;
+  margin-right: 5%;
+}
+
+.tomypage:hover .overlay1 {
+  opacity: 1;
+}
+
+#mypageid {
+  margin-right: 5%;
+}
+
+#usericon {
+  width: 50px;
+  height: 50px;
+  margin: auto 0;
 }
