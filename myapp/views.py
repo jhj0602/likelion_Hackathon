@@ -186,6 +186,9 @@ def inform(request):
     phone_number = request.user.phone_number
     gender = request.user.gender
     address = request.user.address
+    user = request.user
+    print(user.username)
+    form = UserForm(instance=user)
     my_inform = {
                  'username':username,
                  'password':password,

@@ -1,11 +1,13 @@
 
 @font-face {
   font-family: 'NanumBarunGothic';
+  src: local('NanumBarunGothic'),
+    url('../fonts/NanumBarunGothic.ttf');
 }
 
 body {
   font-family: 'NanumBarunGothic';
-  src:url('NanumBarunGothic.ttf')
+  
 }
 
 .logo {
@@ -28,6 +30,7 @@ body {
   width: 50%;
   margin-left: 15%;
   font-family: 'NanumBarunGothic';
+
   border-radius: 10px;
   border-color: inherit;
   margin-top: 8px;
@@ -37,6 +40,8 @@ body {
 
 .inbutton {
   font-family: 'NanumBarunGothic';
+  
+
   margin-left: 20px;
   border: none;
   color: white;
