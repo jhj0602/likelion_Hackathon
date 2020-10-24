@@ -50,11 +50,11 @@ def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product
 def lotteproduct(request):
     if request.method =='POST':
         gender = request.POST['search']
-        product_dir = str('t-shirts'+'/')
+        product_dir = str('tote bag'+'/')
         baseUrl1 = '&page='
         baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
-        search_Image = "티셔츠"
-        plusUrl = "티셔츠"
+        search_Image = "토트백"
+        plusUrl = "토트백"
         category = search_Image
        
         url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)
@@ -74,7 +74,7 @@ def lotteproduct(request):
         LotteProductList = soup.find(name = 'ul', attrs ={'class':'srchProductList'}) #롯데 상품리스트
 
         Lotteimageurl = LotteProductList.find_all("div", class_ = "srchThumbImageWrap") #이미지 URL
-        Lottebuyurl = LotteProductList.find_all("a",class_="srchGridProductUnitLink srchNoProductOrderInfo")
+        Lottebuyurl = LotteProductList.find_all("div",class_="srchProductUnitImageArea")
         # print(Lottebuyurl)
         Lottetitle = LotteProductList.find_all("div",class_="srchProductUnitTitle")
         # print(Lottetitle)
@@ -90,8 +90,9 @@ def lotteproduct(request):
             print("이미지"+str(image2))
 
             lotte_image_name =str(n) +'.jpg'#이미지 이름
-            buyurl = b.attrs['href']
-            #print("구매링크"+str(buyurl))
+            buyurl = b.select_one("a")
+            buyurl2 = buyurl.attrs['href']
+            print("구매링크"+str(buyurl2))
 
             Lottetitle = t.get_text()
             print("상품 이름"+str(Lottetitle))
@@ -107,7 +108,7 @@ def lotteproduct(request):
 
             urlretrieve(image2,'media/images/'+product_dir + lotte_image_name)
         
-            lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice3,product_dir,category)
+            lotte_Data(searchtitle,lotte_image_name,buyurl2,Lottetitle,Lotteprice3,product_dir,category)
             print("씨발")
             n=n+1
             # except:
@@ -146,13 +147,13 @@ def highprice(request):#높은 가격순
 def search(request):
     q= request.GET['q']
     if q:
-        lotte = lotteData.objects.filter(lotteName__icontains=q).order_by('-id')
+        lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('-id')
     else:
-        return redirect('portfolioPage')
-    paginator = Paginator(lotte,3)
-    page = request.GET.get('page')
-    lotteposts = paginator.get_page(page)
-    return render(request,'Lotte_datasetApp/search.html', {'lotteposts':lotteposts} )
+        return redirect('search')
+    # paginator = Paginator(lotte,3)
+    # page = request.GET.get('page')
+    # lotteposts = paginator.get_page(page)
+    return render(request,'Lotte_datasetApp/search.html', {'lotteposts':lotteposts,'q':q} )
 
 
 def save_test():
