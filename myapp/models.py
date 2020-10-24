@@ -16,6 +16,7 @@ def name_func(instance, filename):
        return filename
 
 
+
 class CustomUser(AbstractUser):
     def __str__(self):
         return self.name
@@ -41,8 +42,9 @@ class CustomUser(AbstractUser):
     address = models.CharField(max_length=50,choices=ADDRESS)
     gender = models.CharField(max_length=50,choices=GENDER)
 
+
 class itemsaved(models.Model):  ## 이미지 검색할 때 임시저장 이미지 모델
-    image = models.ImageField(upload_to='images/', blank=True)
+    image = models.ImageField(upload_to='images/temp/', blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
 

@@ -5,17 +5,10 @@ import cv2
 from PIL import Image
 from Lotte_datasetApp.models import lotteData
 import matplotlib.pyplot as plt
+
 mouse_is_pressing = False
 points = []
 
-# register = template.Library()
-
-# @register.filter
-# def remainder(value, arg):
-#     try:
-#         return int(value) % int(arg)
-#     except (ValueError, ZeroDivisionError):
-#         return "나머지가 없습니다."
 
 
 
@@ -322,26 +315,33 @@ def imagecutter(request,image): #모든 크롤링 데이터에 대해 적용해�
             cv2.waitKey(0)
 
             cv2.destroyAllWindows()
-    return redirect('avhash',int(image_count),class_str)
+    return redirect('avhash',int(image_count),class_str,1)
 
-def avhash(request,image_count,class_list):
-    print(class_list)
+def avhash(request,image_count,class_list,sort=1):
+    kim = image_count
+    soo = class_list
+
     class_list=class_list.split(',')
-    gender = request.user.gender # 성별넣음
+    
     class_list.pop() # 마지막 새끼 제거
     search_list = []
     address = []
+    pricelist = []
+    namelist =[]
+    k=[]
     for x in class_list:
-        k = lotteData.objects.filter(category=x)
+        if sort==1:
+            k = lotteData.objects.filter(category=x).order_by('lottePrice')
+        elif sort==2:
+            k = lotteData.objects.filter(category=x).order_by('-lottePrice')
         search_list.append(k)
         img_list = k.values_list('lotteImage',flat = True)
     
     #img_list에는 지금 애들 정확히 lotteImage값 들감
     #img_list[0] == images/남성/t-shirts/1.jpg
-    
-    print(search_list) 
+    print(k)
     print(class_list) #카테고리 프린트
-    search_dir = "media/images/{}/{}".format(gender,class_list[0])
+    search_dir = "media/images/{}".format(class_list[0])
     print(search_dir)
     cache_dir = "imageprocess/imagecache/{}".format(class_list[0])
     print(cache_dir)
@@ -379,12 +379,37 @@ def avhash(request,image_count,class_list):
         return fname
 
 
-# hsv 거리 구하기
-    def hsv_dist(a,b):
+
+    # hsv 거리 구하기
+    def hsv_dist(b):
+        color_temp = []
+
+        for a,x in b:
+            if (a >0 and a<10) or (a>165 and a<180):
+                color_temp.append("빨강")
+                    
+            elif (a>10 and a< 25):
+                color_temp.append("주황")
+            elif (a>25 and a< 35):
+                color_temp.append("노랑")
+            elif (a>35 and a< 80):
+                color_temp.append("초록")
+            elif (a>80 and a< 95):
+                color_temp.append("하늘")
+            elif (a>95 and a< 110):
+                color_temp.append("파랑")
+            elif (a>110 and a<130):
+                color_temp.append("진한파랑")
+            elif (a>130 and a<145):
+                color_temp.append("보라")
+            elif (a>145 and a<165):
+                color_temp.append("핑크")
+        return color_temp
         aa = a.reshape(1,-1)
         ab = b.reshape(1,-1)
         dist = (aa != ab).sum()
         return dist
+
     def hsv_color_dist(fname):
         fname2 = os.path.basename(fname)
         #이미지 캐시하기
@@ -392,21 +417,8 @@ def avhash(request,image_count,class_list):
         cache_file = cache_dir + fname2.replace('\\', "/")+"hsv"+".csv"
         # cache_file = cache_dir +fname2+".csv"
         print(cache_file)
-        print("여기에 왓을까?")
         if not os.path.exists(cache_file):
-            img = cv2.imread(fname, cv2.IMREAD_COLOR)
-            img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-            h,s,v = cv2.split(img_hsv)
-            hsv_dict = {}
-            color = []
-            h, cnts = np.unique(h,return_counts=True)
-            hsv_dict = dict(zip(h,cnts))
-            hsv_dict = sorted(hsv_dict.items(), key=(lambda x:x[1]), reverse=True)
-            for x in hsv_dict:
-                color.append(x)
-            print(color) # 여기에 파일 입출력으로 캐시파일 만들기
-            # np.savetxt(cache_file, px , fmt ="%.0f", delimiter=",")
-        else:
+            print(fname)
             img = cv2.imread(fname, cv2.IMREAD_COLOR)
             img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
             h,s,v = cv2.split(img_hsv)
@@ -416,8 +428,25 @@ def avhash(request,image_count,class_list):
             hsv_dict = dict(zip(h,cnts))
             hsv_dict = sorted(hsv_dict.items(), key=(lambda x:x[1]), reverse=True)
             for x in range(5):
-                color.append(x)
+                color.append(hsv_dict[x])
+            return color # 여기에 파일 입출력으로 캐시파일 만들기
+            # np.savetxt(cache_file, px , fmt ="%.0f", delimiter=",")
+        else:
+            img = cv2.imread(fname, cv2.IMREAD_COLOR)
+            print(fname)
+            print("hsv 왜 안먹는데")
+            img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+            h,s,v = cv2.split(img_hsv)
+            hsv_dict = {}
+            color = []
+            h, cnts = np.unique(h,return_counts=True)
+            hsv_dict = dict(zip(h,cnts))
+            hsv_dict = sorted(hsv_dict.items(), key=(lambda x:x[1]), reverse=True)
+            print(hsv_dict)
+            for x in range(5):
+                color.append(hsv_dict[x])
             print(color)
+            return color
             # px = np.loadtxt(cache_file, delimiter=",") # 캐시파일 불러오기
             
         # return px
@@ -436,15 +465,26 @@ def avhash(request,image_count,class_list):
     def find_image(fname, rate,categogo):
         src = average_hash(fname)
         color = hsv_color_dist(fname)
+        color_korea=hsv_dist(color)
+        print(set(color_korea))
         c = 0
         for fname in enum_all_files(search_dir): # 여기에서 카테고리랑 이름이 같으면 걸러내자
             dst = average_hash(fname)
+            try:
+                color_files = hsv_color_dist('media/'+fname)
+                color_korea2 = hsv_dist(color_files)
+                print(set(color_korea2))
+            except:
+                print("일단 패스")
+                continue
             diff_r = hamming_dist(src, dst) / 256
             print("[check] ",fname)
             if diff_r < rate:
+                print(set(color_korea) - set(color_korea2))
                 for x in img_list:
-                    if fname == x:
-                        address.append(lotteData.objects.get(lotteImage=x))
+                    if len(set(color_korea) - set(color_korea2))<=1:
+                        if fname == x:
+                            address.append(lotteData.objects.get(lotteImage=x))
                 c+=1
                 yield (diff_r, fname)
         if c==0:
@@ -456,6 +496,7 @@ def avhash(request,image_count,class_list):
     namelist = []
     address = []
     sim=[]
+    
 
     for x in range(image_count):
         print(class_list[x])
@@ -480,7 +521,10 @@ def avhash(request,image_count,class_list):
             # namelist.append(os.path.basename(f))
             # distance.append(r)
         # img_list = address.values_list('lotteImage',flat = True)
-        print(address)
+    for x in k:
+        if x in address:
+            pricelist.append(x)
     if len(address)==0:
         return render(request, 'imageprocess/warningone.html')
-    return render(request, 'imageprocess/result.html', {'sim': sim,  'distance':distance, 'product':address })
+    
+    return render(request, 'imageprocess/result.html', {'sim': sim,  'distance':distance, 'product':pricelist, 'kim':kim, 'soo':soo})
