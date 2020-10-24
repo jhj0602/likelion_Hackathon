@@ -110,8 +110,8 @@
 	<form method="post">
 		<div class="mycodi">
 			{% csrf_token %}
-			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)" draggable="true" ondragstart="drag(event)">TOP</div>
-			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BOTTOM</div>
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)" draggable="true" ondragstart="drag2(event)">TOP</div>
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">BOTTOM</div>
 			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
 			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
 		
@@ -124,7 +124,7 @@
 
 	{% for d  in cart_item%}
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
-		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" draggable="true" ondragstart="drag(event)">
+		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" title="true" draggable="true" ondragstart="drag(event)">
 	</div>
 	
 
@@ -152,21 +152,43 @@
 
 		function drag(ev) {
 			ev.dataTransfer.setData("text", ev.target.id);
+			ev.dataTransfer.setData("class",ev.target.class);
 			
+		}
+		function drag2(ev){
+			ev.dataTransfer.setData("class",ev.target.class);
 		}
 
 		function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var img = ev.currentTarget.querySelector("img");
+	
+	var class_name =ev.dataTransfer.getData("class");
 	var url = "{% url 'imagenaming' 123 %}";
-	// var id = $(this).attr('id');
+	// alert(data);
+	
     if(img) {
         document.getElementById(data).parentNode.appendChild(img);
     }
     ev.currentTarget.appendChild(document.getElementById(data));
 	// document.location.href = url.replace('123', data.id);
 		}
+	
+	
+	function drop2(ev){
+	
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+    var img = ev.currentTarget.querySelector("img");
+	var class_name =ev.dataTransfer.getData("class");
+	if(img) {
+        document.getElementById(data).parentNode.appendChild(img);
+    }
+    ev.currentTarget.appendChild(document.getElementById(data));
+	// document.location.href = url.replace('123', data.id);
+		
+	}
 		
 	</script>
 
