@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load humanize%}
 <!DOCTYPE html>
 <html lang="" dir="ltr">
   <head>
@@ -8,32 +9,81 @@
     <link rel="stylesheet" href="{% static 'myapp/css/mainstyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    
+  </style>
   </head>
   <body>
+    <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+    <div class="container">
+      <div class="card shopping-cart" >
+          <div class="card-header text-light" id="cardheader" style="background-color: black;">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              Shopping cart
+              <a href="main.html" class="btn btn-outline-info btn-sm pull-right" id="gotomain">Go to mainpage</a>
+              <div class="clearfix"></div>
+          </div>
+        
+          <div class="card-body">
+                  <!-- PRODUCT -->
+                  {% for c in cart_item %}
+                  <br>
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-2 text-center">
+                      <a href="{{ c.product.lotteUrl }}"  role="button"><img src="/media/{{c.product.lotteImage}}" alt="prewiew" width="120" height="80" style="border:0em;" ></a>
+                    </div>
+                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <h4 class="product-name"><strong>{{c.product.lotteName}}</strong></h4>
+                        <h4>
+                            <small>{{c.product.lotteName}}</small>
+                        </h4>
+                    </div>
+                      <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                          <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                              <h6><strong>{{c.product.lottePrice | intcomma }}<span class="text-muted">원</span></strong></h6>
+                          </div>
+                          <div class="col-4 col-sm-4 col-md-4">
+                             
+                          </div>
+                          <div class="col-2 col-sm-2 col-md-2 text-right">
+                            <a href="{% url 'delete_cart_item' c.product.id %}" role="button">   <button type="button" class="btn btn-outline-danger btn-xs">
+                              <i class="fa fa-trash" aria-hidden="true" href="{% url 'delete_cart_item' c.product.id %}"></i>
+                          </button>
+                        </a>
 
-<br>
-<br>
-<h1>여기는 장바구니에용</h1>
-{% for c in cart_item %}
-     <br>
-    
-    <!-- <p>{{c.quantity}}</p> -->
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
-          <div class="thumbnail">
-            <img src="/media/{{c.product.lotteImage}}" alt="..."width="150">
-            <div class="caption">
-              <h5>상품 이름 : {{c.product.musinName}}</h5>
-              <p>가격 : {{c.product.musinPrice}}</p>
-              
-              <p><a href="{% url 'delete_cart_item' c.product.id %}" class="btn btn-primary" role="button">장바구니 아이템 삭제</a>  <a href="{{ c.product.lotteUrl }}" class="btn btn-primary" role="button">구매하러가기</a></p>
-       
-            </div>
+                           
+                          </div>
+                      </div>
+                  </div>
+                  <hr>
+                  <br>
+                  {% endfor %}
+                  <!-- END PRODUCT -->
+                  <!-- PRODUCT -->
+             
+                  <hr>
+                  <!-- END PRODUCT -->
+              <div class="pull-right">
+                  <a href="" class="btn btn-outline-secondary pull-right">
+                      Update shopping cart
+                  </a>
+              </div>
+          </div>
+          <div class="card-footer" style="background-color: black;" >
+              <div class="pull-right" style="margin: 10px ;color: white;" >
+                  <a href="" class="btn btn-success pull-right">Checkout</a>
+                  <div class="pull-right" style="margin: 5px">
+                      Total price : <b>{{total_price | intcomma }} 원 </b>
+                  </div>
+              </div>
           </div>
         </div>
       </div>
-    
-    {% endfor %}
+  
+
+<br>
+<br>
+
   </body>
   </html>
   
