@@ -1,12 +1,12 @@
 
 @font-face {
-  font-family: '123RF';
+  font-family: 'NanumBarunGothic';
 }
 
 body{
   margin-top:20px;
-  font-family: '123RF';
-  src:url('123RF.ttf');
+  font-family: 'NanumBarunGothic';
+  src:url('../fonts/NanumBarunGothic.ttf')
 }
 
 .logo {
