@@ -1,7 +1,10 @@
 @font-face {
-  font-family: '123RF';
-  src: local('123RF'),
-    url('../fonts/123RF_123RF_TTF.ttf')
+  font-family: 'NanumBarunGothic';
+}
+
+body {
+  font-family: 'NanumBarunGothic';
+  src:url('../fonts/NanumBarunGothic.ttf')
 }
 
 .logo {
@@ -17,9 +20,6 @@
   border: 2px solid rgb(49, 46, 46);
 }
 
-body {font-family: '123RF';
-  src:url('../fonts/123RF_123RF_TTF.ttf');
-}
 * {box-sizing: border-box;}
 
 input[type=text], select, textarea {
@@ -34,7 +34,8 @@ input[type=text], select, textarea {
 }
 
 input[type=submit] {
-  background-color: #4CAF50;
+  margin-top: 15px;
+  background-color: #BDBDBD;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -43,17 +44,18 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #8C8C8C;
 }
 
 .container {
-  font-family: '123RF';
-  src:url('../fonts/123RF_123RF_TTF.ttf');
+  font-family: 'NanumBarunGothic';
   border-radius: 5px;
-  background-color: #E8D9FF;
+  background-color:#D5D5D5;
   padding: 20px;
   margin-top: 50px;
   margin-bottom: 50px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .gender1 {
