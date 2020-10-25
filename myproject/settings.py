@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path,os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -20,13 +20,15 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f))+vn!nm(2etu!zji$fg7*g^(4c^y&(e6+z@43!&3@j)r#hgi'
+# SECRET_KEY = 'f))+vn!nm(2etu!zji$fg7*g^(4c^y&(e6+z@43!&3@j)r#hgi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
-
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'f))+vn!nm(2etu!zji$fg7*g^(4c^y&(e6+z@43!&3@j)r#hgi')
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -64,6 +66,7 @@ INSTALLED_APPS += (
 
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -150,3 +153,9 @@ MEDIA_URL = '/media/'
 LOGOUT_REDIRECT_URL = 'signin'
  
 AUTH_USER_MODEL = 'myapp.CustomUser'
+
+
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
