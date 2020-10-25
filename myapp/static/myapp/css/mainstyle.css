@@ -1,11 +1,13 @@
 
 @font-face {
   font-family: 'NanumBarunGothic';
+  src: local('NanumBarunGothic'),
+    url('../fonts/NanumBarunGothic.ttf');
 }
 
 body {
   font-family: 'NanumBarunGothic';
-  src:url('../fonts/NanumBarunGothic.ttf')
+  
 }
 
 .logo {
@@ -26,17 +28,20 @@ body {
   float: left;
   padding: 10px;
   width: 50%;
-  margin-left: 20%;
+  margin-left: 15%;
   font-family: 'NanumBarunGothic';
+
   border-radius: 10px;
-  border-color: #d5d5d5;
+  border-color: inherit;
   margin-top: 8px;
   font-size: 17px;
-  background-color: #D5D5D5;
+  background-color: #DAD9FF;
 }
 
 .inbutton {
   font-family: 'NanumBarunGothic';
+  
+
   margin-left: 20px;
   border: none;
   color: white;
@@ -49,9 +54,9 @@ body {
 }
 
 .searchbtn {
-  background-color: white;
+  background-color: rgb(49, 46, 46);
   color: white;
-  border: 2px solid white;
+  border: 2px solid #B5B2FF;
   width: 100px;
   height: 50px;
   font-size: 20px;
@@ -62,11 +67,12 @@ body {
 }
 
 .carticon {
-  float: right;
+  float: left;
   padding: 10px;
-  width: 60px;
-  height: 60px;
-  color: black;
+  width: 30%;
+  width: 50px;
+  height: 50px;
+  color:rgb(49, 46, 46);
 }
 
 
@@ -74,7 +80,7 @@ body {
 
 
 .hr1 {
-  border: 2px solid black;
+  border: 2px solid rgb(49, 46, 46);
 }
 
 .mySlides {
@@ -156,7 +162,7 @@ body {
 /* closet start */
 .closet{
   width: 70%;
-  height: 550px;
+  height: 480px;
   float: left;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -175,7 +181,7 @@ body {
 ::-webkit-scrollbar-track { background-color: #f0f0f0; }
 /* 스크롤바의 전체 배경색 */
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, black, white);
+    background: linear-gradient(to bottom, rgb(49, 46, 46),rgb(241, 235, 235));
 }
 /* 스크롤바 색 */
 ::-webkit-scrollbar-button { display: none; }
@@ -188,7 +194,7 @@ closet end */
   width: 230px;
   position: relative;
   float: left;
-  height: 500px;
+  height: 430px;
   margin: 10px;
 }
 
@@ -199,12 +205,12 @@ closet end */
   bottom: 0;
   left: 0px;
   right: 0;
-  height: 500px;
+  height: 430px;
   width: 230px;
   max-width: 100%;
   opacity: 0;
   transition: .3s ease;
-  background-color: black;
+  background-color:rgb(49, 46, 46);
   margin: 10px;
 }
 
@@ -246,7 +252,7 @@ closet end */
   max-width: 100%;
   opacity: 0;
   transition: .3s ease;
-  background-color: black;
+  background-color: rgb(49, 46, 46);
 }
 
 .morecloset:hover .overlay2 {
@@ -266,7 +272,7 @@ closet end */
 }
 
 .fa-user:hover {
-  color: black;
+  color: #eee;
 }
 /* upload closet end */
 
@@ -276,29 +282,20 @@ closet end */
 }
 
 .functioncard {
-  float: right;
-  width:30%;
-  box-sizing: border-box;
   font-family: 'NanumBarunGothic';
-  padding: 30px 10px 30px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 90%;
+  float: left;
+  margin-left: 9%;
+  width: 20%;
   height: 600px;
+  box-sizing: border-box;
   margin-top: 30px;
-  margin-right: 5%;
   padding: 20px;
-  margin-bottom: 3%;
+  margin-bottom: 100px;
 }
 
 .function {
-  padding: 30px 10px 30px 10px;
   color: grey;
   font-size: 22px;
-}
-
-.card {
-  width: 30%;
-  float: left;
-  justify-content: center;
-  display: table;
 }

@@ -9,9 +9,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
   <body>
-
-    <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
-
+   {% if user %}
+   <a href="{% url 'main2' %}"> <img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+   {% else%}
+   
+   <a href="{% url 'signin' %}" onclick="return confirm('로그인을 해주세요!!')"> <img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+   {% endif %}
     <hr class="hr1">
 
     <div class="container logintext">
