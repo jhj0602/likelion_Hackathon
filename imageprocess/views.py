@@ -679,9 +679,6 @@ def avhash(request,image_count,class_list,sort=1):
                 print(img_list)
                 print(k)
                 for x in img_list:
-                    print("여기가 x")
-                    print(x)
-                    print(fname)
                     if fname == x:
                         address.append(lotteData.objects.get(lotteImage=x))
                         ddd={lotteData.objects.get(lotteImage=x).pk :src_color2['rgb']}
