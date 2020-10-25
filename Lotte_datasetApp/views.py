@@ -11,7 +11,7 @@ import time
 from django.core.paginator import Paginator
 
 def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product_dir,category):
-    print("씨발")
+  
     lotte = lotteData()
     if category == "아우터":
         category = "outer"
@@ -50,11 +50,11 @@ def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product
 def lotteproduct(request):
     if request.method =='POST':
         gender = request.POST['search']
-        product_dir = str('tote bag'+'/')
+        product_dir = str('t-shirts'+'/')
         baseUrl1 = '&page='
         baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
-        search_Image = "토트백"
-        plusUrl = "토트백"
+        search_Image = "티셔츠"
+        plusUrl = "티셔츠"
         category = search_Image
        
         url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)
@@ -109,7 +109,7 @@ def lotteproduct(request):
             urlretrieve(image2,'media/images/'+product_dir + lotte_image_name)
         
             lotte_Data(searchtitle,lotte_image_name,buyurl2,Lottetitle,Lotteprice3,product_dir,category)
-            print("씨발")
+          
             n=n+1
             # except:
             #     print('media/images/'+product_dir + lotte_image_name)

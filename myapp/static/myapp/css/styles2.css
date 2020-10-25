@@ -115,30 +115,30 @@ body {
   margin-left: 3%;
 }
 
-#product {
+#centerproduct {
   font-family: 'NanumBarunGothic';
   float: left;
-  justify-content: center;
-  margin-left: 0;
-  margin-right: 0;
+  width:  23%;
+  height: 600px;
   box-sizing: border-box;
-}
-
-.category {
-  line-height: 30px;
-  font-family: 'NanumBarunGothic';
-  font-size: 20px;
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 #cartbutton {
-  width: 200px;
+  width: 150px;
   height: auto;
   line-height: 30px;
   border: none;
 }
 
 #gototheproductpage {
-  width: 200px;
+  width: 150px;
   height: auto;
   line-height: 30px;
   border: none;
@@ -147,25 +147,11 @@ body {
 .tomypage {
   width: 230px;
   position: relative;
-  float: left;
+  float: right;
   height: 500px;
   margin: 10px;
-}
-
-.overlay1 {
-  float: left;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0px;
-  right: 0;
-  height: 500px;
-  width: 230px;
-  max-width: 100%;
-  opacity: 0;
-  transition: .3s ease;
-  background-color: black;
-  margin: 10px;
+  bottom: 960%;
+  right: 7%;
 }
 
 .tomypage:hover .overlay1 {
@@ -176,44 +162,63 @@ body {
   font-size: 20px;
 }
 
-/* footer */
-
-.footer {
-  float: bottom;
-  background-color: rgb(49, 46, 46);
-  color: #e6e9ec;
-  padding: 20px 0px 20px 0px;
-  margin-top: 40%;
+.productname {
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-.footer .title{text-align: left;color:#fff;font-size:25px;}
+/* navbar */
 
 
-.footer .social-icon{padding:0px;margin:0px;}
-.footer .social-icon a{display:inline-block;color:#fff;font-size:25px;padding:5px;}
-.footer .acount-icon a{display:block;color:#fff;font-size:18px;padding:5px;text-decoration:none;}
-.footer .acount-icon .fa{margin-right:25px;}
-
-
-.footer .category a {
-  text-decoration: none;
-  color: #fff;
-  display: inline-block;
-  padding: 5px 20px;
-  margin: 1px;
-  border-radius:4px;
-  margin-top: 6px;
-  background-color: black;
-  border: solid 1px #fff;
+.topnav {
+  overflow: hidden;
 }
 
-.footer .payment{margin:0px;padding:0px;list-style-type:none}
-.footer .payment li{list-style-type:none}
-.footer .payment li a {
-  text-decoration: none;
-  display: inline-block;
-  color: #fff;
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
   float: left;
-  font-size: 25px;
-  padding: 10px 10px;
+  padding: 10px;
+  width: 50%;
+  margin-left: 20%;
+  font-family: 'NanumBarunGothic';
+  border-radius: 10px;
+  border-color: #d5d5d5;
+  margin-top: 8px;
+  font-size: 17px;
+  background-color: #D5D5D5;
 }
+
+.inbutton {
+  font-family: 'NanumBarunGothic';
+  margin-left: 20px;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#searchbutton {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 20px;
+  float: left;
+  padding: 5px;
+}
+
+.carticon {
+  float: right;
+  padding: 10px;
+  width: 60px;
+  height: 60px;
+  color: black;
+}
+
