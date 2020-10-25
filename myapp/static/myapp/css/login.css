@@ -1,7 +1,10 @@
 @font-face {
-  font-family: '123RF';
-  src: local('123RF'),
-    url('../fonts/123RF_123RF_TTF.ttf')
+  font-family: 'NanumBarunGothic';
+}
+
+body {
+  font-family: 'NanumBarunGothic';
+  src:url('../fonts/NanumBarunGothic.ttf')
 }
 
 .logo {
@@ -20,18 +23,18 @@
 /* Style the search box inside the navigation bar */
 .topnav input[type=text] {
   float: right;
-  font-family: '123RF';
+  font-family: 'NanumBarunGothic';
   padding: 4px;
   border-radius: 5px 5px 5px 5px;
   border-color: inherit;
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
-  background-color: #DAD9FF;
+  background-color: white;
 }
 
 .inbutton {
-  font-family: '123RF';
+  font-family: 'NanumBarunGothic';
   margin-left: 20px;
   border: none;
   color: white;
@@ -45,40 +48,39 @@
 
 .loginbtn{
   background-color: white;
-  color: #6B66FF;
-  border: 2px solid #B5B2FF;
+  color: #aaa;
+  border: 2px solid rgb(49, 46, 46);
 }
 
 .loginbtn:hover {
-  background-color: #B5B2FF;
+  background-color:#A6A6A6;
   color: white;
 }
 
 .signinbtn {
   background-color: white;
-  color: #6B66FF;
-  border: 2px solid #B5B2FF;
+  color: #aaa;
+  border: 2px solid rgb(49, 46, 46);
 }
 
 .signinbtn:hover {
-  background-color: #B5B2FF;
+  background-color: #A6A6A6;
   color: white;
 }
 
 .hr1 {
-  border: 2px solid #B5B2FF;
+  border: 2px solid rgb(49, 46, 46);
 }
 
 body {
     padding-bottom:4.2rem;
-    background:rgba(0, 0, 0, 0.76);
-    font-family: '123RF';
-    src:url('../fonts/123RF_123RF_TTF.ttf')
+    background:#EAEAEA;
+    font-family: 'NanumBarunGothic';
 }
 
 .logintext {
-  font-family: '123RF';
-  src:url('../fonts/123RF_123RF_TTF.ttf')
+  font-family: 'NanumBarunGothic';
+  font-size: 25px;
 }
 
 .logintextt {
@@ -100,11 +102,12 @@ a {
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
-  border: 2px solid #B5B2FF;
+  border: 2px solid rgb(49, 46, 46);
   border-radius: 1.1rem;
   outline: 0;
   max-width: 500px;
-  background-color: #B5B2FF;
+  background-color: rgb(49, 46, 46);
+  font-size: 20px;
 }
 
 .tx-tfm{
@@ -131,7 +134,7 @@ a {
   margin-left: -25px;
   width: 50px;
   text-align: center;
-  background-color: #B5B2FF;
+  background-color:rgb(49, 46, 46);
   color: white;
  }
 
@@ -141,13 +144,17 @@ a {
   margin-bottom: 0px !important;
  }
 
-.google {
-  color:#666;
+.signupgoogle {
+  background-color: white;
   width:100%;
   height:40px;
   text-align:center;
   outline:none;
-  border: 1px solid lightgrey;
+ }
+
+ .signupgoogle:hover {
+   background-color:#8C8C8C;
+   
  }
 
  form .error {
@@ -155,3 +162,18 @@ a {
  }
 
  #second{display:none;}
+
+ .signuptext {
+   color: white;
+ }
+
+ #ID {
+   font-size: 20px;
+ }
+ #password {
+    font-size: 20px;
+ }
+
+ #loginbutton {
+  font-size: 20px;
+ }

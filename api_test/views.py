@@ -69,16 +69,20 @@ def media_kakaoproduct(request):
         form = MediaForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
-            image_name = form.image
-                        
-        # image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
+            form.image.name = request.user.username + '.jpg'
+            image_name = form.image.name
             print(image_name)
+            form.save()
+            print(image_name) 
+            # image_name = "media/images/temp/opencv_frame_0.png"  # 여기에 카메라로 찍은 사진이 들어옴
+            # image_name = 'media/'+image_name
+            image_name = 'media/images/temp/'+image_name
             detection_result = detect_product(image_name)
             print('여긴가?')
-            image_name = Image.open(image_list)
+            image_name = Image.open(image_name)
             image = show_products(image_name, detection_result)
-            image.show()
-            return redirect('imagecut')
+            
+            return redirect('imagecut',image)
     else:
         form = MediaForm()
         return render(request, 'api_test/media.html',{'form':form})

@@ -4,11 +4,18 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+
+
 @font-face {
-  font-family: '123RF';
-  src: local('123RF'),
-    url('../fonts/123RF_123RF_TTF.ttf');
+  font-family: 'NanumBarunGothic';
+  src:url('../fonts/NanumBarunGothic.ttf');
 }
+
+body {
+  font-family: 'NanumBarunGothic';
+  src:url('../fonts/NanumBarunGothic.ttf');
+}
+
 
 * {
   box-sizing: border-box;
@@ -19,25 +26,21 @@
 }
 
 .logo {
-  width: 400px;
-  height: 110px;
+  width: 800px;
+  height: 100px;
   display: table;
   margin-left: auto;
   margin-right: auto;
-
-
 }
 
 body {
-  background-color: #E8D9FF;
-  font-family: '123RF';
-  src:url('123RF.ttf');
+  background-color: #ffffff;
+  font-family: 'NanumBarunGothic';
 }
 
 .gotomainbutton {
   cursor: pointer;
-  font-family: '123RF';
-  src:url('123RF.ttf');
+  font-family: 'NanumBarunGothic';
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -46,8 +49,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  background-color: #E3C4FF;
-  color: #8041D9;
+  background-color: #5D5D5D;
+  color: white;
   border-radius: 15px;
   line-height: 60px;
   border-color: inherit;
@@ -55,7 +58,7 @@ body {
 }
 
 .gotomainbutton:hover {
-    background-color: white;
+    background-color: orangered;
     cursor: hand;
 }
 
@@ -71,7 +74,7 @@ body {
   content: '';
   position: absolute;
   width: 6px;
-  background-color: white;
+  background-color: black;
   top: 0;
   bottom: 0;
   left: 50%;
@@ -87,7 +90,7 @@ body {
 }
 
 .horizen {
-  border: 2px solid #B5B2FF;
+  border: 2px solid #5D5D5D;
   margin-bottom: 50px;
 }
 
@@ -98,8 +101,8 @@ body {
   width: 25px;
   height: 25px;
   right: -17px;
-  background-color: white;
-  border: 4px solid #B5B2FF;
+  background-color: #353535;
+  border: 4px solid #FF0000;
   top: 15px;
   border-radius: 50%;
   z-index: 1;
@@ -124,9 +127,9 @@ body {
   width: 0;
   z-index: 1;
   right: 30px;
-  border: medium solid white;
+  border: medium solid #353535;
   border-width: 10px 0 10px 10px;
-  border-color: transparent transparent transparent white;
+  border-color: transparent transparent transparent#353535;
 }
 
 /* Add arrows to the right container (pointing left) */
@@ -138,9 +141,9 @@ body {
   width: 0;
   z-index: 1;
   left: 30px;
-  border: medium solid white;
+  border: medium solid #353535;
   border-width: 10px 10px 10px 0;
-  border-color: transparent white transparent transparent;
+  border-color: transparent #353535; transparent transparent;
 }
 
 /* Fix the circle for containers on the right side */
@@ -151,31 +154,33 @@ body {
 /* The actual content */
 .content {
   padding: 20px 30px;
-  background-color: white;
+  background-color:#353535;
+  color: white;
   position: relative;
   border-radius: 6px;
 }
 
+.content:hover {
+  cursor: default;
+}
+
 .lastcontent {
   padding: 20px 30px;
-  background-color: white;
+  background-color: #353535;
   position: relative;
   border-radius: 6px;
   margin-bottom: 50px;
 }
 
 .introducefirst  {
-  font-family: 123RF;
-
-  src:url('123RF.ttf');
+  font-family: 'NanumBarunGothic';
   padding: 30px 50px;
-  background-color: white;
   position: relative;
   border-radius: 6px;
   margin-left: auto;
   margin-right: auto;
   width: 1000px;
-  background-color: #E3C4FF;
+  background-color: #BA2B2B;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -219,22 +224,22 @@ body {
 </head>
 <body>
     <div class="navbar">
-      <a href="{% url 'introduce' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+      <a href="{% url 'introduce' %}"><img class="logo" src="{% static 'myapp/img/main/codilotte.jpg' %}" width="" alt=""></a>
     </div>
 
     <div class="introducefirst">
-      <h2 style="color: #A566FF;">Let me introduce "Codiboogie"</h2>
-      <pre style="color: #8041D9; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 30px;">
-      저희 코디부기(codiboogie)에서는 자신이 마음에 드는 옷을 사진을 찍거나 캡쳐한 사진들을 인식한 후 옷의 정보를
-      파악하여 해당 옷을 구매할 수 있는 사이트에 연결해드립니다!
+      <h2 style="color: white;">Let me introduce "Codiboogie"</h2>
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 30px; font-size: 18px;">
+      의상을 의미하는 "coordination"과 옷장 속에 사는 악동 "boogieman"을 합친 저희는 "Codiboogie"입니다!
+      Codiboogie는 내 옷장 속의 옷들, 샐럽들이 입은 옷들 등 사용자가 입고 싶은대로 맘대로 코디해보는 웹 서비스입니다.
+      저희 코디부기(codiboogie)에서는 자신이 마음에 드는 옷을 사진을 찍거나 캡쳐한 사진들을 인식한 후 상품의 정보를
+      파악하여 유사한 상품을 구매할 수 있는 사이트에 연결해드립니다!
       또한, 마음에 드는 옷들을 저장하시면, 자신이 선택한 옷들로 직접 코디를 해볼 수도 있습니다!
       저희가 이 서비스를 만들게 된 동기는 자신이 보았던 옷들 중 마음에 드는 옷을 고른 후,
       그 옷의 정보를 알아 자신이 직접 코디하여 입으면 좋을 것 같다는 생각을 하였고, 이 서비스를 만들게 되었습니다.
       </pre>
-      <h2 style="color: #A566FF;">Division of roles</h2>
-      <pre style="color: #8041D9; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 30px;">
+      <h2 style="color: white;">Division of roles</h2>
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 30px; font-size: 18px;">
       김수현 학생은 전체적인 백을 맡았으며, 저장한 옷들을 인식하고 실제 옷들과의 유사도를 판별하는 기능을 구현하였습니다.
       박주영 학생은 전체적인 프론트를 맡았으며, 로고 제작 및 메인 홈페이지와 로그인, 회원가입 등의 홈페이지를 디자인했습니다.
       한슬희 학생은 드래그앤드롭에 대해 공부함으로써 유저가 사진을 직접 드래그하여 코디하는 기능을 구현하였고,
@@ -248,17 +253,23 @@ body {
   </div>
 
 
-<a href="{% url 'signin' %}" style="text-decoration:none;"><button type="button" class="btn btn-dark gotomainbutton">Go to Codiboogie!</button></a>
+<a href="{% url 'signin' %}" style="text-decoration:none;"><button type="button" class="btn btn-dark gotomainbutton"><strong>Go to Codiboogie!</strong></button></a>
 
 <hr class="horizen">
 
+<details style="display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+margin-bottom: 50px;
+cursor: pointer;">
+<summary style="line-height: 30px; font-size: 25px;">Codiboogie팀의 코딩일지를 확인해보세요!</summary>
 <div class="timeline">
   <div class="container right">
     <div class="content">
       <h2>20.08.04 첫번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0804.jpg' %}" alt="" width=200px; height=300px;>
-  <pre style="color: black; font-family: '123RF';
-  src:url('123RF.ttf'); line-height: 20px;">
+  <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   프론트와 백 역할 나누기
   front : 주영,수호,슬희
   back : 수현, 형준
@@ -274,8 +285,7 @@ body {
   <div class="container left">
     <div class="content">
       <h2>20.08.07 두번째 모임</h2>
-      <pre style="color: black; font-family: '123RF';
-      src:url('../fonts/123RF_123RF_TTF.ttf'); line-height: 20px;">
+      <pre style="color:white;; font-family: 'NanumBarunGothic'; line-height: 20px;">
       forms에 대해서 연구하기
       git 연습(다들 git 협력에 대해서 공부해오기)
       login form 꾸미기(ModelChoiceField로 할 예정)
@@ -290,8 +300,7 @@ body {
     <div class="content">
       <h2>20.08.11 세번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0811.jpg' %}" alt="" width=300px; height=300px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white;; font-family: 'NanumBarunGothic'; line-height: 20px;">
   슬희: 브랜치로 수정한 내용 pull request 합쳐보기
   각자 맡을 HTML 하나씩 부트스트랩 이용해 만들어보기
   수호: 수업내용 복습 겸 수현과 회원가입,로그인 구현
@@ -304,8 +313,7 @@ body {
     <div class="content">
       <h2>20.08.14 네번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0814.jpg' %}" alt="" width=200px; height=300px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   전체모임 전에 간단하게 모였음.
   수호 결석권 사용
   모델에서 birthdayfield라는거 써보려다가 잘 안돼서
@@ -321,8 +329,7 @@ body {
     <div class="content">
       <h2>20.08.18 다섯번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0818.jpg' %}" alt="" width=300px; height=300px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   수현, 형준: pdf파일을 받고 결제 전에는
   미리보기로 3페이지만 보이게 하고,
   결제를 하면 모든 페이지를 열람할 수 있는 기능 구현중
@@ -341,8 +348,7 @@ body {
     <div class="content">
       <h2>20.08.21 여섯번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0821.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   주영 결석권 사용
 
   수호: 유튜브 프론트 강의 10강 듣기(기초부족)
@@ -362,8 +368,7 @@ body {
   <div class="container right">
     <div class="content">
       <h2>20.08.25 일곱번째 모임</h2>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   아이디어 새로 구상
 
   처음 구상한 포트폴리오 공유 서비스
@@ -390,8 +395,7 @@ body {
     <div class="content">
       <h2>20.08.28 여덟번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0828.jpg' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   수현 : 이미지 배경 자동 지우기 구현중.
   지금은 open형식이라서 저장해야함.
   슬희, 주영 : 필요한 부트스트랩 테마 고르기, 로고디자인
@@ -404,9 +408,8 @@ body {
     <div class="content">
       <h2>20.09.01 아홉번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0901.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
-  수호: footer 디자인 고르기, trello 적기 인수인계
+      <pre style="color:white; font-family: 'NanumBarunGothic'; line-height: 20px;">
+  수호: footer 디자인 고르기, trelo 적기 인수인계
   수현: 카메라로 찍은 사진 상품검출(애먹다가 결국 해결)
   주영: main페이지 프론트 구현
   형준: 회원가입 로그인 수정
@@ -417,8 +420,7 @@ body {
     <div class="content">
       <h2>20.09.04 열번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0904.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   날씨를 메인으로 잡자니 메인기능으로
   선정하기에 어려움이 있어 아이디어 회의
 
@@ -448,8 +450,7 @@ body {
     <div class="content">
       <h2>20.09.08 열한번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0908.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color:white;font-family: 'NanumBarunGothic'; line-height: 20px;">
   형준: 크롤링 찾아서 넘겨주기
          클래스별로 상의, 하의 등 이미지들 받아오기
   수현: 딥러닝 유사이미지 학습 시키기
@@ -464,8 +465,7 @@ body {
     <div class="content">
       <h2>20.09.11 열두번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0911.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   형준, 수현: 옷 드래그하는거 크게 잡아서 만들어주기
   슬희: 드래그 앤 드롭
   주영: 마네킹 디자인과 밑에 넣을 광고배너 생각해보기
@@ -477,8 +477,7 @@ body {
     <div class="content">
       <h2>20.09.15 열세번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0915.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   모델 사이 관계 공부
   ex) 1:1 -> 학생 김수현 - 학번 201914009
   ex) 1:n -> 게시판의 글 - 여러 개의 댓글
@@ -499,8 +498,7 @@ body {
     <div class="content">
       <h2>20.09.18 열네번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0918.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   전체적인 데이터베이스 점검
 
   수현: 데이터 부풀리기란 과정으로
@@ -517,8 +515,7 @@ body {
     <div class="content">
       <h2>20.09.22 열다섯번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/0922.jpg' %}" alt="" width=300px; height=300px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   수현: 데이터 부풀리기 과정 진행 중
   수호: 다른 홈쇼핑 페이지와 비교 후 추가할 부분 찾기
   주영: 가격 계산하는 기능 공부
@@ -531,8 +528,7 @@ body {
     <div class="content">
       <h2>20.10.02 열여섯번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/1002.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
   수현: 픽셀상에 하얀색 배경이 아닌 다른 색의 배경이
         들어오면 정확도가 많이 떨어질 수 있으므로
         전처리 과정 공부 중임
@@ -547,8 +543,7 @@ body {
     <div class="content">
       <h2>20.10.06 스무번째 모임</h2>
       <img class="teampicture" src="{% static 'myapp/img/team/1006.png' %}" alt="" width=300px; height=200px;>
-      <pre style="color: black; font-family: '123RF';
-      src:url('123RF.ttf'); line-height: 20px;">
+      <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
     로그인-아웃과 회원가입 페이지 거의 완료.
     구체적인 구성이 조금 바뀌어 플로우차트 다시 짜기.
     가격 표시 기능도 추가하고 구매는 url을 주어서
@@ -557,10 +552,9 @@ body {
     </div>
   </div>
   <div class="container left">
-  <div class="lastcontent">
+  <div class="lastcontent" style="color: white;">
     <h2>20.10.16 스물세번째 모임</h2>
-    <pre style="color: black; font-family: '123RF';
-    src:url('123RF.ttf'); line-height: 20px;">
+    <pre style="color: white; font-family: 'NanumBarunGothic'; line-height: 20px;">
 수현: 이미지 정확도 높이기에 집중
 수호: 소개 페이지에 들어갈 글 작성
 주영: 검색결과, 소개 페이지 만들기
@@ -569,6 +563,7 @@ body {
   </pre>
   </div>
   </div>
+</details>
 
 </body>
 </html>

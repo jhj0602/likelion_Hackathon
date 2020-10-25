@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'deeplearning',
     'imageprocess',
     'django.contrib.humanize',
+    'imageprocess.templatetags.order_by',
+
+
 ]
 
 # for CELERY
