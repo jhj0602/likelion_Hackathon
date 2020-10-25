@@ -332,11 +332,12 @@ def avhash(request,image_count,class_list,sort=1):
     namelist =[]
     design_list = []
     k=[]
+    img_list = []
     for x in class_list:
         if sort==1:
             k = lotteData.objects.filter(category=x).order_by('lottePrice')
         elif sort==2:
-            k = lotteData.objects.filter(category=x).order_by('-lottePrice')
+            k = lotteData.objects.filter(category=x).order_by('-lottePrice')          
         search_list.append(k)
         img_list = k.values_list('lotteImage',flat = True)
     
@@ -351,7 +352,7 @@ def avhash(request,image_count,class_list,sort=1):
     print("실행시작1")
 
     def average_hash(fname, size=16):
-        print("버러지임?")
+        
         fname2 = os.path.basename(fname)
         #이미지 캐시하기
         print(fname2)
@@ -675,10 +676,16 @@ def avhash(request,image_count,class_list,sort=1):
             
             if diff_c >= 3:
                 print("여기면 통과한 이미지")
+                print(img_list)
+                print(k)
                 for x in img_list:
+                    print("여기가 x")
+                    print(x)
+                    print(fname)
                     if fname == x:
                         address.append(lotteData.objects.get(lotteImage=x))
                         ddd={lotteData.objects.get(lotteImage=x).pk :src_color2['rgb']}
+                        print("통과한 딕셔너리")
                         print(ddd)
                 c+=1
                 yield (diff_c, fname)
@@ -712,10 +719,11 @@ def avhash(request,image_count,class_list,sort=1):
             f=f.replace("\\",'/')
             f = '/'+f
             print(f)
+    print(address)
     for x in k:
         if x in address:
             pricelist.append(x)
     # if len(address)==0:
     #     return render(request, 'imageprocess/warningone.html')
-    
+    print(pricelist)
     return render(request, 'imageprocess/result.html', {'sim': sim,  'distance':distance, 'product':pricelist, 'kim':kim, 'soo':soo,'design_list':design_list})
