@@ -47,11 +47,12 @@
           <button class="btn btn-secondary my-2 my-sm-0" type="submit" value="Search">Search</button>
         </form>
      -->
-
+  {% if q %}
     <p class="pricebuttons"> 
-      <a href="{% url 'lowprice' %}" class="btn btn-primary" id="pricebutton" role="button">낮은 가격순</a>
-      <a href="{% url 'highprice' %}" class="btn btn-primary" id="pricebutton" role="button">높은 가격순</a>
+      <a href="{% url 'searchlowprice' s_data=q%}" class="btn btn-primary" id="pricebutton" role="button" >낮은 가격순</a>
+      <a href="{% url 'searchhighprice' s_data=q %}" class="btn btn-primary" id="pricebutton" role="button" >높은 가격순</a>
     </p>
+ {% endif %}
     <br>
     <br>
   <div class="productcontainer">

@@ -150,10 +150,38 @@ def search(request):
         lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('-id')
     else:
         return redirect('search')
+
     paginator = Paginator(lotteposts,20)
     page = request.GET.get('page')
     lotteposts = paginator.get_page(page)
     return render(request,'Lotte_datasetApp/search.html', {'lotteposts':lotteposts,'q':q} )
+
+def searchlowprice(request,s_data):#낮은 가격순
+    print(s_data)
+    q= s_data
+    print("되나용 씹ㄹ란여")
+    if q:
+        lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('lottePrice')
+    else:
+        return redirect('search')
+   
+    paginator = Paginator(lotteposts,20)
+    page = request.GET.get('page')
+    lotteposts = paginator.get_page(page)
+    return render(request, 'Lotte_datasetApp/search.html',{ 'lotteposts' : lotteposts ,'q':q})
+
+
+def searchhighprice(request,s_data):#높은 가격순
+    q= s_data
+    if q:
+        lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('-lottePrice')
+    else:
+        return redirect('search')
+
+    paginator = Paginator(lotteposts,20)
+    page = request.GET.get('page')
+    lotteposts = paginator.get_page(page)
+    return render(request, 'Lotte_datasetApp/search.html',{ 'lotteposts' : lotteposts ,'q':q})
 
 
 def save_test():
