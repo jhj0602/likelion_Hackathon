@@ -58,5 +58,9 @@ urlpatterns = [
 
     path('highprice', Lotte_datasetApp.views.highprice, name="highprice"),
     path('lowprice', Lotte_datasetApp.views.lowprice, name="lowprice"),
+    
     path('search', Lotte_datasetApp.views.search, name="search"),
+    path('searchlowprice/<str:s_data>/', Lotte_datasetApp.views.searchlowprice, name="searchlowprice"),
+    path('searchhighprice/<str:s_data>/', Lotte_datasetApp.views.searchhighprice, name="searchhighprice"),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
