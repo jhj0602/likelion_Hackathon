@@ -6,14 +6,14 @@
 	<meta charset="UTF-8">
 	<title>My Codi</title>
 	<style>
-	.logo {
-    	width: 400px;
-    	height: 110px;
-    	display: table;
-    	margin-left: auto;
-    	margin-right: auto;
-    	margin-top: 10px;
-  		}
+		.logo {
+			width: 400px;
+			height: 110px;
+			display: table;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+		}
 
 		div {
 			width: 150px;
@@ -44,63 +44,61 @@
 
 		@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
-.preserve-3d {
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-}
+		.preserve-3d {
+			transform-style: preserve-3d;
+			-webkit-transform-style: preserve-3d;
+		}
 
 
-@media screen and (max-width: 1260px) {
-    .back {
-        width: 50%;
-    }
-}
+		@media screen and (max-width: 1260px) {
+			.back {
+				width: 50%;
+			}
+		}
 
-@media screen and (max-width: 840px) {
-    .back {
-        width: 100%;
-    }
-}
+		@media screen and (max-width: 840px) {
+			.back {
+				width: 100%;
+			}
+		}
 
-.button_base {
-    margin: 0;
-    border: 0;
-    font-size: 18px;
-    position: relative;
-    top: 310%;
-    right: 100%;
-    margin-top: -25px;
-    margin-left: -100px;
-    width: 200px;
-    height: 50px;
-    text-align: center;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-user-select: none;
-    cursor: default;
-}
+		.button_base {
+			margin: 0;
+			border: 0;
+			font-size: 18px;
+			position: relative;
+			top: 310%;
+			right: 100%;
+			margin-top: -25px;
+			margin-left: -100px;
+			width: 200px;
+			height: 50px;
+			text-align: center;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-user-select: none;
+			cursor: default;
+		}
 
-.button_base:hover {
-    cursor: pointer;
-}
+		.button_base:hover {
+			cursor: pointer;
+		}
 
-/* ### ### ### 01 */
-.b01_simple_rollover {
-	margin-top:10px;
-	margin-left: 10px;
-    color: #000000;
-    border: #000000 solid 1px;
-    padding: 10px;
-    background-color: #ffffff;
-}
+		/* ### ### ### 01 */
+		.b01_simple_rollover {
+			margin-top: 10px;
+			margin-left: 10px;
+			color: #000000;
+			border: #000000 solid 1px;
+			padding: 10px;
+			background-color: #ffffff;
+		}
 
-.b01_simple_rollover:hover {
-    color: #ffffff;
-    background-color: #747474;
-}
-
-
+		.b01_simple_rollover:hover {
+			color: #ffffff;
+			background-color: #747474;
+		}
 	</style>
 </head>
 
@@ -110,40 +108,42 @@
 	<form method="post">
 		<div class="mycodi">
 			{% csrf_token %}
-			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)" draggable="true" ondragstart="drag2(event)">TOP</div>
-			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">BOTTOM</div>
-			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
-			<div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
-		
+			<!-- ondragstart가 drag2이면 bottom처럼 올릴때는 아무것도 없다가 다시 돌려놓으면 3 -->
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품1</div> 
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품2</div>
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품3</div>
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품4</div>
+
 		</div>
-	<!-- <div class="back"> -->
-		<input class="b01_simple_rollover" type="submit" value="저장" onclick="alerttest()" ></input>
-	<!-- </div> -->
+		<!-- <div class="back"> -->
+		<input class="b01_simple_rollover" type="submit" value="저장" onclick="alerttest()"></input>
+		<!-- </div> -->
 	</form>
-	
+
 
 	{% for d  in cart_item%}
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
-		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" title="true" draggable="true" ondragstart="drag(event)">
+		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" title="true" draggable="true"
+			ondragstart="drag(event)">
 	</div>
-	
+
 
 	<!-- <div ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 	{% endfor %}
-	
-	
 
 
-	
+
+
+
 	<script language="javascript">
 
-		function alerttest(){
-  
-			  alert("코디가 저장되었습니다.");
-  
+		function alerttest() {
+
+			alert("코디가 저장되었습니다.");
+
 		}
-  
-   </script>
+
+	</script>
 
 	<script>
 		function dragEnter(ev) {
@@ -151,45 +151,60 @@
 		}
 
 		function drag(ev) {
-			ev.dataTransfer.setData("text", ev.target.id);
-			ev.dataTransfer.setData("class",ev.target.class);
 			
+			ev.dataTransfer.setData("text", ev.target.id);
+			ev.dataTransfer.setData("class", ev.target.class);
+
 		}
-		function drag2(ev){
-			ev.dataTransfer.setData("class",ev.target.class);
+		function drag2(ev) {
+			alert(2);
+			ev.dataTransfer.setData("class", ev.target.class);
 		}
 
 		function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var img = ev.currentTarget.querySelector("img");
-	
-	var class_name =ev.dataTransfer.getData("class");
-	var url = "{% url 'imagenaming' 123 %}";
-	// alert(data);
-	
-    if(img) {
-        document.getElementById(data).parentNode.appendChild(img);
-    }
-    ev.currentTarget.appendChild(document.getElementById(data));
-	// document.location.href = url.replace('123', data.id);
+			alert(3);
+			ev.preventDefault();
+			
+			var data = ev.dataTransfer.getData("text");
+			var img = ev.currentTarget.querySelector("img");
+			var z = document.createElement('p');
+			var obj = JSON.stringify(data);
+			z.innerHTML =obj;
+			document.body.removeChild(z);
+			console.log(document.body);
+			var class_name = ev.dataTransfer.getData("class");
+			var url = "{% url 'imagenaming' 123 %}";
+			// alert(data);
+			if (img) {
+				console.log(document.getElementById(data).parentNode);
+				document.getElementById(data).parentNode.appendChild(img);
+			}
+			ev.currentTarget.appendChild(document.getElementById(data));
+			// document.location.href = url.replace('123', data.id);
 		}
-	
-	
-	function drop2(ev){
-	
-	ev.preventDefault();
-	var data = ev.dataTransfer.getData("text");
-    var img = ev.currentTarget.querySelector("img");
-	var class_name =ev.dataTransfer.getData("class");
-	if(img) {
-        document.getElementById(data).parentNode.appendChild(img);
-    }
-    ev.currentTarget.appendChild(document.getElementById(data));
-	// document.location.href = url.replace('123', data.id);
-		
-	}
-		
+
+
+		function drop2(ev) {
+
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			var img = ev.currentTarget.querySelector("img");
+			var class_name = ev.dataTransfer.getData("class");
+			
+			var z = document.createElement('p');
+			var obj = JSON.stringify(data);
+			z.innerHTML =obj;
+			document.body.appendChild(z);
+			console.log(document.body);
+			console.log(document.getElementById(data).parentElement);
+			if (img) {
+				document.getElementById(data).parentNode.appendChild(img);
+			}
+			ev.currentTarget.appendChild(document.getElementById(data));
+			// document.location.href = url.replace('123', data.id);
+
+		}
+
 	</script>
 
 </body>

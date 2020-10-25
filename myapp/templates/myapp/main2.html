@@ -65,9 +65,16 @@
     <br>
 
     <div class="closet">
-     
-        <img src="{{imagename}}" />
-        <img src="{% static 'myapp/img/main/마네킹.jpg' %}" />
+      {% if imagename %}
+        {% for x in imagename %}
+        <img src="{{x.image.url}}" />
+        {% endfor %}
+      
+      {% else %}
+      <img src="{% static 'myapp/img/main/마네킹.jpg' %}" />
+      <img src="{% static 'myapp/img/main/마네킹.jpg' %}" />
+      <img src="{% static 'myapp/img/main/마네킹.jpg' %}" />
+      {% endif %}
         
     </div>
 
