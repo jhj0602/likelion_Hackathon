@@ -468,34 +468,13 @@ def avhash(request,image_count,class_list,sort=1):
             
             
         design_list.append('#' + hex(c_r)[2:].zfill(2) + hex(c_g)[2:].zfill(2) + hex(c_b)[2:].zfill(2))
-        # count_b=0
-        # count_g=0
-        # count_r=0
 
-        # for k in color_temp[0][0]:
-        #     b=k[0]
-        #     g=k[1]
-        #     r=k[2]
-        #     # design_list.append('#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2))
-        #     if c_b <= b+10 or c_b>= b-10:
-        #         sumb+=b
-        #         count_b+=1
-        #     if c_g <= g+10 or c_g>= g-10:
-        #         sumg+=g
-        #         count_g+=1
-        #     if c_r <= r+10 or c_r>= r-10:
-        #         sumr+=r
-        #         count_r+=1
-        # r = sumr//count_r
-        # b = sumb//count_b
-        # g = sumg//count_g
         print('rgb값')
         
         reallist = [c_r,c_g,c_b]
         print(reallist)
         print('#' + hex(c_r)[2:].zfill(2) + hex(c_g)[2:].zfill(2) + hex(c_b)[2:].zfill(2))
         text = '#' + hex(c_r)[2:].zfill(2) + hex(c_g)[2:].zfill(2) + hex(c_b)[2:].zfill(2)
-        # design_list.append('#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2))
         print('hsvdist 함수 끝남')
         return reallist
         
@@ -585,18 +564,10 @@ def avhash(request,image_count,class_list,sort=1):
                 except:
                     color_v.append(0)
 
-
-
-
             for y in color_h: # h리스트 5개 짜리
-                
                 for z in zip(h,s,v):
                     try:
                         if (y[0] == z[0]):
-                            # print(z)
-                            # print(color_s[0][0])
-                            # print(color_v[0][0])
-                            # if (z[1] == color_s[0][0] and z[2] == color_v[0][0]):
                             print(z)
                             color_hsv.append([z[0],z[1],z[2]])
                     except:
@@ -606,29 +577,12 @@ def avhash(request,image_count,class_list,sort=1):
                             color_hsv.append([0,0,0])
             
             print(color_hsv)
-            # for x in range(5):
-            #     color.append(hsv_dict[x])
-            # print(color)
+
             return color_hsv
-            # h_dict = {}
-            # color_h = []
-            # h, cnts = np.unique(h,return_counts=True)
-            # h_dict = dict(zip(h,cnts))
-            # h_dict = sorted(h_dict.items(), key=(lambda x:x[1]), reverse=True)
-            # color_hsv=[]
-            # for x in range(5):
-            #     color_h.append(h_dict[x])
-            # for y in color_h:
-            #     for a,b,c in zip(h,s,v):
-            #         if a==y:
-            #             color_hsv.append(tuple(a,b,c))
-            # print(color_hsv)
-            return color # 여기에 파일 입출력으로 캐시파일 만들기
-            # np.savetxt(cache_file, px , fmt ="%.0f", delimiter=",")
+
         else:
             img = cv2.imread(fname, cv2.IMREAD_COLOR)
             print(fname)
-            print("hsv 왜 안먹는데")
             img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
             h,s,v = cv2.split(img_hsv)
             
@@ -680,11 +634,7 @@ def avhash(request,image_count,class_list,sort=1):
             #     color.append(hsv_dict[x])
             # print(color)
             return color_hsv
-            # px = np.loadtxt(cache_file, delimiter=",") # 캐시파일 불러오기
-            
-        # return px
-        
-        return "빈도가 제일 높은 hsv 칼라 특히 h"
+
     # 모든 폴더에 처리 적용하기
     def enum_all_files(path):
         for root, dirs, files in os.walk(path):
@@ -762,10 +712,6 @@ def avhash(request,image_count,class_list,sort=1):
             f=f.replace("\\",'/')
             f = '/'+f
             print(f)
-            # address.append(f)
-            # namelist.append(os.path.basename(f))
-            # distance.append(r)
-        # img_list = address.values_list('lotteImage',flat = True)
     for x in k:
         if x in address:
             pricelist.append(x)
