@@ -15,7 +15,8 @@
   </head>
   <body>
 
-    <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+    <a href="{% url 'main2' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+    
 
     <div id="mypageid">
     <div class="tomypage">
@@ -33,7 +34,7 @@
           <div class="card-header text-light" id="cardheader" style="background-color: black;">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               Shopping cart
-              <a href="main.html" class="btn btn-outline-info btn-sm pull-right" id="gotomain">Go to mainpage</a>
+              <a href="{%url 'main2' %}" class="btn btn-outline-info btn-sm pull-right" id="gotomain">Go to mainpage</a>
               <div class="clearfix"></div>
           </div>
         
@@ -58,8 +59,11 @@
                           <div class="col-4 col-sm-4 col-md-4">
                              
                           </div>
+                          <h1>
+                            
+                          </h1>
                           <div class="col-2 col-sm-2 col-md-2 text-right">
-                            <a href="{% url 'delete_cart_item' c.product.id %}" role="button">   <button type="button" class="btn btn-outline-danger btn-xs">
+                            <a href="{% url 'delete_cart_item' c.product.id %}" role="button" onclick="return confirm('정말 삭제하시겠습니까?')" >   <button type="button" class="btn btn-outline-danger btn-xs">
                               <i class="fa fa-trash" aria-hidden="true" href="{% url 'delete_cart_item' c.product.id %}"></i>
                           </button>
                         </a>

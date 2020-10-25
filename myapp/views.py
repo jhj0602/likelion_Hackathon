@@ -34,18 +34,10 @@ def main2(request):
         return redirect('signin')
     else:
         users = CustomUser.objects.all()
-        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=1acc16a96aa8764e33997f3c2ac1a09c'
-        city = 'busan'
-        city_weather = requests.get(url.format(city)).json() #request the API data and convert the JSON to Python data types
-        weather = {
-            'city' : city,
-            'temperature' : round((city_weather['main']['temp'] - 32)/1.8,1),
-            'description' : city_weather['weather'][0]['description'],
-            'icon' : city_weather['weather'][0]['icon']
-        }
-        context = {'weather' : weather,
-        'users': users}
-        
+        index = [1,1,1]
+        context = {
+        'users': users,
+        'index':index}
         return render(request, 'myapp/main2.html',context)
     
     
@@ -102,7 +94,7 @@ def crowling(request):
         
 
 def add_cart(request, product_pk):
-    print("씨발")
+    
 	# 상품을 담기 위해 해당 상품 객체를 product 변수에 할당
     product = lotteData.objects.get(pk=product_pk)
     print(product.lotteImage)
@@ -110,7 +102,7 @@ def add_cart(request, product_pk):
     try:
     	# 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
         cart = CartItem.objects.get(product=product, user=request.user)
-        print("씨발")
+       
         if cart:
             if cart.product.lotteName == product.lotteName:
                 cart.quantity += 1
@@ -181,22 +173,24 @@ def imagenaming(request,data):
     return data
 
 def inform(request):
-    username = request.user.name
-    password = request.user.password
-    phone_number = request.user.phone_number
-    gender = request.user.gender
-    address = request.user.address
-    user = request.user
-    print(user.username)
-    form = UserForm(instance=user)
-    my_inform = {
-                 'username':username,
-                 'password':password,
-                 'phone_number':phone_number,
-                 'gender':gender,
-                 'address':address,    
-                }
-    return render(request, 'myapp/inform.html',my_inform)
+    if request.method =='POST':
+        user = request.user
+        phone_number = request.POST.get('phone_number')
+        username = request.POST.get('username')
+        new_user_pw = request.POST.get('password')
+        name = request.POST.get('name')
+        
+        user.phone_number = phone_number
+        user.username = username
+        user.name = name
+        user.set_password(new_user_pw)
+        user.save()
+
+
+        return redirect('main2')
+
+  
+    return render(request, 'myapp/inform.html')
 
 def introduce(request):
     return render(request, 'myapp/introduce.html')

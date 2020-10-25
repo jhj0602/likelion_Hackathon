@@ -9,59 +9,82 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <a href="main.html"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+    <a href="{%url 'main2' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
+
     <div class="topnav">
-      <a href="basket.html">
+      <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+        <input class="form-control mr-sm-2" type="text" name="q" placeholder="검색어를 입력하세요">
+         
+     
+          <button class="" id="searchbutton" type="submit" value="Search">Search</button>
+        </form>
+        {% if user %}
+      <a href="{%url 'my_cart'%}">
         <svg class="carticon" viewBox="0 0 16 16" class="bi bi-cart4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+        </svg> "
+      </a>
+      {% else %}
+      <a href="{%url 'signin' %}" onclick="return confirm('로그인이 필요합니다 이동하시겠습니까?')" >
+        <svg class="carticon" viewBox="0 0 16 16" class="bi bi-cart4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+        </svg> 
+      </a>
+      {% endif %}
+      <a href="{% url 'logout' %}"  onclick="return confirm('로그아웃 하시겠습니까?')" >
+        <svg class="carticon" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+          <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
         </svg>
       </a>
+      
     </div>
-
     <hr class="hr1">
 
-       <h1 class="searchtext">Search results</h1>
+       <h1 class="searchtext">Search results : {{q}}</h1>
        <!-- <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
         <input class="form-control mr-sm-2" type="text" name="q" placeholder="검색어를 입력하세요">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit" value="Search">Search</button>
         </form>
      -->
-
+  {% if q %}
     <p class="pricebuttons"> 
-      <a href="{% url 'lowprice' %}" class="btn btn-primary" id="pricebutton" role="button">낮은 가격순</a>
-      <a href="{% url 'highprice' %}" class="btn btn-primary" id="pricebutton" role="button">높은 가격순</a>
+      <a href="{% url 'searchlowprice' s_data=q%}" class="btn btn-primary" id="pricebutton" role="button" >낮은 가격순</a>
+      <a href="{% url 'searchhighprice' s_data=q %}" class="btn btn-primary" id="pricebutton" role="button" >높은 가격순</a>
     </p>
-
+ {% endif %}
+    <br>
+    <br>
   <div class="productcontainer">
     {% if lotteposts %}
+    <div class="row search">
     {%for l in lotteposts%}
-    <div class="row" id="product">
-        <div class="col-sm-6 col-md-4">
-          <div class="thumbnail">
-            <img src="/media/{{l.lotteImage}}" alt="..." width="300">
-            <div class="caption">
-              <p class="category">카테고리 : {{l.category}}</p>
-              <h5>상품 이름 : {{l.lotteName}}</h5>
-              <p>가격 : {{l.lottePrice}}</p>
-              <p action="POST" name="searchtitle">검색어 : {{l.search_lotte}}</p>
-              <p>
-                <a href="{% url 'add_cart' l.id %}" class="btn btn-primary" id="cartbutton" role="button">장바구니담기</a>
-                <a href="{{l.lotteUrl}}" class="btn btn-primary" id="gototheproductpage" role="button">상품 보러가기</a>
-              </p>
-            </div>
+
+      <div class="col-sm-7 col-md-4" >
+        <div class="thumbnail search-con-div" >
+          <img src="/media/{{l.lotteImage}}" alt="...">
+          <div class="caption">
+            <p class="category" style="text-align: center;">카테고리 : {{l.category}}</p>
+              <p style="text-align: center;"><strong>상품 이름 : {{l.lotteName}}</strong></p>
+              <p class="productprice" style="text-align: center;">가격 : {{l.lottePrice}}</p>
+            <div class="button-sort"><a href="{% url 'add_cart' l.id %}" class="btn btn-dark" role="button">장바구니담기</a> <a href="{{l.lotteUrl}}" class="btn btn-dark" role="button">상품 보러가기</a></div>
           </div>
+          <br>
         </div>
+        <br>  <br>
       </div>
-    {% endfor %}
-  <div class="pagenumber">
+   
+   
+    {% endfor %} </div>
+  <div class="pagenumber" style="text-align: center;">
     {% if lotteposts.has_other_pages %}
     {%if lotteposts.has_previous%}
         {% if q %}
-            <a href="?q={{q}}&page=1">1</a>
-            <a href="?q={{q}}&page={{lotteposts.previous_page_number}}">이전</a>
+            <a href="?q={{q}}&page=1" class="btn-dark"id="lastbutton" role="button">1</a>
+            <a href="?q={{q}}&page={{lotteposts.previous_page_number}}" class="btn-dark"id="lastbutton" role="button">이전</a>
         {% else %}
-        <a href="?page=1">1</a>
-        <a href="?page={{lotteposts.previous_page_number}}">이전</a>
+        <a href="?page=1" class="btn-dark"id="lastbutton" role="button" >1</a>
+        <a href="?page={{lotteposts.previous_page_number}} "class="btn-dark"id="lastbutton" role="button" >이전</a>
         {% endif %}
     {%endif%}
     <span>{{lotteposts.number}}</span>
@@ -70,13 +93,13 @@
     {%if lotteposts.has_next%}
         {% if q %}
         <div class="nextandlastbutton">
-        <a href="?q={{q}}&page={{lotteposts.next_page_number}}" class="btn btn-dark" id="nextbutton" role="button" >다음</a>
-        <a href="?q={{q}}&page={{lotteposts.paginator.num_pages}}" class="btn btn-dark"id="lastbutton" role="button">마지막</a>
+        <a href="?q={{q}}&page={{lotteposts.next_page_number}}" class="btn-dark" id="nextbutton" role="button" >다음</a>
+        <a href="?q={{q}}&page={{lotteposts.paginator.num_pages}}" class="btn-dark"id="lastbutton" role="button">마지막</a>
         </div>
         {% else %}
         <div class="nextandlastbutton">
-        <a href="?page={{lotteposts.next_page_number}}">다음</a>
-        <a href="?page={{lotteposts.paginator.num_pages}}">마지막</a>
+        <a href="?page={{lotteposts.next_page_number}} " class="btn-dark"id="lastbutton" role="button">다음</a>
+        <a href="?page={{lotteposts.paginator.num_pages}}" class="btn-dark"id="lastbutton" role="button">마지막</a>
         </div>
         {%endif%}
     {%endif%}
@@ -85,67 +108,7 @@
   {% endif %}
 {% else %}
 <h4>검색결과가 없습니다...</h4>
-
 {% endif %}
-
-<div class="tomypage">
-  <img src="{% static 'myapp/img/main/tomypage.jpg' %}" alt="tomypage" class="tomypage">
-  <div class="overlay1">
-    <a href="{%url 'mypage' %}" class="icon" title="To mypage">
-      <i class="fa fa-user"></i>
-    </a>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-      <div class="row">
-        <div class="col-sm-4">
-          <h4 class="title">Codieboogie</h4>
-          <p>성공회대학교 멋쟁이 사자처럼 8기</p>
-          <p>대표: 김수현</p>
-          <p>팀원: 박주영, 한슬희, 정수호, 진형준</p>
-          <p>E-mail: sss4920@likelion.org</p>
-          <p>사업자등록번호: 326-41-48251</p>
-    
-        </div>
-      <div class="col-sm-4">
-          <h4 class="title">고객만족센터</h4>
-          <p>● 운영시간 평일(월~금): 9:00~20:00</p>
-          <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;토요일: 9:00~13:00</p>
-          <p>● 문의전화 &nbsp;010-4037-4920</p>
-          <p>● 부정비리 신고 E-mail: 3021062@gmail.com</p>
-
-          </div>
-
-  
-          <div class="col-sm-3">
-            <h4 class="title">My Account</h4>
-            <ul class="social-icon">
-              <span class="acount-icon">          
-               
-                <a href="#"><i class="fa fa-heart" aria-hidden="true"></i> Wish List</a>
-                <a href="basket"><i class="fa fa-cart-plus" aria-hidden="true"></i> Cart</a>
-                <a href="inform"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
-                <a href="introduce"><i class="fa fa-globe" aria-hidden="true"></i> instruction</a>           
-          
-              </span>
-              <a href="#" class="social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-              <a href="#" class="social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-              <a href="#" class="social"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-              <a href="#" class="social"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-              <a href="#" class="social"><i class="fa fa-google" aria-hidden="true"></i></a>
-              <a href="#" class="social"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-              </ul>
-            </div>
-      </div>
-      <hr>
-      
-      <div class="row text-center"> © 2020. Made with by likelion8th.</div>
-      </div>
-      
-      
-  </footer>
 
       </body>
     </html>

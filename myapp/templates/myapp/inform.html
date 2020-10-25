@@ -41,19 +41,7 @@
   		<div class="col-sm-3"><!--left col-->
               
 
-      <!-- <div class="text-center">
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block file-upload">
-      </div></hr><br>
-
-               
-          <div class="panel panel-default">
-            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
-          </div> -->
-          
-          
+    
      
           
         </div>
@@ -67,57 +55,59 @@
           <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+
+                  <form class="form"  method="POST" id="registrationForm">
+                    {% csrf_token %}
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="first_name"><h4>name</h4></label>
-                             {{form.name}}
+                              <label for="first_name"><h4>ID</h4></label>
+                              <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}"> 
+                             
                           </div>
                       </div>
                       <div class="form-group">
                           
                         <div class="col-xs-6">
                             <label for="password"><h4>Password</h4></label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="변경할 비밀번호를 입력하세요.">
                         </div>
                     </div>
               
-                    
           
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="phone"><h4>Phonenumber</h4></label>
-                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                              <input type="text" class="form-control" name="phone_number" id="phone" placeholder="enter phone" title="enter your phone number if any." value="{{ user.phone_number }}" >
                           </div>
                       </div>
           
                       <div class="form-group">
                           <div class="col-xs-6">
                              <label for="mobile"><h4>gender</h4></label>
-                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="male? female?" title="enter your mobile number if any.">
+                              <input type="text" class="form-control" name="gender" id="gender" placeholder="male? female?" title="enter your mobile number if any." value="{{ user.gender }}" >
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                              <label for="name"><h4>name</h4></label>
+                              <input type="name" class="form-control" name="name" id="name" placeholder="you@email.com" title="enter your email." value="{{ user.name }}" >
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>address</h4></label>
-                              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                              <label for="name"><h4>address</h4></label>
+                              <input type="name" class="form-control" id="location" placeholder="somewhere" title="enter a location"  value="{{ user.address }}">
                           </div>
                       </div>
 
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
-                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign" onclick="return confirm('정말 수정하시겠습니까?')" ></i> Save</button>
                                	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                             </div>
                       </div>

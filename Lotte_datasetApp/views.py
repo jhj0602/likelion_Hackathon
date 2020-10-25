@@ -11,7 +11,7 @@ import time
 from django.core.paginator import Paginator
 
 def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product_dir,category):
-    print("씨발")
+  
     lotte = lotteData()
     if category == "아우터":
         category = "outer"
@@ -50,11 +50,11 @@ def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product
 def lotteproduct(request):
     if request.method =='POST':
         gender = request.POST['search']
-        product_dir = str('pants'+'/')
+        product_dir = str('t-shirts'+'/')
         baseUrl1 = '&page='
         baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
-        search_Image = "바지"
-        plusUrl = "바지"
+        search_Image = "티셔츠"
+        plusUrl = "티셔츠"
         category = search_Image
        
         url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)
@@ -109,7 +109,7 @@ def lotteproduct(request):
             urlretrieve(image2,'media/images/'+product_dir + lotte_image_name)
         
             lotte_Data(searchtitle,lotte_image_name,buyurl2,Lottetitle,Lotteprice3,product_dir,category)
-            print("씨발")
+          
             n=n+1
             # except:
             #     print('media/images/'+product_dir + lotte_image_name)
@@ -150,10 +150,38 @@ def search(request):
         lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('-id')
     else:
         return redirect('search')
-    # paginator = Paginator(lotte,3)
-    # page = request.GET.get('page')
-    # lotteposts = paginator.get_page(page)
+
+    paginator = Paginator(lotteposts,20)
+    page = request.GET.get('page')
+    lotteposts = paginator.get_page(page)
     return render(request,'Lotte_datasetApp/search.html', {'lotteposts':lotteposts,'q':q} )
+
+def searchlowprice(request,s_data):#낮은 가격순
+    print(s_data)
+    q= s_data
+    print("되나용 씹ㄹ란여")
+    if q:
+        lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('lottePrice')
+    else:
+        return redirect('search')
+   
+    paginator = Paginator(lotteposts,20)
+    page = request.GET.get('page')
+    lotteposts = paginator.get_page(page)
+    return render(request, 'Lotte_datasetApp/search.html',{ 'lotteposts' : lotteposts ,'q':q})
+
+
+def searchhighprice(request,s_data):#높은 가격순
+    q= s_data
+    if q:
+        lotteposts = lotteData.objects.filter(lotteName__icontains=q).order_by('-lottePrice')
+    else:
+        return redirect('search')
+
+    paginator = Paginator(lotteposts,20)
+    page = request.GET.get('page')
+    lotteposts = paginator.get_page(page)
+    return render(request, 'Lotte_datasetApp/search.html',{ 'lotteposts' : lotteposts ,'q':q})
 
 
 def save_test():
