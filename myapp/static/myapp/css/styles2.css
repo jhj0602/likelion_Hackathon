@@ -16,6 +16,10 @@ body {
   margin-right: auto;
   margin-top: 10px;
 }
+.hr1 {
+  border: 2px solid black;
+}
+
 
 .topnav {
   font-family: 'NanumBarunGothic';
@@ -118,12 +122,12 @@ body {
 #centerproduct {
   font-family: 'NanumBarunGothic';
   float: left;
-  width:  23%;
+  width:  30%;
   height: 600px;
   box-sizing: border-box;
   background-color: white;
   border: 2px solid black;
-  padding: 20px;
+  padding: 30px;
   margin-top: 30px;
   margin-bottom: 30px;
   margin-left: 8px;
@@ -133,14 +137,14 @@ body {
 #cartbutton {
   width: 150px;
   height: auto;
-  line-height: 30px;
+  line-height: 20px;
   border: none;
 }
 
 #gototheproductpage {
   width: 150px;
   height: auto;
-  line-height: 30px;
+  line-height: 20px;
   border: none;
 }
 
@@ -222,3 +226,19 @@ body {
   color: black;
 }
 
+/* @media */
+.search-con-div{
+  text-align: center;
+  width: 70%;
+}
+
+.search .button-sort  {
+  display: flex;
+  /* padding: 0 50% 0 0; */
+}
+
+.search .button-sort a{
+  width: 200px;
+  margin: 0 5px;
+  justify-content: left;
+}
