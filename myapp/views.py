@@ -34,18 +34,10 @@ def main2(request):
         return redirect('signin')
     else:
         users = CustomUser.objects.all()
-        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=1acc16a96aa8764e33997f3c2ac1a09c'
-        city = 'busan'
-        city_weather = requests.get(url.format(city)).json() #request the API data and convert the JSON to Python data types
-        weather = {
-            'city' : city,
-            'temperature' : round((city_weather['main']['temp'] - 32)/1.8,1),
-            'description' : city_weather['weather'][0]['description'],
-            'icon' : city_weather['weather'][0]['icon']
-        }
-        context = {'weather' : weather,
-        'users': users}
-        
+        index = [1,1,1]
+        context = {
+        'users': users,
+        'index':index}
         return render(request, 'myapp/main2.html',context)
     
     

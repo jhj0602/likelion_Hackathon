@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.item1 { grid-area: header; }
+.item2 { grid-area: menu;}
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'main main menu menu menu menu'
+    'footer footer menu menu menu menu';
+  grid-gap: 10px;
+  /* background-color: #2196F3; */
+  padding: 10px;
+  height: 700px;
+}
+
+.grid-container > div {
+  background-color: darkgray;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+  .grid-container > .item2 > div {
+    width: 150px;
+    height: 180px;
+    margin: 10px;
+    padding: 10px;
+    border: solid 3px #D1B2FF;
+    float: left;
+}
+
+.mycodi {
+    width: 400px;
+    height: 500px;
+    margin: 10px;
+    padding: 10px;
+    border: solid 4px #A566FF;
+    float: left;
+    background-color: #E8D9FF;
+}
+
+.mycodii {
+    background-color: #ffffff;
+    border: none;
+    width: 160px;
+    height: 200px;
+}
+
+</style>
+</head>
+<body>
+<div class="grid-container">
+    <div class="item2">
+        <!-- <div class="mycodi">
+            <div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">TOP</div>
+            <div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BOTTOM</div>
+            <div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">SHOES</div>
+            <div class="mycodii" ondrop="drop(event)" ondragover="dragEnter(event)">BAG</div>
+        </div> -->
+        {% for c in cart_item %}
+        <div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
+            <img id="top1" width="140" height="170" src="/media/{{c.product.musinsaImage}}" draggable="true" ondragstart="drag(event)">
+        </div>
+        {% endfor %}
+        
+    
+
+    </div>
+    <div class="item3" onclick="location.href='/mypage'">detail</div>
+    <div class="item5" onclick="location.href='/mypage_drag'">mypage</div>
+    
+    
+</div>
+      
+<script>
+    function dragEnter(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+ev.preventDefault();
+var data = ev.dataTransfer.getData("text");
+var img = ev.currentTarget.querySelector("img");
+if(img) {
+    document.getElementById(data).parentNode.appendChild(img);
+}
+ev.currentTarget.appendChild(document.getElementById(data));
+    }
+    
+</script>
+</body>
+</html>

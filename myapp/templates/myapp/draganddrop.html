@@ -106,7 +106,7 @@
 
 <body>
 	<a href="{%url 'main2' %}"><img class="logo" src="{% static 'myapp/img/main/로고.jpg' %}" alt=""></a>
-	<hr style="border: 2px solid black;">
+	<hr style=" border: 2px solid black;">
 	<form method="post">
 		<div class="mycodi">
 			{% csrf_token %}
@@ -121,13 +121,15 @@
 	<!-- </div> -->
 	</form>
 	
-
+	
 	{% for d  in cart_item%}
+	{%if user == d.user%}
+	
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
 		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" title="true" draggable="true" ondragstart="drag(event)">
 	</div>
 	
-
+	{%endif%}
 	<!-- <div ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 	{% endfor %}
 	
