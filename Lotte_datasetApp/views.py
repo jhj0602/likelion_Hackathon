@@ -50,11 +50,11 @@ def lotte_Data(searchtitle,lotte_image_name,buyurl,Lottetitle,Lotteprice,product
 def lotteproduct(request):
     if request.method =='POST':
         gender = request.POST['search']
-        product_dir = str('pants'+'/')
+        product_dir = str('tote bag'+'/')
         baseUrl1 = '&page='
         baseUrl = 'https://www.lotteon.com/search/search/search.ecn?render=search&platform=pc&q='
-        search_Image = "바지"
-        plusUrl = "바지"
+        search_Image = "토트백"
+        plusUrl = "토트백"
         category = search_Image
        
         url = baseUrl + quote_plus(plusUrl) + baseUrl1 + str(1)
@@ -139,7 +139,7 @@ def highprice(request):#높은 가격순
     return render(request, 'Lotte_datasetApp/lotteproduct.html',{ 'lotteposts' : lotteposts })
 
 
-   # for i in range(1,2):
+#    for i in range(1,6):
 
 #     lotteproduct(i) #수현이가 말한 크롤링 함수 반복문
 
