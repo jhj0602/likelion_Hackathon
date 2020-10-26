@@ -49,7 +49,7 @@ def show_products(image_url, detection_result):
         image_path = 'media/images/temp/' + str(obj['class']) + '.jpeg'
         image_path_list.append(image_path)
         croped_image.save(image_path)
-        croped_image.show() #내컴퓨터에서 사진파일 실행
+        # croped_image.show() #내컴퓨터에서 사진파일 실행
     del draw
 
 
