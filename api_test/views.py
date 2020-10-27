@@ -6,7 +6,7 @@ import requests
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-from myapp.models import itemsaved,wear_mywear
+from myapp.models import itemsaved
 from matplotlib import pyplot as plt
 from myapp.models import CustomUser
 from django.contrib.auth import login, authenticate

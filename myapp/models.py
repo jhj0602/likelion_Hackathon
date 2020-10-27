@@ -6,8 +6,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
-class wear_mywear(models.Model):
-    shopping_want_wear = models.ImageField(upload_to='images/shoplist',blank=True)
+class drag_model(models.Model):
+    drag_wear = models.ImageField(upload_to='images/shoplist',blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    
 
 
 def name_func(instance, filename):

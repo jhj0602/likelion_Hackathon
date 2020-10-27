@@ -6,12 +6,13 @@ import requests
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont ,ImageGrab
 from io import BytesIO
-from .models import itemsaved,wear_mywear
+from .models import itemsaved
 from matplotlib import pyplot as plt
 from .models import lotteData ,CartItem # 무신사 데이터 ,장바구니
 from .models import CustomUser
 from django.contrib.auth import login, authenticate
 import cv2
+import json
 from .forms import  UserForm
 from django.http import HttpResponse
 from bs4 import BeautifulSoup as bs
@@ -156,16 +157,27 @@ def mypage(request):
     return render(request, 'myapp/mypage.html')
 
 def draganddrop(request):
-    if request.method == "POST":
-        user = request.user
+    if request.method == "POST":  
+        print("캥거루",request.body)
+        received_json_data = json.loads(request.body)
+        print("parse",received_json_data)
         bbox=(20,300,562,905) #x1 y1 x2 y2
         img = ImageGrab.grab(bbox)
-        imagename = './{}.png'.format(user)
-        img.save(imagename)
-        imagename = './{}.png'.format(user)
-        return redirect('main2',{'imagename':imagename})
-    cart_item = CartItem.objects.all()
-    return render(request, 'myapp/draganddrop.html',{'cart_item':cart_item})
+        # imagename = './{}.png'.format(user)
+       # img.save(imagename)
+        # imagename = './{}.png'.format(user)
+        print("여기까지오는건가?")
+        response = {'status': 1} 
+        return HttpResponse(json.dumps(response), content_type='application/json')
+    else:
+            
+        print("개씨빨")
+        cart_item = CartItem.objects.all()
+        return render(request, 'myapp/draganddrop.html',{'cart_item':cart_item})
+
+
+    
+
 
 def imagenaming(request,data):
     print(data)

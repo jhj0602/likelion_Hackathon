@@ -109,51 +109,66 @@
 		<div class="mycodi">
 			{% csrf_token %}
 			<!-- ondragstart가 drag2이면 bottom처럼 올릴때는 아무것도 없다가 다시 돌려놓으면 3 -->
-			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품1</div> 
+			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품1</div>
 			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품2</div>
 			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품3</div>
 			<div class="mycodii" name="top" ondrop="drop2(event)" ondragover="dragEnter(event)">상품4</div>
 
 		</div>
 		<!-- <div class="back"> -->
-		<input class="b01_simple_rollover" type="submit" value="저장" onclick="alerttest()"></input>
+		{% csrf_token %}
+		<input class="b01_simple_rollover" value="저장"></input>
 		<!-- </div> -->
 	</form>
-	
-	
+
+
 	{% for d  in cart_item%}
 	{%if user == d.user%}
-	
+
 	<div class="top" ondrop="drop(event)" ondragover="dragEnter(event)">
 		<img id="{{d.pk}}" width="140" height="170" src="/media/{{d.product.lotteImage}}" title="true" draggable="true"
 			ondragstart="drag(event)">
 	</div>
-	
+
 	{%endif%}
 	<!-- <div ondrop="drop(event)" ondragover="dragEnter(event)"></div> -->
 	{% endfor %}
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-
-
-	<script language="javascript">
-
-		function alerttest() {
-
-			alert("코디가 저장되었습니다.");
-
-		}
-
-	</script>
 
 	<script>
+		var JsonArray = new Array();
+
+		$(".b01_simple_rollover").click(function () {
+			var target = document.getElementsByClassName('mycodi');
+			var clientRect = target[0].getBoundingClientRect();
+			var relativeTop = clientRect.top;
+			JsonArray.push(clientRect);
+			codi = JSON.stringify(JsonArray);
+			var csrf_token = $('[name=csrfmiddlewaretoken]').val();
+			$.ajax({
+				headers: {
+					'X-CSRFToken': csrf_token
+				},
+				url: '/draganddrop',
+				type: 'POST',
+				contentType: 'application/json; charset=utf-8',
+				data: codi,
+				dataType: 'json',
+				success: function () {
+					alert("코디가 저장되었습니다");
+					window.location.href = '/main';
+				}
+			});
+		});
+
 		function dragEnter(ev) {
 			ev.preventDefault();
 		}
 
 		function drag(ev) {
-			
+
 			ev.dataTransfer.setData("text", ev.target.id);
 			ev.dataTransfer.setData("class", ev.target.class);
 
@@ -163,46 +178,72 @@
 			ev.dataTransfer.setData("class", ev.target.class);
 		}
 
-		function drop(ev) {
-			alert(3);
+		function drop(ev) { //이게 발동되면 삭제되어야함
+
 			ev.preventDefault();
-			
+
 			var data = ev.dataTransfer.getData("text");
 			var img = ev.currentTarget.querySelector("img");
-			var z = document.createElement('p');
-			var obj = JSON.stringify(data);
-			z.innerHTML =obj;
-			document.body.removeChild(z);
-			console.log(document.body);
-			var class_name = ev.dataTransfer.getData("class");
-			var url = "{% url 'imagenaming' 123 %}";
-			// alert(data);
-			if (img) {
-				console.log(document.getElementById(data).parentNode);
-				document.getElementById(data).parentNode.appendChild(img);
+			var temp = -1;
+			console.log("여기왓음");
+			for (var i = 0; i < JsonArray.length; i++) {
+				if (data == JsonArray[i].id) {
+					temp = i;
+				}
 			}
-			ev.currentTarget.appendChild(document.getElementById(data));
+
+			// 지금 temp는 내가 드래그 해서 들고있는 새끼의 인덱스
+			if (img) {													//여기에 이미지가 이미 있다면 자리를 바꿈
+				document.getElementById(data).parentNode.appendChild(img); //기존애를 새로운애가 있던 자리에 넣음
+				var Json = new Object();
+				Json.id = img.id;
+				JsonArray.push(Json);
+			}
+			ev.currentTarget.appendChild(document.getElementById(data));  //바뀐애를 넣음 현재 식제위치에
+			JsonArray.splice(temp, 1);
+			console.log(JsonArray);
 			// document.location.href = url.replace('123', data.id);
 		}
 
 
-		function drop2(ev) {
+		function drop2(ev) { //이게 발동되면 추가되어야함.
 
 			ev.preventDefault();
 			var data = ev.dataTransfer.getData("text");
 			var img = ev.currentTarget.querySelector("img");
-			var class_name = ev.dataTransfer.getData("class");
-			
-			var z = document.createElement('p');
-			var obj = JSON.stringify(data);
-			z.innerHTML =obj;
-			document.body.appendChild(z);
-			console.log(document.body);
-			console.log(document.getElementById(data).parentElement);
+
+
+
+
+			var Json = new Object();
+			Json.id = data;
+
+			JsonArray.push(Json);
+			console.log(document.getElementById(data).parentElement.className);
+
+
+
+
 			if (img) {
-				document.getElementById(data).parentNode.appendChild(img);
+				if (document.getElementById(data).parentElement.className == document.getElementById(img.id).parentElement.className) {
+					document.getElementById(data).parentNode.appendChild(img);
+					JsonArray.pop();
+				}
+				else {
+					document.getElementById(data).parentNode.appendChild(img);
+					var temp = -1;
+					console.log("여기왓음");
+					for (var i = 0; i < JsonArray.length; i++) {
+						if (img.id == JsonArray[i].id) {
+							temp = i;
+						}
+					}
+					JsonArray.splice(temp, 1);
+				}
 			}
 			ev.currentTarget.appendChild(document.getElementById(data));
+			console.log(JsonArray);
+
 			// document.location.href = url.replace('123', data.id);
 
 		}
